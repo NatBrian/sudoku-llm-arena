@@ -1,0 +1,249 @@
+{
+  "run_id": "6x6_002_s4-full-logic_r3",
+  "puzzle_id": "6x6_002",
+  "strategy_id": "s4-full-logic",
+  "strategy_label": "The Logician",
+  "run_number": 3,
+  "solved": false,
+  "correct_against_solution": false,
+  "total_turns": 1,
+  "total_errors": 0,
+  "total_prompt_tokens": 331,
+  "total_completion_tokens": 1059,
+  "duration_ms": 52756,
+  "final_grid": [
+    [
+      2,
+      0,
+      0,
+      0,
+      5,
+      0
+    ],
+    [
+      1,
+      5,
+      6,
+      0,
+      0,
+      4
+    ],
+    [
+      4,
+      0,
+      3,
+      5,
+      0,
+      0
+    ],
+    [
+      0,
+      6,
+      2,
+      4,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      6
+    ],
+    [
+      6,
+      2,
+      1,
+      3,
+      4,
+      5
+    ]
+  ],
+  "steps": [
+    {
+      "turn": 1,
+      "reasoning": "Let\u2019s check for hidden singles in each row/col/box.\n\nRow 1: missing digits {1,3,4,6}.  \nColumn 6: missing digits {1,2,3}.  \nBox 1 (rows 1-2, cols 1-3): has 2,1,5,6,4 \u2192 missing 3. Only possible cell in box 1 for 3 is R1C3 (since R1C2 is in col 2 which already has 5 in row 2, but col 2 doesn\u2019t forbid 3 yet; but check: R2C1=1, R2C2=5, R2C3=6, R1C1=2, R1C2 empty, R1C3 empty. In box 1, only R1C2 and R1C3 are empty. Row 1 already has 2,5, so missing 1,3,4,6. Column 2: has 5 (row2), 6 (row4), 2 (row6) \u2192 missing 1,3,4. Column 3: has 6,3,2,1 \u2192 missing 4,5. So 3 is not in col 3 yet. Could 3 go in R1C2? Col 2 has no 3, row 1 has no 3, box 1 has no 3. Could 3 go in R1C3? Col 3 has no 3, row 1 has no 3, box 1 has no 3. So both possible for 3 in box 1. So not hidden single in box 1 yet.\n\nCheck box 2 (rows 1-2, cols 4-6): missing digits {1,2,3}? Let\u2019s list: R1C4=?, R1C5=5, R1C6=?, R2C4=?, R2C5=?, R2C6=4. Filled: 5,4. Missing {1,2,3,6}. But row 2 has 1,5,6,4 \u2192 missing 2,3 in row 2. Row 1 missing {1,3,4,6} in row 1. So in box 2: possible 2 is only in R2C4 or R2C5? Check col 4: has 5,4,3 \u2192 missing 1,2,6. Col 5: has 5,4 \u2192 missing 1,2,3,6. So 2 could go in R2C4 or R2C5 or R1C4 or R1C6. So no hidden single yet.\n\nCheck column 6: missing {1,2,3}. Row 1 col 6: possible {1,3,6}? Row 1 missing {1,3,4,6}, but col 6 has no 4 yet, but row 1 col 6 can\u2019t be 4 because row 1 already has 4? No, row 1 has no 4 yet. Wait row 1 currently: 2,_,_,_,5,_. So row 1 missing {1,3,4,6}. Col 6: filled: row2=4, row5=6, row6=5. So col 6 has 4,6,5. Missing {1,2,3}. So in col 6, possible cells: R1C6 {1,3} (can\u2019t be 2 because row 1 has 2), R3C6 {1,2,3}, R4C6 {1,2,3}. So no hidden single in col 6.\n\nCheck row 5: all empty except col 6 = 6. Missing {1,2,3,4,5}.  \nColumn 1: missing digits {3,5,6}? Let\u2019s list col 1: R1=2, R2=1, R3=4, R4=?, R5=?, R6=?. So filled: 2,1,4. Missing {3,5,6}. Possible cells: R4C1 {3,5} (row 4 missing {1,3,5}), R5C1 {3,5} (row 5 missing all), R6C1 {3,5,6} (row 6 missing {6}? Wait row 6: .,2,1,3,4,5 \u2192 missing {6}. So R6C1 must be 6 (hidden single in row 6 and col 1).\n\n**Yes**: Row 6 missing only 6, and R6C1 is empty, so R6C1 = 6.\n\nREASONING: Row 6 missing only digit 6, R6C1 is empty.",
+      "parsed_move": {
+        "row": 5,
+        "col": 0,
+        "value": 6
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 6,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          6
+        ],
+        [
+          6,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          1,
+          6
+        ],
+        "R1C6": [
+          1,
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2,
+          3
+        ],
+        "R3C2": [
+          1
+        ],
+        "R3C5": [
+          1,
+          2,
+          6
+        ],
+        "R3C6": [
+          1,
+          2
+        ],
+        "R4C1": [
+          5
+        ],
+        "R4C5": [
+          1,
+          3
+        ],
+        "R4C6": [
+          1,
+          3
+        ],
+        "R5C1": [
+          3,
+          5
+        ],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4,
+          5
+        ],
+        "R5C4": [
+          1,
+          2
+        ],
+        "R5C5": [
+          1,
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    }
+  ],
+  "error_steps": []
+}

@@ -1,0 +1,2914 @@
+{
+  "run_id": "6x6_005_s5-guess-verify_r1",
+  "puzzle_id": "6x6_005",
+  "strategy_id": "s5-guess-verify",
+  "strategy_label": "The Gambler",
+  "run_number": 1,
+  "solved": true,
+  "correct_against_solution": true,
+  "total_turns": 19,
+  "total_errors": 1,
+  "total_prompt_tokens": 6029,
+  "total_completion_tokens": 7309,
+  "duration_ms": 326680,
+  "final_grid": [
+    [
+      5,
+      6,
+      3,
+      1,
+      4,
+      2
+    ],
+    [
+      2,
+      1,
+      4,
+      6,
+      5,
+      3
+    ],
+    [
+      3,
+      4,
+      2,
+      5,
+      1,
+      6
+    ],
+    [
+      1,
+      5,
+      6,
+      2,
+      3,
+      4
+    ],
+    [
+      4,
+      2,
+      1,
+      3,
+      6,
+      5
+    ],
+    [
+      6,
+      3,
+      5,
+      4,
+      2,
+      1
+    ]
+  ],
+  "steps": [
+    {
+      "turn": 1,
+      "reasoning": "Let\u2019s check for hidden singles first.  \n\n**Row 3:** Missing digits: 5, 6.  \n- Column 6: Row 1 has 2, Row 4 empty, Row 5 empty, Row 6 empty. Box (rows 1\u20132, cols 5\u20136) already has 2,3,5? Wait, check box 2 (rows 1\u20133, cols 3\u20134? Actually boxes are 3 rows \u00d7 2 cols).  \nBetter: Box 2 (rows 1\u20133, cols 3\u20134) is: R1C3=?, R1C4=1, R2C3=?, R2C4=6, R3C3=2, R3C4=?.  \nBox 2 missing digits: 3,4,5? Let\u2019s hold.  \n\n**Column 6:** Given: R1=2, R2=3, R3=?, R4=?, R5=?, R6=?. Missing: 1,4,5,6.  \nR3C6 can be 5 or 6.  \nR4C6 can\u2019t be 1 (R4C1=1), can\u2019t be 3 (R4C5=3), can\u2019t be 2 (R1C6=2), so R4C6 is 4,5,6.  \n\n**Box 4 (rows 4\u20136, cols 1\u20132):** R4C1=1, R4C2=?, R5C1=?, R5C2=2, R6C1=?, R6C2=?  \nMissing digits: 3,4,5,6.  \nColumn 2: R1C2=6, R2C2=?, R3C2=4, R5C2=2, so R2C2 can be 1,3,5. R4C2 can be 3,5,6. R6C2 can be 1,3,5.  \n\n**Hidden single in Box 4:**  \nDigit 6 in Box 4: only possible in R4C2 (since R6C2 col 2 already has 6 in R1C2? No, R1C2=6 is col 2 but different row, allowed. Wait, col 2 already has 6 at R1C2, so R4C2 cannot be 6. So 6 in Box 4 must be in R5C1 or R6C1.  \n\nCheck col 1: R1C1=?, R3C1=3, R4C1=1, R5C1=?, R6C1=?. Missing: 2,4,5,6.  \nR1C1 can be 5 (since row 1 missing 3,5, col 1 missing 2,4,5,6, box 1 missing 2,5,6).  \n\nActually let\u2019s find a definite hidden single:  \n**Box 6 (rows 4\u20136, cols 5\u20136):**  \nCells: R4C5=3, R4C6=?, R5C5=?, R5C6=?, R6C5=2, R6C6=?.  \nMissing digits in Box 6: 1,4,5,6.  \nR4C6: col 6 missing 1,4,5,6, row 4 missing 4,5,6 (row 4 already has 1,2,3). So R4C6 can be 4,5,6.  \nR5C5: col 5 missing 4,5,6 (col 5: R1=4, R2=5, R3=1, R4=3, R6=2 \u2192 missing 6). So R5C5 must be 6 (hidden single in col 5).  \n\nThat\u2019s a definite hidden single.  \n\nREASONING: Column 5 missing digit 6, only possible in R5C5.",
+      "parsed_move": {
+        "row": 4,
+        "col": 4,
+        "value": 6
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 6,
+      "grid_before": [
+        [
+          0,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          3,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          0,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          3,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C1": [
+          5
+        ],
+        "R1C3": [
+          3,
+          5
+        ],
+        "R2C1": [
+          2,
+          4
+        ],
+        "R2C2": [
+          1
+        ],
+        "R2C3": [
+          4
+        ],
+        "R3C4": [
+          5
+        ],
+        "R3C6": [
+          5,
+          6
+        ],
+        "R4C2": [
+          5
+        ],
+        "R4C3": [
+          5,
+          6
+        ],
+        "R4C6": [
+          4,
+          5,
+          6
+        ],
+        "R5C1": [
+          4,
+          5,
+          6
+        ],
+        "R5C5": [
+          6
+        ],
+        "R5C6": [
+          4,
+          5,
+          6
+        ],
+        "R6C1": [
+          4,
+          5,
+          6
+        ],
+        "R6C2": [
+          3,
+          5
+        ],
+        "R6C3": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "R6C4": [
+          4,
+          5
+        ],
+        "R6C6": [
+          1,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "turn": 2,
+      "reasoning": "Let's check for hidden singles first.  \n\nLooking at Row 3: missing digits are 5 and 6.  \nR3C6: column 6 already has digits 2,3,? (Row 1:2, Row 2:3, Row 4:?, Row 5:?, Row 6:?).  \nBox 2 (rows 1\u20132, cols 4\u20136) has digits 1,4,2,6,5,3, so box 2 is full.  \nBox 4 (rows 3\u20134, cols 1\u20133) has digits 3,4,2,1,?,? \u2014 missing 5 and 6.  \n\nCheck R3C1 is 3, R3C2 is 4, R3C3 is 2, R3C4 is ?, R3C5 is 1, R3C6 is ?.  \nColumn 4: Row 1:1, Row 2:6, Row 3:?, Row 4:2, Row 5:3, Row 6:? \u2192 missing 4,5.  \nSo R3C4 cannot be 5 or 6? Wait, column 4 missing digits: 4,5. Row 3 missing digits: 5,6. Intersection: none. So R3C4 cannot be 5 or 6. But Row 3 missing digits are 5,6, so R3C4 can't be either \u2192 contradiction? Let's recheck.  \n\nRow 3 currently: 3,4,2,?,1,? \u2192 missing 5,6.  \nColumn 4 used: 1,6,2,3 \u2192 missing 4,5.  \nSo R3C4 must be in {4,5} \u2229 {5,6} = {5} \u2192 yes! So R3C4 = 5.  \n\nThat\u2019s a hidden single.  \n\nREASONING: Row 3 missing {5,6}, column 4 missing {4,5}, intersection is 5.",
+      "parsed_move": {
+        "row": 2,
+        "col": 3,
+        "value": 5
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 5,
+      "grid_before": [
+        [
+          0,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          3,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          0,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          3,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C1": [
+          5
+        ],
+        "R1C3": [
+          3,
+          5
+        ],
+        "R2C1": [
+          2,
+          4
+        ],
+        "R2C2": [
+          1
+        ],
+        "R2C3": [
+          4
+        ],
+        "R3C4": [
+          5
+        ],
+        "R3C6": [
+          5,
+          6
+        ],
+        "R4C2": [
+          5
+        ],
+        "R4C3": [
+          5,
+          6
+        ],
+        "R4C6": [
+          4,
+          5,
+          6
+        ],
+        "R5C1": [
+          4,
+          5
+        ],
+        "R5C6": [
+          4,
+          5
+        ],
+        "R6C1": [
+          4,
+          5,
+          6
+        ],
+        "R6C2": [
+          3,
+          5
+        ],
+        "R6C3": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "R6C4": [
+          4,
+          5
+        ],
+        "R6C6": [
+          1,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "turn": 3,
+      "reasoning": "Let\u2019s start by scanning for naked singles.\n\nLooking at R3C6:  \nRow 3 has {3,4,2,5,1} \u2192 missing 6.  \nColumn 6 has {2,3,?,?,?} (R1=2, R2=3, R3=?, R4=?, R5=?, R6=?) \u2014 no conflict with 6.  \nBox 2 (R1R2R3, C4C5C6) has {1,4,2,6,5,3,5,1,?} \u2192 missing 6.  \nSo R3C6 must be 6.",
+      "parsed_move": {
+        "row": 2,
+        "col": 5,
+        "value": 6
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 6,
+      "grid_before": [
+        [
+          0,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          3,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          0,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          3,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C1": [
+          5
+        ],
+        "R1C3": [
+          3,
+          5
+        ],
+        "R2C1": [
+          2,
+          4
+        ],
+        "R2C2": [
+          1
+        ],
+        "R2C3": [
+          4
+        ],
+        "R3C6": [
+          6
+        ],
+        "R4C2": [
+          5
+        ],
+        "R4C3": [
+          5,
+          6
+        ],
+        "R4C6": [
+          4,
+          6
+        ],
+        "R5C1": [
+          4,
+          5
+        ],
+        "R5C6": [
+          4,
+          5
+        ],
+        "R6C1": [
+          4,
+          5,
+          6
+        ],
+        "R6C2": [
+          3,
+          5
+        ],
+        "R6C3": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "R6C4": [
+          4
+        ],
+        "R6C6": [
+          1,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "turn": 4,
+      "reasoning": "Let's check for hidden singles first.  \n\nRow 4: missing digits {4,5,6}.  \nColumn 2: already has 6 (R1), 4 (R3), 2 (R5), so missing {1,3,5} for R2C2, R4C2, R6C2.  \nBox 4 (rows 4\u20135, cols 1\u20133): cells R4C1=1, R4C2=?, R4C3=?, R5C1=?, R5C2=2, R5C3=1.  \nDigits in box 4 so far: {1,2}. Missing {3,4,5,6}.  \n\nIn box 4, R4C2 and R4C3 are empty. R4C2 sees column 2 missing {1,3,5}, but box 4 missing {3,4,5,6}. Intersection: possible for R4C2: {3,5} (4 not possible because column 2 already has 4 in R3C2).  \n\nCheck R4C3: column 3 has 2 (R3), 1 (R5), 6 (R2? no, R2C3 is empty). Actually column 3: R3C3=2, R5C3=1, others empty. So missing {3,4,5,6}.  \n\nNow look at row 4: R4C2, R4C3, R4C6 empty. Row 4 missing {4,5,6}.  \nSo R4C2 can\u2019t be 4,5,6 because row 4 missing them but column 2 restricts 4 already, so R4C2 possible {3} only from earlier? Wait, row 4 missing {4,5,6}, so R4C2 must be one of {4,5,6} to fill row 4\u2019s missing, but column 2 already has 4 (R3C2) and 6 (R1C2), so R4C2 can\u2019t be 4 or 6, so R4C2 must be 5 for row 4.  \n\nYes! That\u2019s a hidden single for row 4: only R4C2 can be 5 in row 4 because R4C3 and R4C6 can\u2019t be 5? Check column 6: R4C6 sees column 6 with 2 (R1), 3 (R2), 6 (R3), so missing {1,4,5}. So 5 is possible in R4C6. But row 4 missing {4,5,6}, so 5 could be in R4C2 or R4C3 or R4C6.  \n\nBut column 2 already has 6,4,2, so missing {1,3,5}. R4C2 could be 5.  \nBut is 5 forced? Let\u2019s check box 4: missing {3,4,5,6}. In box 4, where can 5 go? R4C2, R4C3, R5C1. R5C1 column 1 has 1 (R4), 3 (R3), so missing {2,4,5,6}. So 5 possible in R5C1 too. So not box single.  \n\nBut row 4: look at column constraints:  \nR4C3: column 3 has 2,1, so missing {3,4,5,6}.  \nR4C6: column 6 has 2,3,6, so missing {1,4,5}.  \n\nSo row 4 missing {4,5,6}:  \n- 4 possible in R4C3 or R4C6 (col 3 allows 4, col 6 allows 4).  \n- 5 possible in R4C2, R4C3, R4C6.  \n- 6 possible in R4C3 only? Check col 3: 6 not yet in col 3, so R4C3 can be 6. Col 6 already has 6 in R3C6, so R4C6 can\u2019t be 6. So 6 must be in R4C3 for row 4.  \n\nYes! That\u2019s the hidden single: 6 in R4C3 for row 4.  \n\nSo R4C3 = 6.  \n\nREASONING: Row 4 missing {4,5,6}. Column 6 already has 6, so 6 in row 4 must be in R4C3.",
+      "parsed_move": {
+        "row": 3,
+        "col": 2,
+        "value": 6
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 6,
+      "grid_before": [
+        [
+          0,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          3,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          0,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          0,
+          6,
+          2,
+          3,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C1": [
+          5
+        ],
+        "R1C3": [
+          3,
+          5
+        ],
+        "R2C1": [
+          2,
+          4
+        ],
+        "R2C2": [
+          1
+        ],
+        "R2C3": [
+          4
+        ],
+        "R4C2": [
+          5
+        ],
+        "R4C3": [
+          5,
+          6
+        ],
+        "R4C6": [
+          4
+        ],
+        "R5C1": [
+          4,
+          5
+        ],
+        "R5C6": [
+          4,
+          5
+        ],
+        "R6C1": [
+          4,
+          5,
+          6
+        ],
+        "R6C2": [
+          3,
+          5
+        ],
+        "R6C3": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "R6C4": [
+          4
+        ],
+        "R6C6": [
+          1,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "turn": 5,
+      "reasoning": "Let\u2019s check for hidden singles first.  \n\nLooking at Row 4: missing digits 4, 5.  \nColumn 6 in Row 4: box constraints (rows 4\u20136, cols 5\u20136) already have 2,3,6 in box, and column 6 has 3,6 used, so R4C6 cannot be 4 (because column 6 already has 4? Wait, check column 6:  \nCol6 values: R1=2, R2=3, R3=6, R4=?, R5=?, R6=?. No 4 yet. So 4 possible in R4C6 or R6C6.  \nBut R4C6\u2019s box (rows 4\u20136, cols 5\u20136) has: R4C5=3, R5C5=6, R6C5=2, R4C6=?, R5C6=?, R6C6=?. Missing in box: 1,4,5.  \nColumn 6 missing 1,4,5. Row 4 missing 4,5. So R4C6 could be 4 or 5. Not a single yet.  \n\nCheck R4C2: Row 4 missing 4,5. Column 2 has 6,4,2 already (R1C2=6, R2C2=?, R3C2=4, R4C2=?, R5C2=2, R6C2=?). So column 2 missing 1,3,5. Intersection with Row 4\u2019s missing {4,5} gives only 5 possible. So R4C2 must be 5.  \n\nREASONING: Row 4 missing 4,5; column 2 missing 1,3,5; only common is 5.",
+      "parsed_move": {
+        "row": 3,
+        "col": 1,
+        "value": 5
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 5,
+      "grid_before": [
+        [
+          0,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          0,
+          6,
+          2,
+          3,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          0,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C1": [
+          5
+        ],
+        "R1C3": [
+          3,
+          5
+        ],
+        "R2C1": [
+          2,
+          4
+        ],
+        "R2C2": [
+          1
+        ],
+        "R2C3": [
+          4
+        ],
+        "R4C2": [
+          5
+        ],
+        "R4C6": [
+          4
+        ],
+        "R5C1": [
+          4,
+          5
+        ],
+        "R5C6": [
+          4,
+          5
+        ],
+        "R6C1": [
+          4,
+          5,
+          6
+        ],
+        "R6C2": [
+          3,
+          5
+        ],
+        "R6C3": [
+          3,
+          4,
+          5
+        ],
+        "R6C4": [
+          4
+        ],
+        "R6C6": [
+          1,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "turn": 6,
+      "reasoning": "Let's check for hidden singles first.  \n\nRow 4: missing digits 4, but column 6 already has 4? Wait, column 6 currently has: R1=2, R2=3, R3=6, R4=., R5=., R6=.  \nDigits missing in column 6: 1,4,5.  \nRow 4 missing digits: 4 (since row 4 has 1,5,6,2,3).  \nSo R4C6 must be 4 (only 4 fits both row and column constraints).  \n\nREASONING: Row 4 missing 4, column 6 allows 4, box constraint also fine.",
+      "parsed_move": {
+        "row": 3,
+        "col": 5,
+        "value": 4
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 4,
+      "grid_before": [
+        [
+          0,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          0,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C1": [
+          5
+        ],
+        "R1C3": [
+          3,
+          5
+        ],
+        "R2C1": [
+          2,
+          4
+        ],
+        "R2C2": [
+          1
+        ],
+        "R2C3": [
+          4
+        ],
+        "R4C6": [
+          4
+        ],
+        "R5C1": [
+          4,
+          5
+        ],
+        "R5C6": [
+          4,
+          5
+        ],
+        "R6C1": [
+          4,
+          5,
+          6
+        ],
+        "R6C2": [
+          3
+        ],
+        "R6C3": [
+          3,
+          4,
+          5
+        ],
+        "R6C4": [
+          4
+        ],
+        "R6C6": [
+          1,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "turn": 7,
+      "reasoning": "Let's check for naked singles.  \n\nRow 1 has . 6 . 1 4 2 \u2192 missing 3 and 5 in row.  \nRow 2 has . . . 6 5 3 \u2192 missing 1, 2, 4 in row.  \nRow 5 has . 2 1 3 6 . \u2192 missing 4, 5 in row.  \nRow 6 has . . . . 2 . \u2192 missing 1, 3, 4, 5, 6 in row.  \n\nCheck R1C1:  \nRow 1: missing {3,5}  \nColumn 1: has 3 (R3), 1 (R4) \u2192 missing {2,4,5,6}  \nBox 1 (rows 1\u20132, cols 1\u20133): has 6 (R1C2), 3 (R3C1), 4 (R3C2), 2 (R3C3), 5 (R4C2), 1 (R4C1) \u2192 missing nothing? Wait, check carefully:  \nBox 1:  \nR1C1 .  \nR1C2 6  \nR1C3 .  \nR2C1 .  \nR2C2 .  \nR2C3 .  \nR3C1 3  \nR3C2 4  \nR3C3 2  \nOops \u2014 that\u2019s wrong \u2014 Box 1 is rows 1\u20132, cols 1\u20133? No, 6x6 Sudoku boxes are 3 rows \u00d7 2 cols.  \nBox numbering:  \nBox 1: R1\u2013R2, C1\u2013C2? Wait 3x2 boxes means 3 rows high, 2 cols wide.  \nActually 6x6 Sudoku: boxes are 2 rows \u00d7 3 columns? No, standard 6x6 is 2 rows \u00d7 3 columns per box? Let\u2019s check:  \nGiven 3x2 boxes means each box is 3 rows tall, 2 cols wide. Yes, because 6 rows / 3 rows per box = 2 boxes high. 6 cols / 2 cols per box = 3 boxes wide.  \n\nSo Box 1: R1\u2013R3 C1\u2013C2.  \nBox 1: R1C1 ., R1C2 6, R2C1 ., R2C2 ., R3C1 3, R3C2 4.  \nSo digits in Box 1: {6,3,4} missing {1,2,5}.  \n\nR1C1 candidates: Row1 missing {3,5}, Col1 missing {2,4,5,6}, Box1 missing {1,2,5}.  \nIntersect Row1 {3,5}, Col1 {2,4,5,6}, Box1 {1,2,5} \u2192 common with Row1 {3,5} and Box1 {1,2,5} and Col1 {2,4,5,6} \u2192 intersection of {5} only?  \nCheck: Row1 {3,5} \u2229 Box1 {1,2,5} = {5}. {5} \u2229 Col1 {2,4,5,6} = {5}. Yes, so R1C1 = 5.  \n\nThat\u2019s a naked single.  \n\nREASONING: R1C1 only possible digit 5 (row, column, box constraints).",
+      "parsed_move": {
+        "row": 0,
+        "col": 0,
+        "value": 5
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 5,
+      "grid_before": [
+        [
+          0,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          5,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C1": [
+          5
+        ],
+        "R1C3": [
+          3,
+          5
+        ],
+        "R2C1": [
+          2,
+          4
+        ],
+        "R2C2": [
+          1
+        ],
+        "R2C3": [
+          4
+        ],
+        "R5C1": [
+          4,
+          5
+        ],
+        "R5C6": [
+          5
+        ],
+        "R6C1": [
+          4,
+          5,
+          6
+        ],
+        "R6C2": [
+          3
+        ],
+        "R6C3": [
+          3,
+          4,
+          5
+        ],
+        "R6C4": [
+          4
+        ],
+        "R6C6": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "turn": 8,
+      "reasoning": "Let\u2019s check for hidden singles.\n\nRow 2: missing digits {1, 2, 4}.  \nColumn 1 has 5, 3, 1, ?, ?, ?. Row 2, Column 1 is in box 1 (rows 1-2, cols 1-3). Box 1 already has 5, 6, 3, 4, 2 (from R1C1=5, R1C2=6, R3C1=3, R3C2=4, R3C3=2). So box 1 missing {1}.  \nThus R2C1 must be 1 (only place for digit 1 in box 1).\n\nREASONING: Box 1 missing digit 1, only possible cell is R2C1.",
+      "parsed_move": {
+        "row": 1,
+        "col": 0,
+        "value": 1
+      },
+      "valid": false,
+      "validation_errors": [
+        "Column 1 already has 1 at R4"
+      ],
+      "value": 1,
+      "grid_before": [
+        [
+          5,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          5,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C3": [
+          3
+        ],
+        "R2C1": [
+          2,
+          4
+        ],
+        "R2C2": [
+          1
+        ],
+        "R2C3": [
+          4
+        ],
+        "R5C1": [
+          4
+        ],
+        "R5C6": [
+          5
+        ],
+        "R6C1": [
+          4,
+          6
+        ],
+        "R6C2": [
+          3
+        ],
+        "R6C3": [
+          3,
+          4,
+          5
+        ],
+        "R6C4": [
+          4
+        ],
+        "R6C6": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "turn": 9,
+      "reasoning": "Let\u2019s check for hidden singles first.  \n\nLooking at R2C1:  \nRow 2 already has 6,5,3.  \nColumn 1 has 5 (R1), 3 (R3), 1 (R4) \u2192 missing 2,4,6.  \nBox 1 (rows 1\u20133, cols 1\u20132) has 5,6,3,4 \u2192 missing 1,2.  \nSo candidates for R2C1 are 1,2.  \n\nCheck column 1 constraints more carefully:  \nColumn 1 contains: R1C1=5, R3C1=3, R4C1=1, R5C1=?, R6C1=?. Missing in column: 2,4,6.  \nBut R2C1 is in box with R1C1=5, R1C2=6, R2C2=?, R3C1=3, R3C2=4.  \nBox missing digits: 1,2. So R2C1 can be 1 or 2.  \n\nCheck R2C2:  \nRow 2 missing: 1,2,4.  \nColumn 2 has 6,4,5,2 \u2192 missing 1,3.  \nBox missing: 1,2.  \nSo R2C2 candidates: 1 (since column missing 1 and 3, but box missing 1 and 2, so 1 is common).  \n\nThus R2C2 is a hidden single = 1.  \n\nThat means R2C1 must then be 2 (box missing 1,2, 1 goes to R2C2).  \n\nREASONING: Hidden single in box 1: R2C2 must be 1, forcing R2C1 = 2.",
+      "parsed_move": {
+        "row": 1,
+        "col": 0,
+        "value": 2
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 2,
+      "grid_before": [
+        [
+          5,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          5,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C3": [
+          3
+        ],
+        "R2C1": [
+          2,
+          4
+        ],
+        "R2C2": [
+          1
+        ],
+        "R2C3": [
+          4
+        ],
+        "R5C1": [
+          4
+        ],
+        "R5C6": [
+          5
+        ],
+        "R6C1": [
+          4,
+          6
+        ],
+        "R6C2": [
+          3
+        ],
+        "R6C3": [
+          3,
+          4,
+          5
+        ],
+        "R6C4": [
+          4
+        ],
+        "R6C6": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "turn": 10,
+      "reasoning": "Let's scan for hidden singles.\n\nLook at R5C1: column 1 has {5,2,3,1} used, missing {4,6}. Row 5 has {2,1,3,6} used, missing {4,5}. Box 4 (rows 4-6, cols 1-2) has {1,5,2} used, missing {3,4,6}.  \nBut check R6C1: column 1 missing {4,6}, row 6 has {2} used, box missing {3,4,6}. Not a single yet.\n\nCheck R2C2: column 2 has {6,4,5} used, missing {1,2,3}. Row 2 has {2,6,5,3} used, missing {1,4}. Box 1 (rows 1-3, cols 1-2) has {5,6,2,3,4} used, missing {1}.  \nSo R2C2 must be 1.\n\nREASONING: In box 1, only R2C2 can be 1 (others in box have 1 in row or column already).",
+      "parsed_move": {
+        "row": 1,
+        "col": 1,
+        "value": 1
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 1,
+      "grid_before": [
+        [
+          5,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          5,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C3": [
+          3
+        ],
+        "R2C2": [
+          1
+        ],
+        "R2C3": [
+          4
+        ],
+        "R5C1": [
+          4
+        ],
+        "R5C6": [
+          5
+        ],
+        "R6C1": [
+          4,
+          6
+        ],
+        "R6C2": [
+          3
+        ],
+        "R6C3": [
+          3,
+          4,
+          5
+        ],
+        "R6C4": [
+          4
+        ],
+        "R6C6": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "turn": 11,
+      "reasoning": "Let's check for hidden singles first.  \n\nLooking at column 3:  \nRow 1: unknown, Row 2: unknown, Row 3: 2, Row 4: 6, Row 5: 1, Row 6: unknown.  \nUsed digits in col 3: {2, 6, 1}. Missing {3, 4, 5}.  \nBox constraints:  \nBox 1 (R1-3, C1-2) irrelevant for col 3. Box 2 (R1-3, C3-4) contains R1C3, R2C3, R3C3.  \nR3C3=2, R1C4=1, R2C4=6, R3C4=5. So in box 2, digits used: {2,1,6,5} \u2192 missing {3,4}.  \nSo R1C3 and R2C3 candidates are {3,4}.  \n\nNow check R6C3:  \nCol 3 missing {3,4,5} but R6C3 is in box 5 (R4-6, C3-4).  \nBox 5 has: R4C3=6, R4C4=2, R5C3=1, R5C4=3, R6C3=?, R6C4=?.  \nUsed in box 5: {6,2,1,3} \u2192 missing {4,5}.  \nR6C3 col missing {3,4,5}, but box missing {4,5}, so candidates {4,5}.  \n\nCheck R6C2:  \nRow 6: R6C1 ?, R6C2 ?, R6C3 {4,5}, R6C4 ?, R6C5=2, R6C6 ?.  \nCol 2: R1=6, R2=1, R3=4, R4=5, R5=2, R6=? \u2192 missing {3}.  \nSo R6C2 must be 3 (hidden single in column 2).  \n\nREASONING: Column 2 missing only 3, R6C2 can be 3.",
+      "parsed_move": {
+        "row": 5,
+        "col": 1,
+        "value": 3
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 3,
+      "grid_before": [
+        [
+          5,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          5,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C3": [
+          3
+        ],
+        "R2C3": [
+          4
+        ],
+        "R5C1": [
+          4
+        ],
+        "R5C6": [
+          5
+        ],
+        "R6C1": [
+          4,
+          6
+        ],
+        "R6C2": [
+          3
+        ],
+        "R6C3": [
+          3,
+          4,
+          5
+        ],
+        "R6C4": [
+          4
+        ],
+        "R6C6": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "turn": 12,
+      "reasoning": "Let\u2019s check for hidden singles first.  \n\nLooking at R5C1:  \n- Column 1 already has 5, 2, 3, 1 (from R1\u2013R4). Missing {4,6}.  \n- Row 5 has 2, 1, 3, 6. Missing {4,5}.  \n- Box 4 (rows 4\u20136, cols 1\u20132) has {1,5,2,3} in R4C1, R4C2, R5C2, R6C2. Missing {4,6} in that box.  \n\nSo R5C1 could be 4 or 6.  \n\nNow check R6C1:  \n- Column 1 missing {4,6} (same as R5C1).  \n- Row 6 has 3, 2. Missing {1,4,5,6}.  \n- Box 4 missing {4,6}.  \n\nSo both R5C1 and R6C1 are {4,6} candidates.  \n\nLook for hidden single in R6C3:  \n- Column 3: R1C3 ?, R2C3 ?, R3C3=2, R4C3=6, R5C3=1 \u2192 missing {3,4,5} in column 3.  \n- Row 6: {3,2} so missing {1,4,5,6}. Intersection: {4,5} possible.  \n- Box 5 (rows 4\u20136, cols 3\u20134): R4C3=6, R4C4=2, R5C3=1, R5C4=3, R6C4 ?, R6C3 ?. Missing {4,5} in box.  \n\nSo R6C3 is {4,5} \u2014 no hidden single yet.  \n\nCheck R1C3:  \n- Row 1: {5,6,1,4,2} \u2192 missing {3}.  \n- Column 3 missing {3,4,5} (from earlier).  \n- Box 1 (rows 1\u20133, cols 1\u20132): {5,6,2,1,3,4} \u2192 all numbers 1\u20136 present? Wait, check: R1C1=5, R1C2=6, R2C1=2, R2C2=1, R3C1=3, R3C2=4 \u2192 yes, box 1 full. So box 2 (rows 1\u20133, cols 3\u20134) has R1C3 ?, R1C4=1, R2C3 ?, R2C4=6, R3C3=2, R3C4=5. Missing {3,4} in box 2.  \n\nSo R1C3: row 1 missing {3}, box 2 missing {3,4}, column 3 missing {3,4,5}. Intersection: must be 3.  \n\nThat\u2019s a hidden single.  \n\nREASONING: Row 1 missing only digit 3, and R1C3 can be 3 (no conflict in column or box).",
+      "parsed_move": {
+        "row": 0,
+        "col": 2,
+        "value": 3
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 3,
+      "grid_before": [
+        [
+          5,
+          6,
+          0,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          5,
+          6,
+          3,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C3": [
+          3
+        ],
+        "R2C3": [
+          4
+        ],
+        "R5C1": [
+          4
+        ],
+        "R5C6": [
+          5
+        ],
+        "R6C1": [
+          4,
+          6
+        ],
+        "R6C3": [
+          4,
+          5
+        ],
+        "R6C4": [
+          4
+        ],
+        "R6C6": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "turn": 13,
+      "reasoning": "Let\u2019s check for hidden singles.  \n\nRow 2, column 3 (R2C3) is empty.  \nRow 2 has {2,1,6,5,3} \u2192 missing {4}.  \nColumn 3 has {3,2,6,1} from R1C3=3, R3C3=2, R4C3=6, R5C3=1 \u2192 missing {4,5}.  \nBox 1 (rows 1\u20133, cols 1\u20132? Wait, boxes are 3\u00d72: Box 1 = R1-3 C1-2, Box 2 = R1-3 C3-4, Box 3 = R1-3 C5-6, etc.) Actually, let's map:  \n\nBox 1: R1-3 C1-2: {5,6,2,1,3,4} \u2192 all 1\u20136 present.  \nBox 2: R1-3 C3-4: {3,1, ?,6,2,5} \u2192 missing {4}.  \nSo R2C3 is in Box 2 (R1-3, C3-4).  \nBox 2 has {3,1,6,2,5} \u2192 missing {4}.  \n\nThus R2C3 must be 4 (only number missing in both row 2 and box 2).  \n\nREASONING: Row 2 missing 4, Box 2 missing 4, so R2C3 = 4.",
+      "parsed_move": {
+        "row": 1,
+        "col": 2,
+        "value": 4
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 4,
+      "grid_before": [
+        [
+          5,
+          6,
+          3,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          0,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          5,
+          6,
+          3,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          4,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R2C3": [
+          4
+        ],
+        "R5C1": [
+          4
+        ],
+        "R5C6": [
+          5
+        ],
+        "R6C1": [
+          4,
+          6
+        ],
+        "R6C3": [
+          4,
+          5
+        ],
+        "R6C4": [
+          4
+        ],
+        "R6C6": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "turn": 14,
+      "reasoning": "Let's check the grid for naked/hidden singles.\n\nRow 5: missing numbers in row: 4, 5 (since row has 2,1,3,6 already).  \nColumn 1: has 5,2,3,1, missing 4,6.  \nColumn 6: has 2,3,6,4, missing 1,5.  \n\nLook at R5C1: possible {4,5}. Column 1 already has 5, so R5C1 can't be 5 \u2192 must be 4.  \nThat\u2019s a naked single.\n\nREASONING: R5C1 can only be 4 because column 1 already has 5.",
+      "parsed_move": {
+        "row": 4,
+        "col": 0,
+        "value": 4
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 4,
+      "grid_before": [
+        [
+          5,
+          6,
+          3,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          4,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          5,
+          6,
+          3,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          4,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R5C1": [
+          4
+        ],
+        "R5C6": [
+          5
+        ],
+        "R6C1": [
+          4,
+          6
+        ],
+        "R6C3": [
+          5
+        ],
+        "R6C4": [
+          4
+        ],
+        "R6C6": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "turn": 15,
+      "reasoning": "Let's check the grid.\n\nRow 5: 4 2 1 3 6 .  \nRow 6: . 3 . . 2 .\n\nFirst, R5C6: Row 5 already has 1,2,3,4,6 \u2192 missing 5.  \nSo R5C6 = 5 (naked single).\n\nNow grid:  \nRow 5: 4 2 1 3 6 5  \nRow 6: . 3 . . 2 .\n\nCheck R6C1:  \nColumn 1 has {5,2,3,1,4} \u2192 missing 6.  \nSo R6C1 = 6.\n\nNow Row 6: 6 3 . . 2 .  \nRow 6 missing {1,4,5}.  \nCheck R6C3: Column 3 has {3,4,2,6,1} \u2192 missing 5.  \nSo R6C3 = 5.\n\nNow Row 6: 6 3 5 . 2 .  \nRow 6 missing {1,4}.  \nCheck R6C4: Column 4 has {1,6,5,2} \u2192 missing 3,4.  \nBut Row 6 has 3 already, so R6C4 = 4 (hidden single in row).  \nThen R6C6 = 1.\n\nREASONING: Naked singles in R5C6, R6C1, R6C3, then hidden single in R6C4.",
+      "parsed_move": {
+        "row": 4,
+        "col": 5,
+        "value": 5
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 5,
+      "grid_before": [
+        [
+          5,
+          6,
+          3,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          4,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3,
+          6,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          5,
+          6,
+          3,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          4,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3,
+          6,
+          5
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R5C6": [
+          5
+        ],
+        "R6C1": [
+          6
+        ],
+        "R6C3": [
+          5
+        ],
+        "R6C4": [
+          4
+        ],
+        "R6C6": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "turn": 16,
+      "reasoning": "Let's check the grid:  \n\nRow 6 is `. 3 . . 2 .` \u2192 digits present in row 6: {3, 2}.  \nMissing: {1, 4, 5, 6}.  \n\nColumn 1: R1C1=5, R2C1=2, R3C1=3, R4C1=1, R5C1=4 \u2192 missing 6.  \nSo R6C1 must be 6 (naked single in column).  \n\nREASONING: Column 1 missing only 6.",
+      "parsed_move": {
+        "row": 5,
+        "col": 0,
+        "value": 6
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 6,
+      "grid_before": [
+        [
+          5,
+          6,
+          3,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          4,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3,
+          6,
+          5
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          5,
+          6,
+          3,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          4,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3,
+          6,
+          5
+        ],
+        [
+          6,
+          3,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R6C1": [
+          6
+        ],
+        "R6C3": [
+          5
+        ],
+        "R6C4": [
+          4
+        ],
+        "R6C6": [
+          1
+        ]
+      }
+    },
+    {
+      "turn": 17,
+      "reasoning": "Let\u2019s check the grid:  \n\nRow 6 is missing numbers in columns 3, 4, and 6.  \nRow 6 currently has: 6, 3, ?, ?, 2, ?  \n\nMissing digits in row 6: {1, 4, 5}.  \n\nColumn 3:  \nR1C3 = 3, R2C3 = 4, R3C3 = 2, R4C3 = 6, R5C3 = 1, R6C3 = ?  \nUsed in column 3: {3, 4, 2, 6, 1} \u2192 missing {5}.  \nSo R6C3 must be 5 (naked single).  \n\nREASONING: Column 3 only missing digit 5.",
+      "parsed_move": {
+        "row": 5,
+        "col": 2,
+        "value": 5
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 5,
+      "grid_before": [
+        [
+          5,
+          6,
+          3,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          4,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3,
+          6,
+          5
+        ],
+        [
+          6,
+          3,
+          0,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          5,
+          6,
+          3,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          4,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3,
+          6,
+          5
+        ],
+        [
+          6,
+          3,
+          5,
+          0,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R6C3": [
+          5
+        ],
+        "R6C4": [
+          4
+        ],
+        "R6C6": [
+          1
+        ]
+      }
+    },
+    {
+      "turn": 18,
+      "reasoning": "Looking at the grid, the only empty cells are R6C4 and R6C6.  \nRow 6 currently has: 6, 3, 5, _, 2, _.  \nMissing numbers in row 6: 1 and 4.  \n\nColumn 4 already has: 1, 6, 5, 2, 3, _.  \nMissing in column 4: 4.  \n\nSo R6C4 must be 4 (hidden single in column 4).  \n\nREASONING: Column 4 missing 4; row 6 missing 1 and 4; R6C4 must be 4.",
+      "parsed_move": {
+        "row": 5,
+        "col": 3,
+        "value": 4
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 4,
+      "grid_before": [
+        [
+          5,
+          6,
+          3,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          4,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3,
+          6,
+          5
+        ],
+        [
+          6,
+          3,
+          5,
+          0,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          5,
+          6,
+          3,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          4,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3,
+          6,
+          5
+        ],
+        [
+          6,
+          3,
+          5,
+          4,
+          2,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R6C4": [
+          4
+        ],
+        "R6C6": [
+          1
+        ]
+      }
+    },
+    {
+      "turn": 19,
+      "reasoning": "Looking at the grid, row 6 column 6 is the only empty cell.  \nRow 6 has {6,3,5,4,2} so missing 1.  \nColumn 6 has {2,3,6,4,5} so missing 1.  \nBox 6 (rows 5-6, columns 5-6) has {6,5,2,4} so missing 1 and 3, but row 6 already has 3, so only 1 is possible.",
+      "parsed_move": {
+        "row": 5,
+        "col": 5,
+        "value": 1
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 1,
+      "grid_before": [
+        [
+          5,
+          6,
+          3,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          4,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3,
+          6,
+          5
+        ],
+        [
+          6,
+          3,
+          5,
+          4,
+          2,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          5,
+          6,
+          3,
+          1,
+          4,
+          2
+        ],
+        [
+          2,
+          1,
+          4,
+          6,
+          5,
+          3
+        ],
+        [
+          3,
+          4,
+          2,
+          5,
+          1,
+          6
+        ],
+        [
+          1,
+          5,
+          6,
+          2,
+          3,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3,
+          6,
+          5
+        ],
+        [
+          6,
+          3,
+          5,
+          4,
+          2,
+          1
+        ]
+      ],
+      "candidates_before": {
+        "R6C6": [
+          1
+        ]
+      }
+    }
+  ],
+  "error_steps": [
+    {
+      "turn": 8,
+      "reasoning": "Let\u2019s check for hidden singles.\n\nRow 2: missing digits {1, 2, 4}.  \nColumn 1 has 5, 3, 1, ?, ?, ?. Row 2, Column 1 is in box 1 (rows 1-2, cols 1-3). Box 1 already has 5, 6, 3, 4, 2 (from R1C1=5, R1C2=6, R3C1=3, R3C2=4, R3C3=2). So box 1 missing {1}.  \nThus R2C1 must be 1 (only place for digit 1 in box 1).\n\nREASONING: Box 1 missing digit 1, only possible cell is R2C1.",
+      "parsed_move": {
+        "row": 1,
+        "col": 0,
+        "value": 1
+      },
+      "validation_errors": [
+        "Column 1 already has 1 at R4"
+      ]
+    }
+  ]
+}

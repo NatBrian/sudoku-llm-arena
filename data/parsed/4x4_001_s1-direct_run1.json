@@ -1,0 +1,409 @@
+{
+  "run_id": "4x4_001_s1-direct_r1",
+  "puzzle_id": "4x4_001",
+  "strategy_id": "s1-direct",
+  "strategy_label": "The Impulsive",
+  "run_number": 1,
+  "solved": false,
+  "correct_against_solution": false,
+  "total_turns": 4,
+  "total_errors": 2,
+  "total_prompt_tokens": 967,
+  "total_completion_tokens": 1985,
+  "duration_ms": 78760,
+  "final_grid": [
+    [
+      3,
+      2,
+      4,
+      1
+    ],
+    [
+      1,
+      4,
+      2,
+      3
+    ],
+    [
+      2,
+      0,
+      0,
+      4
+    ],
+    [
+      4,
+      0,
+      0,
+      2
+    ]
+  ],
+  "steps": [
+    {
+      "turn": 1,
+      "reasoning": "Looking at row 2, it needs digits 1 and 4 in the first two cells.  \nColumn 1 already has 3, 2, and 4, so R2C1 must be 1 (since 4 would conflict with column 1's existing 4).",
+      "parsed_move": {
+        "row": 1,
+        "col": 0,
+        "value": 1
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 1,
+      "grid_before": [
+        [
+          3,
+          2,
+          4,
+          1
+        ],
+        [
+          0,
+          0,
+          2,
+          3
+        ],
+        [
+          2,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          0,
+          2
+        ]
+      ],
+      "grid_after": [
+        [
+          3,
+          2,
+          4,
+          1
+        ],
+        [
+          1,
+          0,
+          2,
+          3
+        ],
+        [
+          2,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          0,
+          2
+        ]
+      ],
+      "candidates_before": {
+        "R2C1": [
+          1
+        ],
+        "R2C2": [
+          1,
+          4
+        ],
+        "R3C2": [
+          1,
+          3
+        ],
+        "R3C3": [
+          1,
+          3
+        ],
+        "R4C2": [
+          1,
+          3
+        ],
+        "R4C3": [
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "turn": 2,
+      "reasoning": "Looking at row 2, it's missing 4. Column 2 already has 4 in row 1, so 4 must go in row 2, column 3 to satisfy the box constraint.",
+      "parsed_move": {
+        "row": 1,
+        "col": 2,
+        "value": 4
+      },
+      "valid": false,
+      "validation_errors": [
+        "Cell R2C3 already has value 2",
+        "Column 3 already has 4 at R1",
+        "Box (1-2, 3-4) already has 4 at R1C3"
+      ],
+      "value": 4,
+      "grid_before": [
+        [
+          3,
+          2,
+          4,
+          1
+        ],
+        [
+          1,
+          0,
+          2,
+          3
+        ],
+        [
+          2,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          0,
+          2
+        ]
+      ],
+      "grid_after": [
+        [
+          3,
+          2,
+          4,
+          1
+        ],
+        [
+          1,
+          0,
+          2,
+          3
+        ],
+        [
+          2,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          0,
+          2
+        ]
+      ],
+      "candidates_before": {
+        "R2C2": [
+          4
+        ],
+        "R3C2": [
+          1,
+          3
+        ],
+        "R3C3": [
+          1,
+          3
+        ],
+        "R4C2": [
+          1,
+          3
+        ],
+        "R4C3": [
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "turn": 3,
+      "reasoning": "Looking at row 2, it has 1, 2, 3 and needs a 4. Column 2 already has 2 and 3, but row 2 column 2 is the only spot in row 2 for a 4.",
+      "parsed_move": {
+        "row": 1,
+        "col": 1,
+        "value": 4
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 4,
+      "grid_before": [
+        [
+          3,
+          2,
+          4,
+          1
+        ],
+        [
+          1,
+          0,
+          2,
+          3
+        ],
+        [
+          2,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          0,
+          2
+        ]
+      ],
+      "grid_after": [
+        [
+          3,
+          2,
+          4,
+          1
+        ],
+        [
+          1,
+          4,
+          2,
+          3
+        ],
+        [
+          2,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          0,
+          2
+        ]
+      ],
+      "candidates_before": {
+        "R2C2": [
+          4
+        ],
+        "R3C2": [
+          1,
+          3
+        ],
+        "R3C3": [
+          1,
+          3
+        ],
+        "R4C2": [
+          1,
+          3
+        ],
+        "R4C3": [
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "turn": 4,
+      "reasoning": "Looking at row 3: it has 2 and 4.  \nColumn 2 already contains 4, 2, and 4 (row 1, row 2, row 3? wait, row 3 col 2 is empty, but column 2 has 4 in row 1? no, row 1 col 2 is 2, row 2 col 2 is 4, row 4 col 2 is empty). Let's check the top-left 2x2 box: it has 3, 2, 1, 4 \u2014 so 1, 2, 3, 4 are all used.  \n\nActually simpler: Look at row 3, missing numbers are 1 and 3.  \nColumn 3 already has 4 and 2, and box 2 (top-right) has 4, 1, 2, 3 \u2014 so column 3 in box 2 has 2 and 3? Wait, box 2 (rows 1\u20132, cols 3\u20134) has 4, 1, 2, 3 \u2014 all used. So column 3 in box 4 (rows 3\u20134, cols 3\u20134) has no 3 yet.  \n\nBut column 3 in row 3: possible 1 or 3. Column 3 has 2 (row 2) and 4 (row 1) and ? row 4 empty. So column 3 missing 1 and 3.  \n\nCheck column 4: row 1: 1, row 2: 3, row 3: 4, row 4: 2 \u2014 column 4 full.  \n\nBetter: Look at row 4, missing 1 and 3. Column 2 in row 4: possible 1 or 3. Column 2 already has 2 (row 1), 4 (row 2), and row 3 col 2 empty. So column 2 missing 1 and 3.  \n\nBut box 4 (rows 3\u20134, cols 3\u20134) has 4 (row 3 col 4) and 2 (row 4 col 4) and two empty cells. Missing 1 and 3.  \n\nLet\u2019s check row 3 col 3: column 3 has 4 (row 1) and 2 (row 2), so missing 1 and 3. Row 3 missing 1 and 3. So row 3 col 3 could be 1 or 3.  \n\nBut row 4 col 3: row 4 missing 1 and 3, column 3 missing 1 and 3. So no unique yet.  \n\nLet\u2019s check column 2: has 2 (row 1), 4 (row 2), missing 1 and 3. Row 3 col 2: row 3 missing 1 and 3, so possible 1 or 3. Row 4 col 2: row 4 missing 1 and 3, so possible 1 or 3.  \n\nBut in box 3 (rows 3\u20134, cols 1\u20132): row 3 col 1 is 2, row 4 col 1 is 4, so missing 1 and 3 in box. Row 3 col 2 and row 4 col 2 are the two empty cells in box 3, so they must be {1,3}.  \n\nNow look at row 3: missing 1 and 3, but one will go in col 2, one in col 3.  \n\nColumn 3: has 4 (row 1), 2 (row 2), missing 1 and 3. Row 3 col 3 and row 4 col 3 are empty, so they must be {1,3}.  \n\nBut in box 4 (rows 3\u20134, cols 3\u20134): row 3 col 4 is 4, row 4 col 4 is 2, so missing 1 and 3. The two empty cells in box 4 are row 3 col 3 and row 4 col 3 \u2014 exactly the same two as column 3 empties. So they must be {1,3}.  \n\nNow, row 3 col 2 and row 3 col 3 are both in {1,3} for row 3, but row 3 col 2 is in box 3, row 3 col 3 is in box 4.  \n\nWe can\u2019t determine yet without more.  \n\nBut look at column 2: row 3 col 2 and row 4 col 2 are {1,3}.  \n\nColumn 1 is full: 3, 1, 2, 4.  \n\nLet\u2019s check column 4 full: 1,3,4,2.  \n\nSo maybe we can find a unique placement:  \n\nIn box 3, cells R3C2 and R4C2 = {1,3}.  \nIn box 4, cells R3C3 and R4C3 = {1,3}.  \n\nBut row 3: R3C2 and R3C3 = {1,3}.  \nRow 4: R4C2 and R4C3 = {1,3}.  \n\nThis is a deadlocked 1-3 pattern in two rows and two columns \u2014 no unique cell yet without guessing.  \n\nBut maybe I missed something:  \n\nCheck column 3: row 1: 4, row 2: 2, so missing 1,3.  \nRow 1 has 3,2,4,1. Row 2 has 1,4,2,3.  \n\nSo row 3 col 3: if it\u2019s 1, then row 3 col 2 is 3, row 4 col 2 is 1, row 4 col 3 is 3 \u2014 works.  \nIf row 3 col 3 is 3, then row 3 col 2 is 1, row 4 col 2 is 3, row 4 col 3 is 1 \u2014 works.  \n\nSo indeed no unique yet.  \n\nBut wait \u2014 column 2: row 1 has 2, row 2 has 4, so missing 1,3.  \nRow 1 has 3, so row 1 col 2 is 2 \u2014 not relevant.  \n\nBut look at box 1 (top-left): 3,2 / 1,4 \u2014 full. Box 2: 4,1 / 2,3 \u2014 full.  \n\nBox 3: 2, _ / 4, _ \u2014 missing 1,3.  \nBox 4: _, 4 / _, 2 \u2014 missing 1,3.  \n\nSo all empty cells are in two pairs {1,3} in two boxes.  \n\nThis is a known \u201cBivalue Universal Grave\u201d situation unless there\u2019s a constraint I missed.  \n\nBut maybe I can find a unique:  \n\nRow 3: missing 1,3. Column 2: missing 1,3. Column 3: missing 1,3.  \n\nRow 4: missing 1,3. Column 2: missing 1,3. Column 3: missing 1,3.  \n\nSo all four empty cells are in two rows, two columns, two boxes, each cell {1,3}.  \n\nThis means the puzzle has two solutions unless a clue elsewhere breaks it, but all given clues are filled.  \n\nGiven standard Sudoku, maybe I made a mistake:  \n\nLet\u2019s check row 3: it has 2 (col 1) and 4 (col 4), so missing 1,3.  \nRow 4: 4 (col 1) and 2 (col 4), so missing 1,3.  \n\nColumn 2: row 1: 2, row 2: 4, so missing 1,3.  \nColumn 3: row 1: 4, row 2: 2, so missing 1,3.  \n\nYes, so it\u2019s a 2x2 hidden rectangle of {1,3}.  \n\nThus no unique move possible.  \n\nSo:  \n\nREASONING: All empty cells form pairs {1,3} in two rows and columns; no unique deduction possible.  \nI'M STUCK",
+      "parsed_move": null,
+      "valid": false,
+      "validation_errors": [
+        "LLM reported being stuck"
+      ],
+      "value": null,
+      "grid_before": [
+        [
+          3,
+          2,
+          4,
+          1
+        ],
+        [
+          1,
+          4,
+          2,
+          3
+        ],
+        [
+          2,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          0,
+          2
+        ]
+      ],
+      "grid_after": [
+        [
+          3,
+          2,
+          4,
+          1
+        ],
+        [
+          1,
+          4,
+          2,
+          3
+        ],
+        [
+          2,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          0,
+          2
+        ]
+      ],
+      "candidates_before": {
+        "R3C2": [
+          1,
+          3
+        ],
+        "R3C3": [
+          1,
+          3
+        ],
+        "R4C2": [
+          1,
+          3
+        ],
+        "R4C3": [
+          1,
+          3
+        ]
+      }
+    }
+  ],
+  "error_steps": [
+    {
+      "turn": 2,
+      "reasoning": "Looking at row 2, it's missing 4. Column 2 already has 4 in row 1, so 4 must go in row 2, column 3 to satisfy the box constraint.",
+      "parsed_move": {
+        "row": 1,
+        "col": 2,
+        "value": 4
+      },
+      "validation_errors": [
+        "Cell R2C3 already has value 2",
+        "Column 3 already has 4 at R1",
+        "Box (1-2, 3-4) already has 4 at R1C3"
+      ]
+    },
+    {
+      "turn": 4,
+      "reasoning": "Looking at row 3: it has 2 and 4.  \nColumn 2 already contains 4, 2, and 4 (row 1, row 2, row 3? wait, row 3 col 2 is empty, but column 2 has 4 in row 1? no, row 1 col 2 is 2, row 2 col 2 is 4, row 4 col 2 is empty). Let's check the top-left 2x2 box: it has 3, 2, 1, 4 \u2014 so 1, 2, 3, 4 are all used.  \n\nActually simpler: Look at row 3, missing numbers are 1 and 3.  \nColumn 3 already has 4 and 2, and box 2 (top-right) has 4, 1, 2, 3 \u2014 so column 3 in box 2 has 2 and 3? Wait, box 2 (rows 1\u20132, cols 3\u20134) has 4, 1, 2, 3 \u2014 all used. So column 3 in box 4 (rows 3\u20134, cols 3\u20134) has no 3 yet.  \n\nBut column 3 in row 3: possible 1 or 3. Column 3 has 2 (row 2) and 4 (row 1) and ? row 4 empty. So column 3 missing 1 and 3.  \n\nCheck column 4: row 1: 1, row 2: 3, row 3: 4, row 4: 2 \u2014 column 4 full.  \n\nBetter: Look at row 4, missing 1 and 3. Column 2 in row 4: possible 1 or 3. Column 2 already has 2 (row 1), 4 (row 2), and row 3 col 2 empty. So column 2 missing 1 and 3.  \n\nBut box 4 (rows 3\u20134, cols 3\u20134) has 4 (row 3 col 4) and 2 (row 4 col 4) and two empty cells. Missing 1 and 3.  \n\nLet\u2019s check row 3 col 3: column 3 has 4 (row 1) and 2 (row 2), so missing 1 and 3. Row 3 missing 1 and 3. So row 3 col 3 could be 1 or 3.  \n\nBut row 4 col 3: row 4 missing 1 and 3, column 3 missing 1 and 3. So no unique yet.  \n\nLet\u2019s check column 2: has 2 (row 1), 4 (row 2), missing 1 and 3. Row 3 col 2: row 3 missing 1 and 3, so possible 1 or 3. Row 4 col 2: row 4 missing 1 and 3, so possible 1 or 3.  \n\nBut in box 3 (rows 3\u20134, cols 1\u20132): row 3 col 1 is 2, row 4 col 1 is 4, so missing 1 and 3 in box. Row 3 col 2 and row 4 col 2 are the two empty cells in box 3, so they must be {1,3}.  \n\nNow look at row 3: missing 1 and 3, but one will go in col 2, one in col 3.  \n\nColumn 3: has 4 (row 1), 2 (row 2), missing 1 and 3. Row 3 col 3 and row 4 col 3 are empty, so they must be {1,3}.  \n\nBut in box 4 (rows 3\u20134, cols 3\u20134): row 3 col 4 is 4, row 4 col 4 is 2, so missing 1 and 3. The two empty cells in box 4 are row 3 col 3 and row 4 col 3 \u2014 exactly the same two as column 3 empties. So they must be {1,3}.  \n\nNow, row 3 col 2 and row 3 col 3 are both in {1,3} for row 3, but row 3 col 2 is in box 3, row 3 col 3 is in box 4.  \n\nWe can\u2019t determine yet without more.  \n\nBut look at column 2: row 3 col 2 and row 4 col 2 are {1,3}.  \n\nColumn 1 is full: 3, 1, 2, 4.  \n\nLet\u2019s check column 4 full: 1,3,4,2.  \n\nSo maybe we can find a unique placement:  \n\nIn box 3, cells R3C2 and R4C2 = {1,3}.  \nIn box 4, cells R3C3 and R4C3 = {1,3}.  \n\nBut row 3: R3C2 and R3C3 = {1,3}.  \nRow 4: R4C2 and R4C3 = {1,3}.  \n\nThis is a deadlocked 1-3 pattern in two rows and two columns \u2014 no unique cell yet without guessing.  \n\nBut maybe I missed something:  \n\nCheck column 3: row 1: 4, row 2: 2, so missing 1,3.  \nRow 1 has 3,2,4,1. Row 2 has 1,4,2,3.  \n\nSo row 3 col 3: if it\u2019s 1, then row 3 col 2 is 3, row 4 col 2 is 1, row 4 col 3 is 3 \u2014 works.  \nIf row 3 col 3 is 3, then row 3 col 2 is 1, row 4 col 2 is 3, row 4 col 3 is 1 \u2014 works.  \n\nSo indeed no unique yet.  \n\nBut wait \u2014 column 2: row 1 has 2, row 2 has 4, so missing 1,3.  \nRow 1 has 3, so row 1 col 2 is 2 \u2014 not relevant.  \n\nBut look at box 1 (top-left): 3,2 / 1,4 \u2014 full. Box 2: 4,1 / 2,3 \u2014 full.  \n\nBox 3: 2, _ / 4, _ \u2014 missing 1,3.  \nBox 4: _, 4 / _, 2 \u2014 missing 1,3.  \n\nSo all empty cells are in two pairs {1,3} in two boxes.  \n\nThis is a known \u201cBivalue Universal Grave\u201d situation unless there\u2019s a constraint I missed.  \n\nBut maybe I can find a unique:  \n\nRow 3: missing 1,3. Column 2: missing 1,3. Column 3: missing 1,3.  \n\nRow 4: missing 1,3. Column 2: missing 1,3. Column 3: missing 1,3.  \n\nSo all four empty cells are in two rows, two columns, two boxes, each cell {1,3}.  \n\nThis means the puzzle has two solutions unless a clue elsewhere breaks it, but all given clues are filled.  \n\nGiven standard Sudoku, maybe I made a mistake:  \n\nLet\u2019s check row 3: it has 2 (col 1) and 4 (col 4), so missing 1,3.  \nRow 4: 4 (col 1) and 2 (col 4), so missing 1,3.  \n\nColumn 2: row 1: 2, row 2: 4, so missing 1,3.  \nColumn 3: row 1: 4, row 2: 2, so missing 1,3.  \n\nYes, so it\u2019s a 2x2 hidden rectangle of {1,3}.  \n\nThus no unique move possible.  \n\nSo:  \n\nREASONING: All empty cells form pairs {1,3} in two rows and columns; no unique deduction possible.  \nI'M STUCK",
+      "parsed_move": null,
+      "validation_errors": [
+        "LLM reported being stuck"
+      ]
+    }
+  ]
+}

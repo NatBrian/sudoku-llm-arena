@@ -1,0 +1,2222 @@
+{
+  "run_id": "9x9_003_s3-hidden-singles_r2",
+  "puzzle_id": "9x9_003",
+  "strategy_id": "s3-hidden-singles",
+  "strategy_label": "The Scanner",
+  "run_number": 2,
+  "solved": false,
+  "correct_against_solution": false,
+  "total_turns": 5,
+  "total_errors": 3,
+  "total_prompt_tokens": 2080,
+  "total_completion_tokens": 8103,
+  "duration_ms": 314988,
+  "final_grid": [
+    [
+      8,
+      9,
+      0,
+      6,
+      0,
+      7,
+      1,
+      0,
+      5
+    ],
+    [
+      4,
+      2,
+      7,
+      5,
+      1,
+      0,
+      0,
+      6,
+      8
+    ],
+    [
+      1,
+      0,
+      0,
+      2,
+      0,
+      8,
+      9,
+      0,
+      4
+    ],
+    [
+      7,
+      0,
+      0,
+      0,
+      0,
+      5,
+      2,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      3,
+      8,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      3,
+      4,
+      7,
+      6,
+      1,
+      0,
+      0,
+      9
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      2,
+      0,
+      5,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      6,
+      4,
+      0,
+      9,
+      7,
+      3,
+      0,
+      8,
+      0
+    ]
+  ],
+  "steps": [
+    {
+      "turn": 1,
+      "reasoning": "Let\u2019s check for hidden singles.\n\nLooking at **Row 3**: `1 . . . . 8 9 . 4`  \nMissing digits: 2, 3, 5, 6, 7.  \nCheck **Column 2** for possible placements of 6 in Row 3:  \nColumn 2 currently has 9, 2, (Row 3 empty), (Row 4 empty), 1, 3, (empty), (empty), 4.  \n6 is not yet in Column 2, but could it go elsewhere in Column 2?  \nCheck Box 1 (rows 1\u20133, cols 1\u20133): 8, 9, . | 4, 2, 7 | 1, ., .  \nMissing in Box 1: 3, 5, 6.  \nIn Box 1, Row 3 Col 1 is 1, Row 3 Col 2 empty, Row 3 Col 3 empty.  \nColumn 2 already has 9 (R1), 2 (R2), so 6 cannot go in R1C2 or R2C2.  \nRow 1 Col 3 is 6? No, Row 1 Col 3 is dot (actually Row 1: 8 9 . 6 . 7 1 . 5 \u2192 Col 3 is dot).  \nBut 6 is in Row 1 Col 4 (outside Box 1), so 6 not in Box 1 yet.  \nWhere can 6 go in Box 1?  \nPossible cells in Box 1: R1C3, R3C2, R3C3.  \nCheck R1C3: Row 1 has 8,9,6,7,1,5 \u2192 missing 2,3,4. So 6 already in Row 1 (Col 4), so 6 cannot go in R1C3.  \nSo 6 in Box 1 must be in R3C2 or R3C3.\n\nNow check Column 3:  \nColumn 3: Row 1: dot, Row 2: 7, Row 3: dot, Row 4: dot, Row 5: dot, Row 6: 4, Row 7: dot, Row 8: 2, Row 9: dot.  \nMissing 1,3,5,6,8,9.  \n6 not in Column 3 yet. Could 6 go in R3C3? Possibly, but also R3C2 possible.  \n\nBut check **digit 3** in Box 1 (missing 3,5,6).  \nWhere can 3 go in Box 1?  \nRow 1 already has 3? No, Row 1 missing digits 2,3,4. But 3 not in Row 1 yet.  \nColumn 2 has no 3, Column 3 no 3.  \nBut 3 could go in R1C3 or R3C2 or R3C3. Not a hidden single.\n\nLet\u2019s check **digit 5** in Box 1:  \nRow 1 has 5 in Col 9, so 5 not in Row 1 in Box 1.  \nRow 2 has 5 in Col 4, so 5 not in Row 2 in Box 1.  \nRow 3 has no 5.  \nColumn 1: has 8,4,1,7,\u2026 \u2192 no 5 yet.  \nColumn 2: has 9,2,\u2026 \u2192 no 5 yet.  \nColumn 3: no 5 yet.  \nSo 5 could go in R1C3, R3C2, R3C3. Not hidden.\n\nBut maybe easier: Look at **Row 3, Column 4** (R3C4).  \nRow 3 missing: 2,3,5,6,7.  \nColumn 4: 6,5,.,.,3,7,.,.,9 \u2192 missing 1,2,4,8.  \nSo possible for R3C4: intersection of {2,3,5,6,7} and {1,2,4,8} \u2192 only 2 possible.\n\nCheck Box 2 (rows 1\u20133, cols 4\u20136):  \nRow 1: 6 . 7  \nRow 2: 5 1 .  \nRow 3: . . 8  \nMissing in Box 2: 2,3,4,9.  \nR3C4 is in Box 2, possible digits: 2,3,4,9. But from Row 3 missing {2,3,5,6,7}, so possible: 2,3.  \nFrom Column 4 missing {1,2,4,8}, so possible: 2,4.  \nIntersection: 2 only.  \n\nSo R3C4 must be 2. That\u2019s a hidden single in Box 2 (only cell in Box 2 that can be 2 considering Row 3 and Column 4 constraints).\n\n**REASONING:** In Box 2, digit 2 can only go in R3C4 due to row/column constraints.",
+      "parsed_move": {
+        "row": 2,
+        "col": 3,
+        "value": 2
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 2,
+      "grid_before": [
+        [
+          8,
+          9,
+          0,
+          6,
+          0,
+          7,
+          1,
+          0,
+          5
+        ],
+        [
+          4,
+          2,
+          7,
+          5,
+          1,
+          0,
+          0,
+          6,
+          8
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          8,
+          9,
+          0,
+          4
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          3,
+          8,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          4,
+          7,
+          6,
+          1,
+          0,
+          0,
+          9
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          4,
+          0,
+          9,
+          7,
+          3,
+          0,
+          8,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          8,
+          9,
+          0,
+          6,
+          0,
+          7,
+          1,
+          0,
+          5
+        ],
+        [
+          4,
+          2,
+          7,
+          5,
+          1,
+          0,
+          0,
+          6,
+          8
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          0,
+          8,
+          9,
+          0,
+          4
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          3,
+          8,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          4,
+          7,
+          6,
+          1,
+          0,
+          0,
+          9
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          4,
+          0,
+          9,
+          7,
+          3,
+          0,
+          8,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C3": [
+          3
+        ],
+        "R1C5": [
+          2,
+          3,
+          4
+        ],
+        "R1C8": [
+          2,
+          3
+        ],
+        "R2C6": [
+          9
+        ],
+        "R2C7": [
+          3
+        ],
+        "R3C2": [
+          5,
+          6
+        ],
+        "R3C3": [
+          3,
+          5,
+          6
+        ],
+        "R3C4": [
+          2
+        ],
+        "R3C5": [
+          2,
+          3
+        ],
+        "R3C8": [
+          2,
+          3,
+          7
+        ],
+        "R4C2": [
+          6,
+          8
+        ],
+        "R4C3": [
+          6,
+          8,
+          9
+        ],
+        "R4C4": [
+          4
+        ],
+        "R4C5": [
+          4,
+          9
+        ],
+        "R4C8": [
+          1,
+          3,
+          4
+        ],
+        "R4C9": [
+          1,
+          3,
+          6
+        ],
+        "R5C1": [
+          2,
+          5,
+          9
+        ],
+        "R5C3": [
+          5,
+          6,
+          9
+        ],
+        "R5C6": [
+          2,
+          4,
+          9
+        ],
+        "R5C7": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "R5C8": [
+          4,
+          5,
+          7
+        ],
+        "R5C9": [
+          6,
+          7
+        ],
+        "R6C1": [
+          2,
+          5
+        ],
+        "R6C7": [
+          5,
+          8
+        ],
+        "R6C8": [
+          5
+        ],
+        "R7C1": [
+          3,
+          5,
+          9
+        ],
+        "R7C2": [
+          5,
+          7,
+          8
+        ],
+        "R7C3": [
+          1,
+          3,
+          5,
+          8,
+          9
+        ],
+        "R7C4": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "R7C5": [
+          2,
+          4
+        ],
+        "R7C6": [
+          2,
+          4,
+          6
+        ],
+        "R7C7": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "R7C8": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          7,
+          9
+        ],
+        "R7C9": [
+          1,
+          2,
+          3,
+          6,
+          7
+        ],
+        "R8C1": [
+          3,
+          9
+        ],
+        "R8C2": [
+          7,
+          8
+        ],
+        "R8C4": [
+          1,
+          4,
+          8
+        ],
+        "R8C6": [
+          4,
+          6
+        ],
+        "R8C7": [
+          3,
+          4,
+          6,
+          7
+        ],
+        "R8C8": [
+          1,
+          3,
+          4,
+          7,
+          9
+        ],
+        "R8C9": [
+          1,
+          3,
+          6,
+          7
+        ],
+        "R9C3": [
+          1,
+          5
+        ],
+        "R9C7": [
+          5
+        ],
+        "R9C9": [
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "turn": 2,
+      "reasoning": "Let's check for hidden singles.\n\n**Row 7**: Missing digits: 1, 2, 3, 5, 6, 7, 8, 9.  \nColumn 7 (R7C7) is in box 9 (rows 7\u20139, columns 7\u20139).  \nBox 9 currently contains: R7C7=., R7C8=., R7C9=., R8C7=., R8C8=., R8C9=., R9C7=., R9C8=8, R9C9=.  \nMissing in box 9: 1, 2, 3, 4, 5, 6, 7, 9.  \nNow check column 7:  \nC7 has so far: R1C7=1, R2C7=., R3C7=9, R4C7=2, R5C7=., R6C7=., R7C7=., R8C7=., R9C7=.  \nMissing in C7: 3, 4, 5, 6, 7, 8.  \n\nBut look at R7C7 specifically:  \nIn row 7, possible digits are many. But in **box 9**, digit 5 can go only in R7C7.  \nWhy?  \nIn box 9, column 8 already has 8 (R9C8), column 9 empty.  \nCheck column 8: R1C8=., R2C8=6, R3C8=., R4C8=., R5C8=., R6C8=., R7C8=., R8C8=., R9C8=8.  \nCheck column 9: R1C9=5, R2C9=8, R3C9=4, R4C9=., R5C9=., R6C9=9, R7C9=., R8C9=., R9C9=.  \nDigit 5 in box 9 cannot be in col 9 (R1C9=5 already in same col), cannot be in col 8 (no 5 conflict but check row constraints).  \nR7C8: row 7 missing 5, col 8 missing 5, box 9 missing 5 \u2014 possible. But also R7C9: row 7 missing 5, col 9 missing 5 except R1C9=5 so not possible.  \nSo 5 in box 9 must be in row 7 (since row 8 col 8/9 not possible? Let's check R8C8: row 8 missing 5, col 8 missing 5, box 9 missing 5 \u2014 possible too. So not unique yet.)\n\nLet's check a clearer hidden single:  \n**Box 1** (rows 1\u20133, cols 1\u20133):  \nMissing: 3, 5, 6.  \nR1C3: possible 3, 5, 6.  \nR2C3=7, R3C2=., R3C3=.,  \nCheck 6:  \nRow 1 has 6, so R1C3 cannot be 6.  \nRow 2 has 6, row 3 has 6? Row 3: 1 . . 2 . 8 9 . 4 \u2192 no 6 yet, so 6 possible in R3C2 or R3C3.  \nColumn 2: R1C2=9, R2C2=2, R3C2=., R4C2=., R5C2=1, R6C2=3, R7C2=., R8C2=., R9C2=4 \u2192 missing 5,6,7,8 in col 2. So 6 possible in R3C2.  \nColumn 3: R1C3=., R2C3=7, R3C3=., R4C3=., R5C3=., R6C3=4, R7C3=., R8C3=2, R9C3=. \u2192 missing 1,3,5,6,8,9 in col 3. So 6 possible in R3C3.  \nSo 6 not unique in box 1.\n\nCheck 5 in box 1:  \nRow 1 has 5, so R1C3 not 5.  \nRow 2 has 5, row 3 has no 5.  \nCol 1: 8,4,1,7,.,.,.,.,6 \u2192 missing 2,3,5,9. So R3C1=1 already so 5 not possible in col 1 in box 1.  \nCol 2: no 5, so R3C2 could be 5.  \nCol 3: no 5, so R3C3 could be 5.  \nSo 5 not unique.\n\nCheck 3 in box 1:  \nRow 1 has no 3, row 2 has no 3, row 3 has no 3.  \nCol 1: no 3, col 2: no 3, col 3: no 3.  \nSo 3 could be in R1C3, R3C2, R3C3. Not unique.\n\nNo hidden single in box 1.\n\nLet's check **box 4** (rows 4\u20136, cols 1\u20133):  \nMissing: 2,5,6,8,9.  \nR4C1=7, R4C2=., R4C3=., R5C1=., R5C2=1, R5C3=., R6C1=., R6C2=3, R6C3=4.  \nDigit 9:  \nRow 4: missing 9, col 1: missing 9, so R4C1 no, R4C2: col 2 has 9? No, col 2: 9,2,.,.,1,3,.,.,4 \u2192 9 only in R1C2, so col 2 missing 9 in others, so R4C2 possible for 9.  \nR4C3: col 3 missing 9, possible.  \nR5C1: col 1 missing 9, row 5 missing 9, possible.  \nR5C3: col 3 missing 9, possible.  \nSo 9 not unique.\n\nDigit 8:  \nRow 4: no 8, col 1: no 8, col 2: no 8, col 3: no 8.  \nPossible in R4C2, R4C3, R5C1, R5C3. Not unique.\n\nDigit 6:  \nRow 4: no 6, col 1: no 6, col 2: no 6, col 3: no 6.  \nPossible in R4C2, R4C3, R5C1, R5C3. Not unique.\n\nDigit 5:  \nRow 4: no 5, col 1: no 5, col 2: no 5, col 3: no 5.  \nPossible in R4C2, R4C3, R5C1, R5C3. Not unique.\n\nDigit 2:  \nRow 4: no 2, col 1: no 2, col 2: no 2, col 3: no 2.  \nPossible in R4C2, R4C3, R5C1, R5C3. Not unique.\n\nNo hidden single in box 4.\n\nLet's check **column 8**:  \nMissing: 1, 2, 3, 4, 5, 7, 9.  \nR1C8: row 1 missing 2,3,4; col 8 missing all above; box 2 missing?  \nBox 2 (rows 1\u20133, cols 4\u20136): R1C4=6, R1C5=., R1C6=7, R2C4=5, R2C5=1, R2C6=., R3C4=2, R3C5=., R3C6=8. Missing 3,4,9.  \nSo R1C8 not in box 2.  \n\nActually easier: Look at **box 3** (rows 1\u20133, cols 7\u20139):  \nMissing: 2,3,7.  \nR1C7=1, R1C8=., R1C9=5, R2C7=., R2C8=6, R2C9=8, R3C7=9, R3C8=., R3C9=4.  \nDigit 2:  \nRow 1: no 2, col 7: no 2, col 8: no 2, col 9: no 2. Possible in R1C8, R2C7, R3C8. Not unique.  \nDigit 3",
+      "parsed_move": null,
+      "valid": false,
+      "validation_errors": [
+        "Could not parse MOVE from response"
+      ],
+      "value": null,
+      "grid_before": [
+        [
+          8,
+          9,
+          0,
+          6,
+          0,
+          7,
+          1,
+          0,
+          5
+        ],
+        [
+          4,
+          2,
+          7,
+          5,
+          1,
+          0,
+          0,
+          6,
+          8
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          0,
+          8,
+          9,
+          0,
+          4
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          3,
+          8,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          4,
+          7,
+          6,
+          1,
+          0,
+          0,
+          9
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          4,
+          0,
+          9,
+          7,
+          3,
+          0,
+          8,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          8,
+          9,
+          0,
+          6,
+          0,
+          7,
+          1,
+          0,
+          5
+        ],
+        [
+          4,
+          2,
+          7,
+          5,
+          1,
+          0,
+          0,
+          6,
+          8
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          0,
+          8,
+          9,
+          0,
+          4
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          3,
+          8,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          4,
+          7,
+          6,
+          1,
+          0,
+          0,
+          9
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          4,
+          0,
+          9,
+          7,
+          3,
+          0,
+          8,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C3": [
+          3
+        ],
+        "R1C5": [
+          3,
+          4
+        ],
+        "R1C8": [
+          2,
+          3
+        ],
+        "R2C6": [
+          9
+        ],
+        "R2C7": [
+          3
+        ],
+        "R3C2": [
+          5,
+          6
+        ],
+        "R3C3": [
+          3,
+          5,
+          6
+        ],
+        "R3C5": [
+          3
+        ],
+        "R3C8": [
+          3,
+          7
+        ],
+        "R4C2": [
+          6,
+          8
+        ],
+        "R4C3": [
+          6,
+          8,
+          9
+        ],
+        "R4C4": [
+          4
+        ],
+        "R4C5": [
+          4,
+          9
+        ],
+        "R4C8": [
+          1,
+          3,
+          4
+        ],
+        "R4C9": [
+          1,
+          3,
+          6
+        ],
+        "R5C1": [
+          2,
+          5,
+          9
+        ],
+        "R5C3": [
+          5,
+          6,
+          9
+        ],
+        "R5C6": [
+          2,
+          4,
+          9
+        ],
+        "R5C7": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "R5C8": [
+          4,
+          5,
+          7
+        ],
+        "R5C9": [
+          6,
+          7
+        ],
+        "R6C1": [
+          2,
+          5
+        ],
+        "R6C7": [
+          5,
+          8
+        ],
+        "R6C8": [
+          5
+        ],
+        "R7C1": [
+          3,
+          5,
+          9
+        ],
+        "R7C2": [
+          5,
+          7,
+          8
+        ],
+        "R7C3": [
+          1,
+          3,
+          5,
+          8,
+          9
+        ],
+        "R7C4": [
+          1,
+          4,
+          8
+        ],
+        "R7C5": [
+          2,
+          4
+        ],
+        "R7C6": [
+          2,
+          4,
+          6
+        ],
+        "R7C7": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "R7C8": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          7,
+          9
+        ],
+        "R7C9": [
+          1,
+          2,
+          3,
+          6,
+          7
+        ],
+        "R8C1": [
+          3,
+          9
+        ],
+        "R8C2": [
+          7,
+          8
+        ],
+        "R8C4": [
+          1,
+          4,
+          8
+        ],
+        "R8C6": [
+          4,
+          6
+        ],
+        "R8C7": [
+          3,
+          4,
+          6,
+          7
+        ],
+        "R8C8": [
+          1,
+          3,
+          4,
+          7,
+          9
+        ],
+        "R8C9": [
+          1,
+          3,
+          6,
+          7
+        ],
+        "R9C3": [
+          1,
+          5
+        ],
+        "R9C7": [
+          5
+        ],
+        "R9C9": [
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "turn": 3,
+      "reasoning": "Let's check for hidden singles.\n\n**Row 1:** Missing digits: 2, 3, 4.  \n- R1C3: column 3 has 7, 2, (empty in row 3), box 1 has 8, 9, 4, 2, 1, 7 \u2192 missing 3, 5, 6. Could be 3 or 4.  \n- R1C5: column 5 has 1, 8, 6, 5, 7 \u2192 missing 2, 3, 4, 9.  \n- R1C8: column 8 has 6, 8 \u2192 missing 2, 3, 4, 7, 9.  \nNo obvious single candidate that is unique in row.\n\n**Column 5:** Values present: 1, 8, 6, 5, 7 \u2192 missing 2, 3, 4, 9.  \nCheck R3C5: row 3 has 1, 2, 8, 9, 4 \u2192 missing 3, 5, 6, 7.  \nBox 2 (rows 1-3, cols 4-6): has 6, 7, 5, 1, 2, 8 \u2192 missing 3, 4, 9.  \nR2C6 missing in col 5? Wait, col 5: R2C5=1, R3C5=?, R5C5=8, R6C5=6, R8C5=5, R9C5=7.  \nR3C5 candidates: from box 2 missing 3,4,9; col 5 missing 2,3,4,9; row 3 missing 3,5,6,7 \u2192 intersection: 3,4,9 possible. Not single.\n\n**Box 3 (rows 1-3, cols 7-9):**  \nDigits present: 1, 9, 4, 6, 8 \u2192 missing 2, 3, 5, 7.  \nCells: R1C8, R2C7, R2C8=6, R3C8.  \nR1C8 col 8 missing 2,3,4,7,9; row 1 missing 2,3,4; box missing 2,3,5,7 \u2192 possible: 2,3,7.  \nR2C7 col 7 missing 2,3,4,5,7,8; row 2 missing 3,5,9; box missing 2,3,5,7 \u2192 possible: 3,5,7.  \nR3C8 col 8 missing 2,3,4,7,9; row 3 missing 3,5,6,7; box missing 2,3,5,7 \u2192 possible: 3,7.  \nNo single.\n\n**Box 7 (rows 7-9, cols 1-3):**  \nDigits present: 6, 4, 2 (from R8C3=2, R9C1=6, R9C2=4) \u2192 missing 1, 3, 5, 7, 8, 9.  \nCells: R7C1, R7C2, R7C3, R8C1, R8C2, R9C3.  \nR9C3: row 9 has 6,4,9,7,3,8 \u2192 missing 1,2,5. Col 3 has 7, 2, 4 \u2192 missing 1,3,5,6,8,9. Box missing above \u2192 possible: 1,5. Not single.\n\n**Column 9:** Digits present: 5, 8, 4, 9 \u2192 missing 1, 2, 3, 6, 7.  \nCells: R4C9, R5C9, R7C9, R8C9.  \nCheck R4C9: row 4 has 7, 5, 2 \u2192 missing 1,3,4,6,8,9. Col 9 missing above \u2192 possible: 1,3,6,7.  \nCheck R7C9: row 7 empty, col 9 missing 1,2,3,6,7; box 9 missing? Box 9 (rows 7-9, cols 7-9) has R9C8=8, R9C9 empty, R7C7-9 empty, R8C7-9 empty.  \nIn box 9 missing digits: from whole grid? Let's check systematically:  \nBox 9 digits: R9C8=8, R9C9=?, R8C7-9=?, R7C7-9=?.  \nFrom row 9: 6,4,?,9,7,3,?,8,? \u2192 missing 1,2,5.  \nFrom col 7: has 1,9,2,?,?,?,? \u2192 missing 3,4,5,6,7,8.  \nFrom col 8: has 6,8,? \u2192 missing 1,2,3,4,5,7,9.  \nFrom col 9: has 5,8,4,9 \u2192 missing 1,2,3,6,7.  \n\nLet's check R7C9:  \nRow 7: all empty.  \nCol 9 missing: 1,2,3,6,7.  \nBox 9 missing digits: from whole grid digits 1-9 minus present digits in box 9 (only 8 so far) \u2192 missing 1,2,3,4,5,6,7,9.  \nIntersection of col 9 missing and box 9 missing: 1,2,3,6,7.  \nBut in box 9, R9C9 is also in col 9, so same candidates.  \nNo single yet.\n\n**Box 6 (rows 4-6, cols 7-9):**  \nDigits present: 2, 9 \u2192 missing 1,3,4,5,6,7,8.  \nCells: R4C7=2, R4C8, R4C9, R5C7, R5C8, R5C9, R6C7, R6C8, R6C9=9.  \nCheck R4C8: col 8 missing 2,3,4,7,9; row 4 missing 1,3,4,6,8,9; box missing 1,3,4,5,6,7,8 \u2192 possible: 3,4,6,8.  \nCheck R5C9: row 5 has 1,3,8 \u2192 missing 2,4,5,6,7,9; col 9 missing 1,2,3,6,7; box missing above \u2192 possible: 6,7.  \nCheck R6C7: row 6 has 3,4,7,6,1,9 \u2192 missing 2,5,8; col 7 missing 3,4,5,6,7,8; box missing 1,3,4,5,6,7,8 \u2192 possible: 5,8.  \nNo single.\n\n**Box 8 (rows 7-9, cols 4-6):**  \nDigits present: 9,7,3 (from R9C4-6) and R8C5=5 \u2192 missing 1,2,4,6,8.  \nCells: R7C4, R7C5, R7C6, R8C4, R8C6, R9C4=9, R9C5=7, R9C6=3.  \nCheck R8C4: row 8 has 2,5 \u2192 missing 1,3,4,6,7,8,9; col 4 has 6,5,2,3,7,9 \u2192 missing 1,4,8; box missing 1,2,4,6,8 \u2192 possible: 1,4.  \nCheck R7C5: row 7 empty; col 5 missing 2,3,4,9; box missing 1,2,4,6,8 \u2192 possible: 2,4.  \nNo single.\n\n**Column 1:** Digits present: 8,4,1,7,6 \u2192 missing 2,3,5,9.  \nCells: R5C1, R7C1, R8C1.  \nR5C1: row 5 has 1,3,8 \u2192 missing 2,4,5,6,7,9; col 1 missing 2,3,5,9; box 4 (rows 4-6, cols 1-3) has 7,1,3,4 \u2192 missing 2,5,6,8,9. Intersection of col 1 missing and row 5 missing: 2,5,9 possible. Not single.\n\nWait",
+      "parsed_move": null,
+      "valid": false,
+      "validation_errors": [
+        "Could not parse MOVE from response"
+      ],
+      "value": null,
+      "grid_before": [
+        [
+          8,
+          9,
+          0,
+          6,
+          0,
+          7,
+          1,
+          0,
+          5
+        ],
+        [
+          4,
+          2,
+          7,
+          5,
+          1,
+          0,
+          0,
+          6,
+          8
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          0,
+          8,
+          9,
+          0,
+          4
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          3,
+          8,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          4,
+          7,
+          6,
+          1,
+          0,
+          0,
+          9
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          4,
+          0,
+          9,
+          7,
+          3,
+          0,
+          8,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          8,
+          9,
+          0,
+          6,
+          0,
+          7,
+          1,
+          0,
+          5
+        ],
+        [
+          4,
+          2,
+          7,
+          5,
+          1,
+          0,
+          0,
+          6,
+          8
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          0,
+          8,
+          9,
+          0,
+          4
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          3,
+          8,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          4,
+          7,
+          6,
+          1,
+          0,
+          0,
+          9
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          4,
+          0,
+          9,
+          7,
+          3,
+          0,
+          8,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C3": [
+          3
+        ],
+        "R1C5": [
+          3,
+          4
+        ],
+        "R1C8": [
+          2,
+          3
+        ],
+        "R2C6": [
+          9
+        ],
+        "R2C7": [
+          3
+        ],
+        "R3C2": [
+          5,
+          6
+        ],
+        "R3C3": [
+          3,
+          5,
+          6
+        ],
+        "R3C5": [
+          3
+        ],
+        "R3C8": [
+          3,
+          7
+        ],
+        "R4C2": [
+          6,
+          8
+        ],
+        "R4C3": [
+          6,
+          8,
+          9
+        ],
+        "R4C4": [
+          4
+        ],
+        "R4C5": [
+          4,
+          9
+        ],
+        "R4C8": [
+          1,
+          3,
+          4
+        ],
+        "R4C9": [
+          1,
+          3,
+          6
+        ],
+        "R5C1": [
+          2,
+          5,
+          9
+        ],
+        "R5C3": [
+          5,
+          6,
+          9
+        ],
+        "R5C6": [
+          2,
+          4,
+          9
+        ],
+        "R5C7": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "R5C8": [
+          4,
+          5,
+          7
+        ],
+        "R5C9": [
+          6,
+          7
+        ],
+        "R6C1": [
+          2,
+          5
+        ],
+        "R6C7": [
+          5,
+          8
+        ],
+        "R6C8": [
+          5
+        ],
+        "R7C1": [
+          3,
+          5,
+          9
+        ],
+        "R7C2": [
+          5,
+          7,
+          8
+        ],
+        "R7C3": [
+          1,
+          3,
+          5,
+          8,
+          9
+        ],
+        "R7C4": [
+          1,
+          4,
+          8
+        ],
+        "R7C5": [
+          2,
+          4
+        ],
+        "R7C6": [
+          2,
+          4,
+          6
+        ],
+        "R7C7": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "R7C8": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          7,
+          9
+        ],
+        "R7C9": [
+          1,
+          2,
+          3,
+          6,
+          7
+        ],
+        "R8C1": [
+          3,
+          9
+        ],
+        "R8C2": [
+          7,
+          8
+        ],
+        "R8C4": [
+          1,
+          4,
+          8
+        ],
+        "R8C6": [
+          4,
+          6
+        ],
+        "R8C7": [
+          3,
+          4,
+          6,
+          7
+        ],
+        "R8C8": [
+          1,
+          3,
+          4,
+          7,
+          9
+        ],
+        "R8C9": [
+          1,
+          3,
+          6,
+          7
+        ],
+        "R9C3": [
+          1,
+          5
+        ],
+        "R9C7": [
+          5
+        ],
+        "R9C9": [
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "turn": 4,
+      "reasoning": "Let's check for hidden singles.\n\nLooking at Row 7: digits missing are 1,2,3,5,7,8,9.  \nCheck column 1: column 1 already has 8,4,1,7,6 \u2192 missing 2,3,5,9.  \nCheck column 2: has 9,2,?,?,1,3,?,?,4 \u2192 missing 5,6,7,8.  \nCheck column 3: has ?,7,?,?,?,4,?,2,? \u2192 missing 1,3,5,6,8,9.  \nCheck column 4: has 6,5,2,?,3,7,?,?,9 \u2192 missing 1,4,8.  \nCheck column 5: has ?,1,?,?,8,6,?,5,7 \u2192 missing 2,3,4,9.  \nCheck column 6: has 7,?,8,5,?,1,?,?,3 \u2192 missing 2,4,6,9.  \nCheck column 7: has 1,?,9,2,?,?,?,?,? \u2192 missing 3,4,5,6,7,8.  \nCheck column 8: has ?,6,?,?,?,?,?,?,8 \u2192 missing 1,2,3,4,5,7,9.  \nCheck column 9: has 5,8,4,?,?,9,?,?,? \u2192 missing 1,2,3,6,7.\n\nNow check Box 8 (rows 7\u20139, cols 4\u20136):  \nR7C4: candidates from missing in row 7, col 4, box 8.  \nBox 8 currently has:  \nR7C4 ?, R7C5 ?, R7C6 ?  \nR8C4 ?, R8C5 5, R8C6 ?  \nR9C4 9, R9C5 7, R9C6 3.  \nDigits missing in Box 8: 1,2,4,6,8.  \n\nCheck R7C4: column 4 missing 1,4,8. Row 7 missing 1,2,3,5,7,8,9. Intersect with box missing {1,2,4,6,8} \u2192 possible {1,2,4,8}.  \nCheck R7C5: col 5 missing 2,3,4,9. Row 7 missing 1,2,3,5,7,8,9. Intersect with box missing {1,2,4,6,8} \u2192 possible {2}.  \nYes \u2014 only 2 can go in R7C5 because:  \n- Row 7 needs 2.  \n- Column 5 needs 2.  \n- Box 8 needs 2.  \n- No other cell in Box 8 can take 2 (R8C4 col 4 missing 1,4,8, not 2; R8C6 col 6 missing 2,4,6,9, but row 8 missing 1,3,4,6,7,8,9, so 2 possible for R8C6? Wait, check: Row 8 has . . 2 . 5 . . . . \u2192 missing 1,3,4,6,7,8,9. So row 8 does not need 2, so 2 not possible in R8C6. R7C4 col 4 missing 1,4,8, so 2 not possible. R7C6 col 6 missing 2,4,6,9, so 2 possible, but row 7 missing 2, so 2 possible in R7C6 too. But in Box 8, R7C6 col 6 missing 2,4,6,9, row 7 missing 2, so 2 possible. So 2 could be in R7C5 or R7C6. But column 5 missing 2,3,4,9, so only R7C5 in column 5 can take 2. So indeed 2 is forced in R7C5.\n\nSo hidden single in column 5 for digit 2.\n\nREASONING: Column 5 needs digit 2, and only R7C5 can take 2 in that column because other rows in col 5 already have 1,8,6,5,7.",
+      "parsed_move": {
+        "row": 6,
+        "col": 4,
+        "value": 2
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 2,
+      "grid_before": [
+        [
+          8,
+          9,
+          0,
+          6,
+          0,
+          7,
+          1,
+          0,
+          5
+        ],
+        [
+          4,
+          2,
+          7,
+          5,
+          1,
+          0,
+          0,
+          6,
+          8
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          0,
+          8,
+          9,
+          0,
+          4
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          3,
+          8,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          4,
+          7,
+          6,
+          1,
+          0,
+          0,
+          9
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          4,
+          0,
+          9,
+          7,
+          3,
+          0,
+          8,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          8,
+          9,
+          0,
+          6,
+          0,
+          7,
+          1,
+          0,
+          5
+        ],
+        [
+          4,
+          2,
+          7,
+          5,
+          1,
+          0,
+          0,
+          6,
+          8
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          0,
+          8,
+          9,
+          0,
+          4
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          3,
+          8,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          4,
+          7,
+          6,
+          1,
+          0,
+          0,
+          9
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          4,
+          0,
+          9,
+          7,
+          3,
+          0,
+          8,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C3": [
+          3
+        ],
+        "R1C5": [
+          3,
+          4
+        ],
+        "R1C8": [
+          2,
+          3
+        ],
+        "R2C6": [
+          9
+        ],
+        "R2C7": [
+          3
+        ],
+        "R3C2": [
+          5,
+          6
+        ],
+        "R3C3": [
+          3,
+          5,
+          6
+        ],
+        "R3C5": [
+          3
+        ],
+        "R3C8": [
+          3,
+          7
+        ],
+        "R4C2": [
+          6,
+          8
+        ],
+        "R4C3": [
+          6,
+          8,
+          9
+        ],
+        "R4C4": [
+          4
+        ],
+        "R4C5": [
+          4,
+          9
+        ],
+        "R4C8": [
+          1,
+          3,
+          4
+        ],
+        "R4C9": [
+          1,
+          3,
+          6
+        ],
+        "R5C1": [
+          2,
+          5,
+          9
+        ],
+        "R5C3": [
+          5,
+          6,
+          9
+        ],
+        "R5C6": [
+          2,
+          4,
+          9
+        ],
+        "R5C7": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "R5C8": [
+          4,
+          5,
+          7
+        ],
+        "R5C9": [
+          6,
+          7
+        ],
+        "R6C1": [
+          2,
+          5
+        ],
+        "R6C7": [
+          5,
+          8
+        ],
+        "R6C8": [
+          5
+        ],
+        "R7C1": [
+          3,
+          5,
+          9
+        ],
+        "R7C2": [
+          5,
+          7,
+          8
+        ],
+        "R7C3": [
+          1,
+          3,
+          5,
+          8,
+          9
+        ],
+        "R7C4": [
+          1,
+          4,
+          8
+        ],
+        "R7C5": [
+          2,
+          4
+        ],
+        "R7C6": [
+          2,
+          4,
+          6
+        ],
+        "R7C7": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "R7C8": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          7,
+          9
+        ],
+        "R7C9": [
+          1,
+          2,
+          3,
+          6,
+          7
+        ],
+        "R8C1": [
+          3,
+          9
+        ],
+        "R8C2": [
+          7,
+          8
+        ],
+        "R8C4": [
+          1,
+          4,
+          8
+        ],
+        "R8C6": [
+          4,
+          6
+        ],
+        "R8C7": [
+          3,
+          4,
+          6,
+          7
+        ],
+        "R8C8": [
+          1,
+          3,
+          4,
+          7,
+          9
+        ],
+        "R8C9": [
+          1,
+          3,
+          6,
+          7
+        ],
+        "R9C3": [
+          1,
+          5
+        ],
+        "R9C7": [
+          5
+        ],
+        "R9C9": [
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "turn": 5,
+      "reasoning": "Let\u2019s check for hidden singles.\n\nLooking at **Box 1** (rows 1\u20133, cols 1\u20133):  \nMissing numbers: 3, 5, 6.  \n- R1C3: can be 3 or 6.  \n- R2C3 is 7 (filled).  \n- R3C2: can be 3, 5, or 6.  \n- R3C3: can be 3, 5, or 6.  \n\nCheck number **3** in Box 1:  \nRow 1 already has no 3, Row 2 has no 3, Row 3 has no 3.  \nColumn 1 has 8,4,1 (no 3), Column 2 has 9,2,? (no 3), Column 3 has ?,7,? (no 3).  \nPossible cells in Box 1 for 3: R1C3, R3C2, R3C3.  \n\nCheck number **5** in Box 1:  \nRow 1 has 5 in col 9, so Row 1 cannot have 5 in Box 1.  \nRow 2 has no 5 in Box 1 (col 1\u20133), but Row 2 has 5 in col 4.  \nRow 3 has no 5.  \nColumn 1: 8,4,1 (no 5), Column 2: 9,2,? (no 5), Column 3: ?,7,? (no 5).  \nPossible cells for 5 in Box 1: R3C2, R3C3.  \n\nCheck number **6** in Box 1:  \nRow 1 has 6 in col 4, so Row 1 can\u2019t have 6 in Box 1.  \nRow 2 has no 6 in Box 1 (col 1\u20133), but Row 2 has 6 in col 8.  \nRow 3 has no 6.  \nColumn 1: 8,4,1 (no 6), Column 2: 9,2,? (no 6), Column 3: ?,7,? (no 6).  \nPossible cells for 6 in Box 1: R3C2, R3C3.  \n\nNo hidden single in Box 1 yet.\n\nCheck **Box 7** (rows 7\u20139, cols 1\u20133):  \nMissing: 1, 3, 5, 7, 8, 9.  \nLook at number **1**:  \nRow 7: no 1, Row 8: no 1, Row 9: no 1.  \nColumn 1: R1=8, R2=4, R3=1, R4=7, R5=?, R6=?, R7=?, R8=?, R9=6.  \nSo column 1 already has 1 in R3C1, so column 1 in Box 7 (R7C1, R8C1, R9C1) cannot have 1.  \nColumn 2: R1=9, R2=2, R3=?, R4=?, R5=1, R6=3, R7=?, R8=?, R9=4 \u2192 1 is in R5C2, so col 2 in Box 7 cannot have 1.  \nColumn 3: R1=?, R2=7, R3=?, R4=?, R5=?, R6=4, R7=?, R8=2, R9=?. No 1 yet in col 3.  \nSo 1 in Box 7 must be in column 3.  \nPossible cells: R7C3, R9C3.  \nBut R9C3: can it be 1? Row 9 has 6,4,?,9,7,3,?,8,? \u2014 no 1 yet, so possible.  \nR7C3: Row 7 has ?,?,?,?,2,?,?,?,? \u2014 no 1 yet, so possible.  \nBut check column 3 for 1:  \nColumn 3: R1=?, R2=7, R3=?, R4=?, R5=?, R6=4, R7=?, R8=2, R9=?.  \nNo 1 in col 3 yet. So both R7C3 and R9C3 possible for 1.  \nBut maybe another number is a hidden single.\n\nLet\u2019s check **Box 8** (rows 7\u20139, cols 4\u20136):  \nMissing: 1, 4, 6, 8.  \nLook at number **1**:  \nRow 7: no 1, Row 8: no 1, Row 9: no 1.  \nColumn 4: R1=6, R2=5, R3=2, R4=?, R5=3, R6=7, R7=?, R8=?, R9=9. No 1 in col 4.  \nColumn 5: R1=?, R2=1, R3=?, R4=?, R5=8, R6=6, R7=2, R8=5, R9=7 \u2192 col 5 already has 1 in R2C5, so col 5 in Box 8 cannot have 1.  \nColumn 6: R1=7, R2=?, R3=8, R4=5, R5=?, R6=1, R7=?, R8=?, R9=3 \u2192 col 6 already has 1 in R6C6, so col 6 in Box 8 cannot have 1.  \nThus 1 in Box 8 must be in column 4 (since col 5 and col 6 already have 1 elsewhere).  \nColumn 4 in Box 8: R7C4, R8C4, R9C4.  \nR9C4 is 9 (given), so not possible.  \nR8C4 is empty, R7C4 is empty.  \nCheck R8C4: Row 8 has ?,?,2,?,5,?,?,?,? \u2014 no 1 yet, possible.  \nR7C4: Row 7 no 1 yet, possible.  \nBut check column 4: R4C4 empty, R5C4=3, R6C4=7, R7C4 empty, R8C4 empty.  \nNo 1 in col 4 yet.  \nSo both possible for 1 in Box 8? Wait \u2014 but Box 8 is rows 7\u20139, cols 4\u20136.  \nWe said 1 in Box 8 must be col 4 (since col 5 and col 6 already have 1 elsewhere in the column).  \nSo possible cells: R7C4 and R8C4.  \nBut R7C4: Row 7 has no 1, col 4 has no 1 yet.  \nR8C4: Row 8 has no 1, col 4 has no 1 yet.  \nSo not a hidden single yet.\n\nLet\u2019s check **Box 9** (rows 7\u20139, cols 7\u20139):  \nMissing: 1, 2, 3, 4, 5, 6, 7, 9. Only 8 is given (R9C8=8).  \nLook at number **1** in Box 9:  \nRow 7: no 1, Row 8: no 1, Row 9: no 1.  \nColumn 7: R1=1, R2=?, R3=9, R4=2, R5=?, R6=?, R7=?, R8=?, R9=? \u2192 col 7 already has 1 in R1C7, so col 7 in Box 9 cannot have 1.  \nColumn 8: R1=?, R2=6, R3=?, R4=?, R5=?, R6=?, R7=?, R8=?, R9=8 \u2192 no 1 in col 8 yet.  \nColumn 9: R1=5, R2=8, R3=4, R4=?, R5=?, R6=9, R7=?, R8=?, R9=? \u2192 no 1 in col 9 yet.  \nSo 1 in Box 9 must be in col 8 or col 9.  \nPossible cells: R7C8, R7C9, R8C8, R8C9, R9C7, R9C9.  \nBut R9C7 is empty, R9C9 empty.  \nToo many possibilities, not hidden single.\n\nLet\u2019s check **Row 7**:  \nRow 7: . . . . 2 . . . .  \nMissing: 1,3,4,5,6,7,8,9.  \nLook at column constraints:  \nCol 1: possible 1,3,5,9?  \nActually, let\u2019s find a hidden single by scanning each empty cell for a number that can only go there",
+      "parsed_move": null,
+      "valid": false,
+      "validation_errors": [
+        "Could not parse MOVE from response"
+      ],
+      "value": null,
+      "grid_before": [
+        [
+          8,
+          9,
+          0,
+          6,
+          0,
+          7,
+          1,
+          0,
+          5
+        ],
+        [
+          4,
+          2,
+          7,
+          5,
+          1,
+          0,
+          0,
+          6,
+          8
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          0,
+          8,
+          9,
+          0,
+          4
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          3,
+          8,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          4,
+          7,
+          6,
+          1,
+          0,
+          0,
+          9
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          4,
+          0,
+          9,
+          7,
+          3,
+          0,
+          8,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          8,
+          9,
+          0,
+          6,
+          0,
+          7,
+          1,
+          0,
+          5
+        ],
+        [
+          4,
+          2,
+          7,
+          5,
+          1,
+          0,
+          0,
+          6,
+          8
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          0,
+          8,
+          9,
+          0,
+          4
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          3,
+          8,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          4,
+          7,
+          6,
+          1,
+          0,
+          0,
+          9
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          4,
+          0,
+          9,
+          7,
+          3,
+          0,
+          8,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C3": [
+          3
+        ],
+        "R1C5": [
+          3,
+          4
+        ],
+        "R1C8": [
+          2,
+          3
+        ],
+        "R2C6": [
+          9
+        ],
+        "R2C7": [
+          3
+        ],
+        "R3C2": [
+          5,
+          6
+        ],
+        "R3C3": [
+          3,
+          5,
+          6
+        ],
+        "R3C5": [
+          3
+        ],
+        "R3C8": [
+          3,
+          7
+        ],
+        "R4C2": [
+          6,
+          8
+        ],
+        "R4C3": [
+          6,
+          8,
+          9
+        ],
+        "R4C4": [
+          4
+        ],
+        "R4C5": [
+          4,
+          9
+        ],
+        "R4C8": [
+          1,
+          3,
+          4
+        ],
+        "R4C9": [
+          1,
+          3,
+          6
+        ],
+        "R5C1": [
+          2,
+          5,
+          9
+        ],
+        "R5C3": [
+          5,
+          6,
+          9
+        ],
+        "R5C6": [
+          2,
+          4,
+          9
+        ],
+        "R5C7": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "R5C8": [
+          4,
+          5,
+          7
+        ],
+        "R5C9": [
+          6,
+          7
+        ],
+        "R6C1": [
+          2,
+          5
+        ],
+        "R6C7": [
+          5,
+          8
+        ],
+        "R6C8": [
+          5
+        ],
+        "R7C1": [
+          3,
+          5,
+          9
+        ],
+        "R7C2": [
+          5,
+          7,
+          8
+        ],
+        "R7C3": [
+          1,
+          3,
+          5,
+          8,
+          9
+        ],
+        "R7C4": [
+          1,
+          4,
+          8
+        ],
+        "R7C6": [
+          4,
+          6
+        ],
+        "R7C7": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "R7C8": [
+          1,
+          3,
+          4,
+          5,
+          7,
+          9
+        ],
+        "R7C9": [
+          1,
+          3,
+          6,
+          7
+        ],
+        "R8C1": [
+          3,
+          9
+        ],
+        "R8C2": [
+          7,
+          8
+        ],
+        "R8C4": [
+          1,
+          4,
+          8
+        ],
+        "R8C6": [
+          4,
+          6
+        ],
+        "R8C7": [
+          3,
+          4,
+          6,
+          7
+        ],
+        "R8C8": [
+          1,
+          3,
+          4,
+          7,
+          9
+        ],
+        "R8C9": [
+          1,
+          3,
+          6,
+          7
+        ],
+        "R9C3": [
+          1,
+          5
+        ],
+        "R9C7": [
+          5
+        ],
+        "R9C9": [
+          1,
+          2
+        ]
+      }
+    }
+  ],
+  "error_steps": [
+    {
+      "turn": 2,
+      "reasoning": "Let's check for hidden singles.\n\n**Row 7**: Missing digits: 1, 2, 3, 5, 6, 7, 8, 9.  \nColumn 7 (R7C7) is in box 9 (rows 7\u20139, columns 7\u20139).  \nBox 9 currently contains: R7C7=., R7C8=., R7C9=., R8C7=., R8C8=., R8C9=., R9C7=., R9C8=8, R9C9=.  \nMissing in box 9: 1, 2, 3, 4, 5, 6, 7, 9.  \nNow check column 7:  \nC7 has so far: R1C7=1, R2C7=., R3C7=9, R4C7=2, R5C7=., R6C7=., R7C7=., R8C7=., R9C7=.  \nMissing in C7: 3, 4, 5, 6, 7, 8.  \n\nBut look at R7C7 specifically:  \nIn row 7, possible digits are many. But in **box 9**, digit 5 can go only in R7C7.  \nWhy?  \nIn box 9, column 8 already has 8 (R9C8), column 9 empty.  \nCheck column 8: R1C8=., R2C8=6, R3C8=., R4C8=., R5C8=., R6C8=., R7C8=., R8C8=., R9C8=8.  \nCheck column 9: R1C9=5, R2C9=8, R3C9=4, R4C9=., R5C9=., R6C9=9, R7C9=., R8C9=., R9C9=.  \nDigit 5 in box 9 cannot be in col 9 (R1C9=5 already in same col), cannot be in col 8 (no 5 conflict but check row constraints).  \nR7C8: row 7 missing 5, col 8 missing 5, box 9 missing 5 \u2014 possible. But also R7C9: row 7 missing 5, col 9 missing 5 except R1C9=5 so not possible.  \nSo 5 in box 9 must be in row 7 (since row 8 col 8/9 not possible? Let's check R8C8: row 8 missing 5, col 8 missing 5, box 9 missing 5 \u2014 possible too. So not unique yet.)\n\nLet's check a clearer hidden single:  \n**Box 1** (rows 1\u20133, cols 1\u20133):  \nMissing: 3, 5, 6.  \nR1C3: possible 3, 5, 6.  \nR2C3=7, R3C2=., R3C3=.,  \nCheck 6:  \nRow 1 has 6, so R1C3 cannot be 6.  \nRow 2 has 6, row 3 has 6? Row 3: 1 . . 2 . 8 9 . 4 \u2192 no 6 yet, so 6 possible in R3C2 or R3C3.  \nColumn 2: R1C2=9, R2C2=2, R3C2=., R4C2=., R5C2=1, R6C2=3, R7C2=., R8C2=., R9C2=4 \u2192 missing 5,6,7,8 in col 2. So 6 possible in R3C2.  \nColumn 3: R1C3=., R2C3=7, R3C3=., R4C3=., R5C3=., R6C3=4, R7C3=., R8C3=2, R9C3=. \u2192 missing 1,3,5,6,8,9 in col 3. So 6 possible in R3C3.  \nSo 6 not unique in box 1.\n\nCheck 5 in box 1:  \nRow 1 has 5, so R1C3 not 5.  \nRow 2 has 5, row 3 has no 5.  \nCol 1: 8,4,1,7,.,.,.,.,6 \u2192 missing 2,3,5,9. So R3C1=1 already so 5 not possible in col 1 in box 1.  \nCol 2: no 5, so R3C2 could be 5.  \nCol 3: no 5, so R3C3 could be 5.  \nSo 5 not unique.\n\nCheck 3 in box 1:  \nRow 1 has no 3, row 2 has no 3, row 3 has no 3.  \nCol 1: no 3, col 2: no 3, col 3: no 3.  \nSo 3 could be in R1C3, R3C2, R3C3. Not unique.\n\nNo hidden single in box 1.\n\nLet's check **box 4** (rows 4\u20136, cols 1\u20133):  \nMissing: 2,5,6,8,9.  \nR4C1=7, R4C2=., R4C3=., R5C1=., R5C2=1, R5C3=., R6C1=., R6C2=3, R6C3=4.  \nDigit 9:  \nRow 4: missing 9, col 1: missing 9, so R4C1 no, R4C2: col 2 has 9? No, col 2: 9,2,.,.,1,3,.,.,4 \u2192 9 only in R1C2, so col 2 missing 9 in others, so R4C2 possible for 9.  \nR4C3: col 3 missing 9, possible.  \nR5C1: col 1 missing 9, row 5 missing 9, possible.  \nR5C3: col 3 missing 9, possible.  \nSo 9 not unique.\n\nDigit 8:  \nRow 4: no 8, col 1: no 8, col 2: no 8, col 3: no 8.  \nPossible in R4C2, R4C3, R5C1, R5C3. Not unique.\n\nDigit 6:  \nRow 4: no 6, col 1: no 6, col 2: no 6, col 3: no 6.  \nPossible in R4C2, R4C3, R5C1, R5C3. Not unique.\n\nDigit 5:  \nRow 4: no 5, col 1: no 5, col 2: no 5, col 3: no 5.  \nPossible in R4C2, R4C3, R5C1, R5C3. Not unique.\n\nDigit 2:  \nRow 4: no 2, col 1: no 2, col 2: no 2, col 3: no 2.  \nPossible in R4C2, R4C3, R5C1, R5C3. Not unique.\n\nNo hidden single in box 4.\n\nLet's check **column 8**:  \nMissing: 1, 2, 3, 4, 5, 7, 9.  \nR1C8: row 1 missing 2,3,4; col 8 missing all above; box 2 missing?  \nBox 2 (rows 1\u20133, cols 4\u20136): R1C4=6, R1C5=., R1C6=7, R2C4=5, R2C5=1, R2C6=., R3C4=2, R3C5=., R3C6=8. Missing 3,4,9.  \nSo R1C8 not in box 2.  \n\nActually easier: Look at **box 3** (rows 1\u20133, cols 7\u20139):  \nMissing: 2,3,7.  \nR1C7=1, R1C8=., R1C9=5, R2C7=., R2C8=6, R2C9=8, R3C7=9, R3C8=., R3C9=4.  \nDigit 2:  \nRow 1: no 2, col 7: no 2, col 8: no 2, col 9: no 2. Possible in R1C8, R2C7, R3C8. Not unique.  \nDigit 3",
+      "parsed_move": null,
+      "validation_errors": [
+        "Could not parse MOVE from response"
+      ]
+    },
+    {
+      "turn": 3,
+      "reasoning": "Let's check for hidden singles.\n\n**Row 1:** Missing digits: 2, 3, 4.  \n- R1C3: column 3 has 7, 2, (empty in row 3), box 1 has 8, 9, 4, 2, 1, 7 \u2192 missing 3, 5, 6. Could be 3 or 4.  \n- R1C5: column 5 has 1, 8, 6, 5, 7 \u2192 missing 2, 3, 4, 9.  \n- R1C8: column 8 has 6, 8 \u2192 missing 2, 3, 4, 7, 9.  \nNo obvious single candidate that is unique in row.\n\n**Column 5:** Values present: 1, 8, 6, 5, 7 \u2192 missing 2, 3, 4, 9.  \nCheck R3C5: row 3 has 1, 2, 8, 9, 4 \u2192 missing 3, 5, 6, 7.  \nBox 2 (rows 1-3, cols 4-6): has 6, 7, 5, 1, 2, 8 \u2192 missing 3, 4, 9.  \nR2C6 missing in col 5? Wait, col 5: R2C5=1, R3C5=?, R5C5=8, R6C5=6, R8C5=5, R9C5=7.  \nR3C5 candidates: from box 2 missing 3,4,9; col 5 missing 2,3,4,9; row 3 missing 3,5,6,7 \u2192 intersection: 3,4,9 possible. Not single.\n\n**Box 3 (rows 1-3, cols 7-9):**  \nDigits present: 1, 9, 4, 6, 8 \u2192 missing 2, 3, 5, 7.  \nCells: R1C8, R2C7, R2C8=6, R3C8.  \nR1C8 col 8 missing 2,3,4,7,9; row 1 missing 2,3,4; box missing 2,3,5,7 \u2192 possible: 2,3,7.  \nR2C7 col 7 missing 2,3,4,5,7,8; row 2 missing 3,5,9; box missing 2,3,5,7 \u2192 possible: 3,5,7.  \nR3C8 col 8 missing 2,3,4,7,9; row 3 missing 3,5,6,7; box missing 2,3,5,7 \u2192 possible: 3,7.  \nNo single.\n\n**Box 7 (rows 7-9, cols 1-3):**  \nDigits present: 6, 4, 2 (from R8C3=2, R9C1=6, R9C2=4) \u2192 missing 1, 3, 5, 7, 8, 9.  \nCells: R7C1, R7C2, R7C3, R8C1, R8C2, R9C3.  \nR9C3: row 9 has 6,4,9,7,3,8 \u2192 missing 1,2,5. Col 3 has 7, 2, 4 \u2192 missing 1,3,5,6,8,9. Box missing above \u2192 possible: 1,5. Not single.\n\n**Column 9:** Digits present: 5, 8, 4, 9 \u2192 missing 1, 2, 3, 6, 7.  \nCells: R4C9, R5C9, R7C9, R8C9.  \nCheck R4C9: row 4 has 7, 5, 2 \u2192 missing 1,3,4,6,8,9. Col 9 missing above \u2192 possible: 1,3,6,7.  \nCheck R7C9: row 7 empty, col 9 missing 1,2,3,6,7; box 9 missing? Box 9 (rows 7-9, cols 7-9) has R9C8=8, R9C9 empty, R7C7-9 empty, R8C7-9 empty.  \nIn box 9 missing digits: from whole grid? Let's check systematically:  \nBox 9 digits: R9C8=8, R9C9=?, R8C7-9=?, R7C7-9=?.  \nFrom row 9: 6,4,?,9,7,3,?,8,? \u2192 missing 1,2,5.  \nFrom col 7: has 1,9,2,?,?,?,? \u2192 missing 3,4,5,6,7,8.  \nFrom col 8: has 6,8,? \u2192 missing 1,2,3,4,5,7,9.  \nFrom col 9: has 5,8,4,9 \u2192 missing 1,2,3,6,7.  \n\nLet's check R7C9:  \nRow 7: all empty.  \nCol 9 missing: 1,2,3,6,7.  \nBox 9 missing digits: from whole grid digits 1-9 minus present digits in box 9 (only 8 so far) \u2192 missing 1,2,3,4,5,6,7,9.  \nIntersection of col 9 missing and box 9 missing: 1,2,3,6,7.  \nBut in box 9, R9C9 is also in col 9, so same candidates.  \nNo single yet.\n\n**Box 6 (rows 4-6, cols 7-9):**  \nDigits present: 2, 9 \u2192 missing 1,3,4,5,6,7,8.  \nCells: R4C7=2, R4C8, R4C9, R5C7, R5C8, R5C9, R6C7, R6C8, R6C9=9.  \nCheck R4C8: col 8 missing 2,3,4,7,9; row 4 missing 1,3,4,6,8,9; box missing 1,3,4,5,6,7,8 \u2192 possible: 3,4,6,8.  \nCheck R5C9: row 5 has 1,3,8 \u2192 missing 2,4,5,6,7,9; col 9 missing 1,2,3,6,7; box missing above \u2192 possible: 6,7.  \nCheck R6C7: row 6 has 3,4,7,6,1,9 \u2192 missing 2,5,8; col 7 missing 3,4,5,6,7,8; box missing 1,3,4,5,6,7,8 \u2192 possible: 5,8.  \nNo single.\n\n**Box 8 (rows 7-9, cols 4-6):**  \nDigits present: 9,7,3 (from R9C4-6) and R8C5=5 \u2192 missing 1,2,4,6,8.  \nCells: R7C4, R7C5, R7C6, R8C4, R8C6, R9C4=9, R9C5=7, R9C6=3.  \nCheck R8C4: row 8 has 2,5 \u2192 missing 1,3,4,6,7,8,9; col 4 has 6,5,2,3,7,9 \u2192 missing 1,4,8; box missing 1,2,4,6,8 \u2192 possible: 1,4.  \nCheck R7C5: row 7 empty; col 5 missing 2,3,4,9; box missing 1,2,4,6,8 \u2192 possible: 2,4.  \nNo single.\n\n**Column 1:** Digits present: 8,4,1,7,6 \u2192 missing 2,3,5,9.  \nCells: R5C1, R7C1, R8C1.  \nR5C1: row 5 has 1,3,8 \u2192 missing 2,4,5,6,7,9; col 1 missing 2,3,5,9; box 4 (rows 4-6, cols 1-3) has 7,1,3,4 \u2192 missing 2,5,6,8,9. Intersection of col 1 missing and row 5 missing: 2,5,9 possible. Not single.\n\nWait",
+      "parsed_move": null,
+      "validation_errors": [
+        "Could not parse MOVE from response"
+      ]
+    },
+    {
+      "turn": 5,
+      "reasoning": "Let\u2019s check for hidden singles.\n\nLooking at **Box 1** (rows 1\u20133, cols 1\u20133):  \nMissing numbers: 3, 5, 6.  \n- R1C3: can be 3 or 6.  \n- R2C3 is 7 (filled).  \n- R3C2: can be 3, 5, or 6.  \n- R3C3: can be 3, 5, or 6.  \n\nCheck number **3** in Box 1:  \nRow 1 already has no 3, Row 2 has no 3, Row 3 has no 3.  \nColumn 1 has 8,4,1 (no 3), Column 2 has 9,2,? (no 3), Column 3 has ?,7,? (no 3).  \nPossible cells in Box 1 for 3: R1C3, R3C2, R3C3.  \n\nCheck number **5** in Box 1:  \nRow 1 has 5 in col 9, so Row 1 cannot have 5 in Box 1.  \nRow 2 has no 5 in Box 1 (col 1\u20133), but Row 2 has 5 in col 4.  \nRow 3 has no 5.  \nColumn 1: 8,4,1 (no 5), Column 2: 9,2,? (no 5), Column 3: ?,7,? (no 5).  \nPossible cells for 5 in Box 1: R3C2, R3C3.  \n\nCheck number **6** in Box 1:  \nRow 1 has 6 in col 4, so Row 1 can\u2019t have 6 in Box 1.  \nRow 2 has no 6 in Box 1 (col 1\u20133), but Row 2 has 6 in col 8.  \nRow 3 has no 6.  \nColumn 1: 8,4,1 (no 6), Column 2: 9,2,? (no 6), Column 3: ?,7,? (no 6).  \nPossible cells for 6 in Box 1: R3C2, R3C3.  \n\nNo hidden single in Box 1 yet.\n\nCheck **Box 7** (rows 7\u20139, cols 1\u20133):  \nMissing: 1, 3, 5, 7, 8, 9.  \nLook at number **1**:  \nRow 7: no 1, Row 8: no 1, Row 9: no 1.  \nColumn 1: R1=8, R2=4, R3=1, R4=7, R5=?, R6=?, R7=?, R8=?, R9=6.  \nSo column 1 already has 1 in R3C1, so column 1 in Box 7 (R7C1, R8C1, R9C1) cannot have 1.  \nColumn 2: R1=9, R2=2, R3=?, R4=?, R5=1, R6=3, R7=?, R8=?, R9=4 \u2192 1 is in R5C2, so col 2 in Box 7 cannot have 1.  \nColumn 3: R1=?, R2=7, R3=?, R4=?, R5=?, R6=4, R7=?, R8=2, R9=?. No 1 yet in col 3.  \nSo 1 in Box 7 must be in column 3.  \nPossible cells: R7C3, R9C3.  \nBut R9C3: can it be 1? Row 9 has 6,4,?,9,7,3,?,8,? \u2014 no 1 yet, so possible.  \nR7C3: Row 7 has ?,?,?,?,2,?,?,?,? \u2014 no 1 yet, so possible.  \nBut check column 3 for 1:  \nColumn 3: R1=?, R2=7, R3=?, R4=?, R5=?, R6=4, R7=?, R8=2, R9=?.  \nNo 1 in col 3 yet. So both R7C3 and R9C3 possible for 1.  \nBut maybe another number is a hidden single.\n\nLet\u2019s check **Box 8** (rows 7\u20139, cols 4\u20136):  \nMissing: 1, 4, 6, 8.  \nLook at number **1**:  \nRow 7: no 1, Row 8: no 1, Row 9: no 1.  \nColumn 4: R1=6, R2=5, R3=2, R4=?, R5=3, R6=7, R7=?, R8=?, R9=9. No 1 in col 4.  \nColumn 5: R1=?, R2=1, R3=?, R4=?, R5=8, R6=6, R7=2, R8=5, R9=7 \u2192 col 5 already has 1 in R2C5, so col 5 in Box 8 cannot have 1.  \nColumn 6: R1=7, R2=?, R3=8, R4=5, R5=?, R6=1, R7=?, R8=?, R9=3 \u2192 col 6 already has 1 in R6C6, so col 6 in Box 8 cannot have 1.  \nThus 1 in Box 8 must be in column 4 (since col 5 and col 6 already have 1 elsewhere).  \nColumn 4 in Box 8: R7C4, R8C4, R9C4.  \nR9C4 is 9 (given), so not possible.  \nR8C4 is empty, R7C4 is empty.  \nCheck R8C4: Row 8 has ?,?,2,?,5,?,?,?,? \u2014 no 1 yet, possible.  \nR7C4: Row 7 no 1 yet, possible.  \nBut check column 4: R4C4 empty, R5C4=3, R6C4=7, R7C4 empty, R8C4 empty.  \nNo 1 in col 4 yet.  \nSo both possible for 1 in Box 8? Wait \u2014 but Box 8 is rows 7\u20139, cols 4\u20136.  \nWe said 1 in Box 8 must be col 4 (since col 5 and col 6 already have 1 elsewhere in the column).  \nSo possible cells: R7C4 and R8C4.  \nBut R7C4: Row 7 has no 1, col 4 has no 1 yet.  \nR8C4: Row 8 has no 1, col 4 has no 1 yet.  \nSo not a hidden single yet.\n\nLet\u2019s check **Box 9** (rows 7\u20139, cols 7\u20139):  \nMissing: 1, 2, 3, 4, 5, 6, 7, 9. Only 8 is given (R9C8=8).  \nLook at number **1** in Box 9:  \nRow 7: no 1, Row 8: no 1, Row 9: no 1.  \nColumn 7: R1=1, R2=?, R3=9, R4=2, R5=?, R6=?, R7=?, R8=?, R9=? \u2192 col 7 already has 1 in R1C7, so col 7 in Box 9 cannot have 1.  \nColumn 8: R1=?, R2=6, R3=?, R4=?, R5=?, R6=?, R7=?, R8=?, R9=8 \u2192 no 1 in col 8 yet.  \nColumn 9: R1=5, R2=8, R3=4, R4=?, R5=?, R6=9, R7=?, R8=?, R9=? \u2192 no 1 in col 9 yet.  \nSo 1 in Box 9 must be in col 8 or col 9.  \nPossible cells: R7C8, R7C9, R8C8, R8C9, R9C7, R9C9.  \nBut R9C7 is empty, R9C9 empty.  \nToo many possibilities, not hidden single.\n\nLet\u2019s check **Row 7**:  \nRow 7: . . . . 2 . . . .  \nMissing: 1,3,4,5,6,7,8,9.  \nLook at column constraints:  \nCol 1: possible 1,3,5,9?  \nActually, let\u2019s find a hidden single by scanning each empty cell for a number that can only go there",
+      "parsed_move": null,
+      "validation_errors": [
+        "Could not parse MOVE from response"
+      ]
+    }
+  ]
+}

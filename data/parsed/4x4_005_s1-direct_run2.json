@@ -1,0 +1,609 @@
+{
+  "run_id": "4x4_005_s1-direct_r2",
+  "puzzle_id": "4x4_005",
+  "strategy_id": "s1-direct",
+  "strategy_label": "The Impulsive",
+  "run_number": 2,
+  "solved": false,
+  "correct_against_solution": false,
+  "total_turns": 7,
+  "total_errors": 2,
+  "total_prompt_tokens": 1677,
+  "total_completion_tokens": 443,
+  "duration_ms": 44267,
+  "final_grid": [
+    [
+      0,
+      3,
+      4,
+      2
+    ],
+    [
+      2,
+      4,
+      3,
+      1
+    ],
+    [
+      3,
+      1,
+      2,
+      4
+    ],
+    [
+      4,
+      2,
+      1,
+      3
+    ]
+  ],
+  "steps": [
+    {
+      "turn": 1,
+      "reasoning": "Looking at row 3, it already has 3 and 4, and column 2 has 4, column 3 has 1, so R3C2 must be 2 (since 1,3,4 are already used in row/col/box constraints).",
+      "parsed_move": {
+        "row": 2,
+        "col": 1,
+        "value": 2
+      },
+      "valid": false,
+      "validation_errors": [
+        "Column 2 already has 2 at R4",
+        "Box (3-4, 1-2) already has 2 at R4C2"
+      ],
+      "value": 2,
+      "grid_before": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3
+        ]
+      ],
+      "grid_after": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3
+        ]
+      ],
+      "candidates_before": {
+        "R1C1": [
+          1
+        ],
+        "R2C3": [
+          3
+        ],
+        "R2C4": [
+          1
+        ],
+        "R3C2": [
+          1
+        ],
+        "R3C3": [
+          2
+        ],
+        "R4C1": [
+          4
+        ]
+      }
+    },
+    {
+      "turn": 2,
+      "reasoning": "Looking at row 3: it has 3, ?, ?, 4.  \nColumn 2 already contains 3, 4, and 2, so R3C2 must be 1.",
+      "parsed_move": {
+        "row": 2,
+        "col": 1,
+        "value": 1
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 1,
+      "grid_before": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3
+        ]
+      ],
+      "grid_after": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          3,
+          1,
+          0,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3
+        ]
+      ],
+      "candidates_before": {
+        "R1C1": [
+          1
+        ],
+        "R2C3": [
+          3
+        ],
+        "R2C4": [
+          1
+        ],
+        "R3C2": [
+          1
+        ],
+        "R3C3": [
+          2
+        ],
+        "R4C1": [
+          4
+        ]
+      }
+    },
+    {
+      "turn": 3,
+      "reasoning": "Looking at row 2, it needs 1 and 3. Column 3 already has 1 in R4C3, so R2C3 cannot be 1, must be 3, leaving R2C4 as 1.",
+      "parsed_move": {
+        "row": 1,
+        "col": 2,
+        "value": 3
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 3,
+      "grid_before": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          3,
+          1,
+          0,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3
+        ]
+      ],
+      "grid_after": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          0
+        ],
+        [
+          3,
+          1,
+          0,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3
+        ]
+      ],
+      "candidates_before": {
+        "R1C1": [
+          1
+        ],
+        "R2C3": [
+          3
+        ],
+        "R2C4": [
+          1
+        ],
+        "R3C3": [
+          2
+        ],
+        "R4C1": [
+          4
+        ]
+      }
+    },
+    {
+      "turn": 4,
+      "reasoning": "Looking at row 2, it's missing digits 1 and 4, but column 4 already has 4 in row 3, so R2C4 must be 1.",
+      "parsed_move": {
+        "row": 1,
+        "col": 3,
+        "value": 1
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 1,
+      "grid_before": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          0
+        ],
+        [
+          3,
+          1,
+          0,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3
+        ]
+      ],
+      "grid_after": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          3,
+          1,
+          0,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3
+        ]
+      ],
+      "candidates_before": {
+        "R1C1": [
+          1
+        ],
+        "R2C4": [
+          1
+        ],
+        "R3C3": [
+          2
+        ],
+        "R4C1": [
+          4
+        ]
+      }
+    },
+    {
+      "turn": 5,
+      "reasoning": "Row 3 is only missing digit 2 in column 3, because row 3 already has 3, 1, 4, and column 3 has 1, 3, 1, so only 2 is left.",
+      "parsed_move": {
+        "row": 2,
+        "col": 2,
+        "value": 2
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 2,
+      "grid_before": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          3,
+          1,
+          0,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3
+        ]
+      ],
+      "grid_after": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          3,
+          1,
+          2,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3
+        ]
+      ],
+      "candidates_before": {
+        "R1C1": [
+          1
+        ],
+        "R3C3": [
+          2
+        ],
+        "R4C1": [
+          4
+        ]
+      }
+    },
+    {
+      "turn": 6,
+      "reasoning": "Looking at the grid, row 4 is missing a number, and column 1 is missing a number.  \nRow 4 already has 2, 1, 3, so it needs 4.  \nColumn 1 already has 2, 3, so placing 4 in R4C1 satisfies both row and column constraints, and box 4 (bottom-left 2\u00d72) does not yet have a 4.",
+      "parsed_move": {
+        "row": 3,
+        "col": 0,
+        "value": 4
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 4,
+      "grid_before": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          3,
+          1,
+          2,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3
+        ]
+      ],
+      "grid_after": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          3,
+          1,
+          2,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3
+        ]
+      ],
+      "candidates_before": {
+        "R1C1": [
+          1
+        ],
+        "R4C1": [
+          4
+        ]
+      }
+    },
+    {
+      "turn": 7,
+      "reasoning": "Looking at the grid, all cells are already filled with digits 1\u20134, and each row, column, and 2\u00d72 box satisfies the Sudoku rules. There are no empty cells left.\n\nI'M STUCK",
+      "parsed_move": null,
+      "valid": false,
+      "validation_errors": [
+        "LLM reported being stuck"
+      ],
+      "value": null,
+      "grid_before": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          3,
+          1,
+          2,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3
+        ]
+      ],
+      "grid_after": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          3,
+          1,
+          2,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3
+        ]
+      ],
+      "candidates_before": {
+        "R1C1": [
+          1
+        ]
+      }
+    }
+  ],
+  "error_steps": [
+    {
+      "turn": 1,
+      "reasoning": "Looking at row 3, it already has 3 and 4, and column 2 has 4, column 3 has 1, so R3C2 must be 2 (since 1,3,4 are already used in row/col/box constraints).",
+      "parsed_move": {
+        "row": 2,
+        "col": 1,
+        "value": 2
+      },
+      "validation_errors": [
+        "Column 2 already has 2 at R4",
+        "Box (3-4, 1-2) already has 2 at R4C2"
+      ]
+    },
+    {
+      "turn": 7,
+      "reasoning": "Looking at the grid, all cells are already filled with digits 1\u20134, and each row, column, and 2\u00d72 box satisfies the Sudoku rules. There are no empty cells left.\n\nI'M STUCK",
+      "parsed_move": null,
+      "validation_errors": [
+        "LLM reported being stuck"
+      ]
+    }
+  ]
+}

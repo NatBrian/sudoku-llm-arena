@@ -1,0 +1,502 @@
+{
+  "run_id": "4x4_005_s4-full-logic_r2",
+  "puzzle_id": "4x4_005",
+  "strategy_id": "s4-full-logic",
+  "strategy_label": "The Logician",
+  "run_number": 2,
+  "solved": true,
+  "correct_against_solution": true,
+  "total_turns": 6,
+  "total_errors": 0,
+  "total_prompt_tokens": 1714,
+  "total_completion_tokens": 760,
+  "duration_ms": 47420,
+  "final_grid": [
+    [
+      1,
+      3,
+      4,
+      2
+    ],
+    [
+      2,
+      4,
+      3,
+      1
+    ],
+    [
+      3,
+      1,
+      2,
+      4
+    ],
+    [
+      4,
+      2,
+      1,
+      3
+    ]
+  ],
+  "steps": [
+    {
+      "turn": 1,
+      "reasoning": "Let's check each cell systematically.\n\n**Row 1:** Complete (1,3,4,2).  \n**Row 2:** Missing numbers 1 and 3 in cells R2C3 and R2C4.  \n**Row 3:** Missing numbers 1, 2 in cells R3C2 and R3C3.  \n**Row 4:** Missing number 4 in cell R4C1 (since 1,2,3 are present in row 4).\n\nCheck R4C1:  \nColumn 1 has 2 (R2C1), 3 (R3C1), so missing 1 and 4.  \nBox 2x2 (rows 3-4, cols 1-2) already has 3 (R3C1), 2 (R4C2), 1 (R4C3). So only 4 can go in R4C1. That\u2019s a naked single.\n\nREASONING: R4C1 must be 4 because row 4 needs 4, column 1 allows 4, and box 3 (rows 3-4, cols 1-2) already has 1,2,3.",
+      "parsed_move": {
+        "row": 3,
+        "col": 0,
+        "value": 4
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 4,
+      "grid_before": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          2,
+          1,
+          3
+        ]
+      ],
+      "grid_after": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3
+        ]
+      ],
+      "candidates_before": {
+        "R1C1": [
+          1
+        ],
+        "R2C3": [
+          3
+        ],
+        "R2C4": [
+          1
+        ],
+        "R3C2": [
+          1
+        ],
+        "R3C3": [
+          2
+        ],
+        "R4C1": [
+          4
+        ]
+      }
+    },
+    {
+      "turn": 2,
+      "reasoning": "Row 2 is missing 1 and 3. Column 3 already has 1 in row 4, so R2C3 cannot be 1, so it must be 3.",
+      "parsed_move": {
+        "row": 1,
+        "col": 2,
+        "value": 3
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 3,
+      "grid_before": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3
+        ]
+      ],
+      "grid_after": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3
+        ]
+      ],
+      "candidates_before": {
+        "R1C1": [
+          1
+        ],
+        "R2C3": [
+          3
+        ],
+        "R2C4": [
+          1
+        ],
+        "R3C2": [
+          1
+        ],
+        "R3C3": [
+          2
+        ]
+      }
+    },
+    {
+      "turn": 3,
+      "reasoning": "Let\u2019s check each cell systematically.\n\nRow 1: . 3 4 2 \u2192 missing digit in R1C1 is 1 (row has 3,4,2; col1 has 2,3,4; box1 has 3,4,2). So R1C1 must be 1.\n\nREASONING: R1C1 only candidate is 1 (naked single).",
+      "parsed_move": {
+        "row": 0,
+        "col": 0,
+        "value": 1
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 1,
+      "grid_before": [
+        [
+          0,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3
+        ]
+      ],
+      "candidates_before": {
+        "R1C1": [
+          1
+        ],
+        "R2C4": [
+          1
+        ],
+        "R3C2": [
+          1
+        ],
+        "R3C3": [
+          2
+        ]
+      }
+    },
+    {
+      "turn": 4,
+      "reasoning": "Looking at the grid:  \nRow 2 missing numbers: 1 and 4.  \nColumn 4 already has 2 (R1), 4 (R3), 3 (R4) \u2014 missing 1.  \nSo R2C4 must be 1 (hidden single in column 4).",
+      "parsed_move": {
+        "row": 1,
+        "col": 3,
+        "value": 1
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 1,
+      "grid_before": [
+        [
+          1,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          3,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3
+        ]
+      ],
+      "candidates_before": {
+        "R2C4": [
+          1
+        ],
+        "R3C2": [
+          1
+        ],
+        "R3C3": [
+          2
+        ]
+      }
+    },
+    {
+      "turn": 5,
+      "reasoning": "Let's check the grid.\n\nRow 3: 3  .  .  4  \nRow 4: 4  2  1  3  \n\nBox 3 (rows 3\u20134, cols 1\u20132) contains: R3C1=3, R4C1=4, R4C2=2.  \nMissing numbers in Box 3: 1 and 4? Wait, 4 is already in R4C1, so missing numbers are 1 and 4? Let's list carefully:  \nBox 3 cells: R3C1=3, R3C2=?, R4C1=4, R4C2=2.  \nDigits used: {2,3,4}. Missing: 1.  \nSo R3C2 must be 1 (naked single in box).  \n\nREASONING: Box 3 (rows 3\u20134, cols 1\u20132) already has 2,3,4, so R3C2 must be 1.",
+      "parsed_move": {
+        "row": 2,
+        "col": 1,
+        "value": 1
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 1,
+      "grid_before": [
+        [
+          1,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          3,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          3,
+          1,
+          0,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3
+        ]
+      ],
+      "candidates_before": {
+        "R3C2": [
+          1
+        ],
+        "R3C3": [
+          2
+        ]
+      }
+    },
+    {
+      "turn": 6,
+      "reasoning": "Row 3 missing digit 2, column 3 missing digit 2, box 3 missing digit 2.",
+      "parsed_move": {
+        "row": 2,
+        "col": 2,
+        "value": 2
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 2,
+      "grid_before": [
+        [
+          1,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          3,
+          1,
+          0,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          3,
+          4,
+          2
+        ],
+        [
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          3,
+          1,
+          2,
+          4
+        ],
+        [
+          4,
+          2,
+          1,
+          3
+        ]
+      ],
+      "candidates_before": {
+        "R3C3": [
+          2
+        ]
+      }
+    }
+  ],
+  "error_steps": []
+}

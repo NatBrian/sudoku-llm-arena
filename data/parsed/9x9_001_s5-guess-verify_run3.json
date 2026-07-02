@@ -1,0 +1,7997 @@
+{
+  "run_id": "9x9_001_s5-guess-verify_r3",
+  "puzzle_id": "9x9_001",
+  "strategy_id": "s5-guess-verify",
+  "strategy_label": "The Gambler",
+  "run_number": 3,
+  "solved": false,
+  "correct_against_solution": false,
+  "total_turns": 22,
+  "total_errors": 5,
+  "total_prompt_tokens": 9223,
+  "total_completion_tokens": 20203,
+  "duration_ms": 811453,
+  "final_grid": [
+    [
+      1,
+      5,
+      8,
+      0,
+      0,
+      4,
+      2,
+      6,
+      7
+    ],
+    [
+      0,
+      6,
+      0,
+      0,
+      2,
+      7,
+      1,
+      0,
+      9
+    ],
+    [
+      2,
+      7,
+      0,
+      6,
+      9,
+      1,
+      4,
+      3,
+      8
+    ],
+    [
+      7,
+      0,
+      0,
+      0,
+      0,
+      5,
+      9,
+      2,
+      1
+    ],
+    [
+      5,
+      1,
+      0,
+      0,
+      7,
+      6,
+      8,
+      4,
+      3
+    ],
+    [
+      4,
+      3,
+      0,
+      8,
+      0,
+      0,
+      7,
+      5,
+      6
+    ],
+    [
+      8,
+      0,
+      0,
+      1,
+      5,
+      3,
+      6,
+      9,
+      2
+    ],
+    [
+      0,
+      9,
+      1,
+      7,
+      0,
+      2,
+      3,
+      8,
+      0
+    ],
+    [
+      3,
+      0,
+      5,
+      0,
+      0,
+      8,
+      0,
+      0,
+      0
+    ]
+  ],
+  "steps": [
+    {
+      "turn": 1,
+      "reasoning": "Let\u2019s check for hidden singles first.  \n\nLooking at R3C5:  \nRow 3 has {2,4,5,7,8,9} missing, but column 5 has 2,7,6,5 used, box 2 (rows 1-3, cols 4-6) has {1,4,6,2,7} used.  \nMissing in box 2: {3,5,8,9}.  \nColumn 5 missing: {1,3,4,8,9}.  \nIntersection for R3C5: missing in row 3, col 5, box 2: {3,5,8,9} \u2229 {3,4,8,9} \u2229 {3,5,8,9} = {3,8,9}? Wait, let\u2019s check carefully.  \n\nRow 3 currently: [?, 6, ?, 1, ?, 3, ?] \u2192 digits present in row 3: 1,6,3, plus maybe others from clues? Row 3 given: (1) . 8 . . 4 2 . 7? No, that\u2019s Row 1. Row 3 is: . . . 6 . 1 . 3 .  \nSo row 3 has {6,1,3}.  \nColumn 5: R2C5=2, R4C5=?, R5C5=7, R6C5=?, R7C5=?, R8C5=?, R9C5=?.  \nFrom clues: R1C5=?, R2C5=2, R3C5=?, R4C5=?, R5C5=7, R6C5=?, R7C5=?, R8C5=?, R9C5=?  \nWe can find column 5 used digits: R2C5=2, R5C5=7, R? maybe others? R1C5 unknown, R3C5 unknown, R4C5 unknown, R6C5 unknown, R7C5 unknown, R8C5 unknown, R9C5 unknown \u2014 not enough to deduce.  \n\nLet\u2019s try a simpler hidden single:  \nLook at R7C7: Row 7 missing {2,4,5,6,7}? Actually row 7 is 8 . . 1 . 3 . 9 . \u2192 digits present: 8,1,3,9.  \nColumn 7: R1C7=2, R2C7=?, R3C7=?, R4C7=9, R5C7=8, R6C7=7, R7C7=?, R8C7=3, R9C7=?.  \nUsed in column 7: {2,9,8,7,3}. Missing {1,4,5,6}.  \nBox 9 (rows 7-9, cols 7-9): R7C7=?, R7C8=9, R7C9=?, R8C7=3, R8C8=8, R8C9=?, R9C7=?, R9C8=?, R9C9=?.  \nDigits in box 9 so far: {9,3,8}. Missing {1,2,4,5,6,7}.  \n\nBut in box 9, column 7 missing {1,4,5,6}, row 7 missing {2,4,5,6,7}. Intersect: {4,5,6}.  \n\nBut check R9C9: Row 9: . . 5 . . 8 . . . \u2192 digits {5,8}. Column 9: R1C9=7, R2C9=?, R3C9=?, R4C9=?, R5C9=?, R6C9=6, R7C9=?, R8C9=?, R9C9=?.  \nBox 9 missing digits: {1,2,4,5,6,7} minus {5,6,7,8,3,9}? Wait, box 9 has 3,8,9, plus maybe others. Let\u2019s check systematically:  \n\nBetter: Look at R8C9: Row 8: . 9 1 7 . . 3 8 . \u2192 digits {9,1,7,3,8}. Missing {2,4,5,6}.  \nColumn 9 missing {1,2,3,4,5,8,9}? No, column 9 has 7,6 so far. So missing {1,2,3,4,5,8,9}.  \nBox 9 missing digits: In box 9: R7C8=9, R8C7=3, R8C8=8, plus R7C7, R7C9, R8C9, R9C7, R9C8, R9C9 empty. Digits in box 9: {3,8,9}. Missing {1,2,4,5,6,7}.  \n\nNow, R8C9 missing in row {2,4,5,6}, missing in box {1,2,4,5,6,7}, missing in col {1,2,3,4,5,8,9}. Intersect: {2,4,5}.  \n\nBut 2 in column 9? R1C9=7, R2C9=?, R3C9=?, R4C9=?, R5C9=?, R6C9=6, R7C9=?, R8C9=?, R9C9=?. No 2 in column 9 yet. So 2 possible for R8C9.  \n\nBut is 2 a hidden single in box 9 for column 9? Check R7C9: missing in row 7 {2,4,5,6,7}, missing in col 9 {1,2,3,4,5,8,9}, missing in box {1,2,4,5,6,7} \u2192 intersect {2,4,5}. So 2 possible for R7C9 too. So not unique.  \n\nLet\u2019s find a definite hidden single:  \nLook at R4C5: Row 4: 7 . . . . 5 9 2 . \u2192 digits {7,5,9,2}. Missing {1,3,4,6,8}.  \nColumn 5: used digits: R2C5=2, R5C5=7, R? others? R1C5=?, R3C5=?, R6C5=?, R7C5=?, R8C5=?, R9C5=?. So col 5 has {2,7}.  \nBox 5 (rows4-6, cols4-6): digits: R4C6=5, R5C5=7, R5C6=6, R6C4=8, R6C6=?, plus R4C4, R4C5, R5C4, R6C5 empty.  \nDigits in box 5: {5,7,6,8}. Missing {1,2,3,4,9}.  \n\nNow, R4C5 missing in row {1,3,4,6,8}, missing in col {1,3,4,5,6,8,9} (since col 5 has {2,7}), missing in box {1,2,3,4,9}. Intersect: {1,3,4} \u2229 {1,3,4,6,8} \u2229 {1,3,4,9} = {1,3,4}.  \n\nBut check column 5 missing {1,3,4,5,6,8,9}? Wait, col 5: R1C5=?, R2C5=2, R3C5=?, R4C5=?, R5C5=7, R6C5=?, R7C5=?, R8C5=?, R9C5=?. So used in col 5: {2,7}. Missing {1,3,4,5,6,8,9}.  \n\nSo R4C5 candidates: row missing {1,3,4,6,8}, col missing {1,3,4,5,6,8,9}, box missing {1,2,3,4,9}. Intersect: {1,3,4}.  \n\nBut 1 in box 5? Could be in R5C4 or R6C5 too. Not a hidden single.  \n\nLet\u2019s check R3C1: Row 3: . . . 6 . 1 . 3 . \u2192 digits {6,1,3}. Missing {2,4,5,7,8,9}.  \nColumn 1: R1C1=1, R2C1=?, R4C1=7, R5C1=5, R6C1=4, R7C1=8, R8C1",
+      "parsed_move": null,
+      "valid": false,
+      "validation_errors": [
+        "Could not parse MOVE from response"
+      ],
+      "value": null,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          0,
+          1,
+          0,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          0,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          0,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          0,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          0,
+          1,
+          0,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          0,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          0,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          0,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5,
+          9
+        ],
+        "R1C5": [
+          3,
+          5,
+          9
+        ],
+        "R1C8": [
+          6
+        ],
+        "R2C1": [
+          3,
+          9
+        ],
+        "R2C3": [
+          3,
+          4,
+          9
+        ],
+        "R2C4": [
+          3,
+          5,
+          9
+        ],
+        "R2C7": [
+          1,
+          4,
+          5
+        ],
+        "R2C8": [
+          1,
+          4
+        ],
+        "R2C9": [
+          1,
+          4,
+          5,
+          8,
+          9
+        ],
+        "R3C1": [
+          2,
+          9
+        ],
+        "R3C2": [
+          2,
+          4,
+          5,
+          7
+        ],
+        "R3C3": [
+          2,
+          4,
+          7,
+          9
+        ],
+        "R3C5": [
+          5,
+          8,
+          9
+        ],
+        "R3C7": [
+          4,
+          5
+        ],
+        "R3C9": [
+          4,
+          5,
+          8,
+          9
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          1,
+          3,
+          4
+        ],
+        "R4C9": [
+          1,
+          3,
+          4
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          3,
+          4,
+          9
+        ],
+        "R5C8": [
+          4
+        ],
+        "R5C9": [
+          3,
+          4
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1,
+          9
+        ],
+        "R6C6": [
+          2,
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          6,
+          7
+        ],
+        "R7C5": [
+          4,
+          5,
+          6
+        ],
+        "R7C7": [
+          4,
+          5,
+          6
+        ],
+        "R7C9": [
+          2,
+          4,
+          5
+        ],
+        "R8C1": [
+          2,
+          6
+        ],
+        "R8C5": [
+          4,
+          5,
+          6
+        ],
+        "R8C6": [
+          2
+        ],
+        "R8C9": [
+          2,
+          4,
+          5
+        ],
+        "R9C1": [
+          2,
+          3,
+          6
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          2,
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6,
+          9
+        ],
+        "R9C7": [
+          1,
+          4,
+          6
+        ],
+        "R9C8": [
+          1,
+          4,
+          6,
+          7
+        ],
+        "R9C9": [
+          1,
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 2,
+      "reasoning": "In row 3, column 5 must be 9 because 1-8 are already present in row, column, or box except 9.",
+      "parsed_move": {
+        "row": 2,
+        "col": 4,
+        "value": 9
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 9,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          0,
+          1,
+          0,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          0,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          0,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          0,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          9,
+          1,
+          0,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          0,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          0,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          0,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5,
+          9
+        ],
+        "R1C5": [
+          3,
+          5,
+          9
+        ],
+        "R1C8": [
+          6
+        ],
+        "R2C1": [
+          3,
+          9
+        ],
+        "R2C3": [
+          3,
+          4,
+          9
+        ],
+        "R2C4": [
+          3,
+          5,
+          9
+        ],
+        "R2C7": [
+          1,
+          4,
+          5
+        ],
+        "R2C8": [
+          1,
+          4
+        ],
+        "R2C9": [
+          1,
+          4,
+          5,
+          8,
+          9
+        ],
+        "R3C1": [
+          2,
+          9
+        ],
+        "R3C2": [
+          2,
+          4,
+          5,
+          7
+        ],
+        "R3C3": [
+          2,
+          4,
+          7,
+          9
+        ],
+        "R3C5": [
+          5,
+          8,
+          9
+        ],
+        "R3C7": [
+          4,
+          5
+        ],
+        "R3C9": [
+          4,
+          5,
+          8,
+          9
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          1,
+          3,
+          4
+        ],
+        "R4C9": [
+          1,
+          3,
+          4
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          3,
+          4,
+          9
+        ],
+        "R5C8": [
+          4
+        ],
+        "R5C9": [
+          3,
+          4
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1,
+          9
+        ],
+        "R6C6": [
+          2,
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          6,
+          7
+        ],
+        "R7C5": [
+          4,
+          5,
+          6
+        ],
+        "R7C7": [
+          4,
+          5,
+          6
+        ],
+        "R7C9": [
+          2,
+          4,
+          5
+        ],
+        "R8C1": [
+          2,
+          6
+        ],
+        "R8C5": [
+          4,
+          5,
+          6
+        ],
+        "R8C6": [
+          2
+        ],
+        "R8C9": [
+          2,
+          4,
+          5
+        ],
+        "R9C1": [
+          2,
+          3,
+          6
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          2,
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6,
+          9
+        ],
+        "R9C7": [
+          1,
+          4,
+          6
+        ],
+        "R9C8": [
+          1,
+          4,
+          6,
+          7
+        ],
+        "R9C9": [
+          1,
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 3,
+      "reasoning": "Let's check for hidden singles first.  \n\nLooking at row 3: `Row 3: .  .  .  6  9  1  .  3  .`  \nMissing digits: 2,4,5,7,8.  \nCheck column 1 for row 3:  \nColumn 1 has: R1:1, R2:., R3:., R4:7, R5:5, R6:4, R7:8, R8:., R9:.  \nMissing in column 1: 2,3,6,9. Intersect with row 3 missing digits {2,4,5,7,8} \u2192 only 2 is possible for R3C1.  \n\nSo R3C1 is a hidden single 2.  \n\nREASONING: Row 3 missing {2,4,5,7,8}, column 1 missing {2,3,6,9}, only common is 2.",
+      "parsed_move": {
+        "row": 2,
+        "col": 0,
+        "value": 2
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 2,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          6,
+          9,
+          1,
+          0,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          0,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          0,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          0,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          0,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          0,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          0,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          0,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5
+        ],
+        "R1C5": [
+          3,
+          5
+        ],
+        "R1C8": [
+          6
+        ],
+        "R2C1": [
+          3,
+          9
+        ],
+        "R2C3": [
+          3,
+          4,
+          9
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C7": [
+          1,
+          4,
+          5
+        ],
+        "R2C8": [
+          1,
+          4
+        ],
+        "R2C9": [
+          1,
+          4,
+          5,
+          8,
+          9
+        ],
+        "R3C1": [
+          2
+        ],
+        "R3C2": [
+          2,
+          4,
+          5,
+          7
+        ],
+        "R3C3": [
+          2,
+          4,
+          7
+        ],
+        "R3C7": [
+          4,
+          5
+        ],
+        "R3C9": [
+          4,
+          5,
+          8
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          1,
+          3,
+          4
+        ],
+        "R4C9": [
+          1,
+          3,
+          4
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          3,
+          4,
+          9
+        ],
+        "R5C8": [
+          4
+        ],
+        "R5C9": [
+          3,
+          4
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          2,
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          6,
+          7
+        ],
+        "R7C5": [
+          4,
+          5,
+          6
+        ],
+        "R7C7": [
+          4,
+          5,
+          6
+        ],
+        "R7C9": [
+          2,
+          4,
+          5
+        ],
+        "R8C1": [
+          2,
+          6
+        ],
+        "R8C5": [
+          4,
+          5,
+          6
+        ],
+        "R8C6": [
+          2
+        ],
+        "R8C9": [
+          2,
+          4,
+          5
+        ],
+        "R9C1": [
+          2,
+          3,
+          6
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          2,
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [
+          1,
+          4,
+          6
+        ],
+        "R9C8": [
+          1,
+          4,
+          6,
+          7
+        ],
+        "R9C9": [
+          1,
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 4,
+      "reasoning": "Let\u2019s check for hidden singles first.  \n\nLook at R9C4 (box 8, row 9).  \nColumn 4 already has: 8(R6C4), 6(R3C4), 7(R8C4), 1(R7C4), so missing 2,3,4,5,9.  \nRow 9 already has: 5(R9C3), 8(R9C6), so missing 1,2,3,4,6,7,9.  \nBox 8 (rows 7\u20139, cols 4\u20136) has: R7C4=1, R7C6=3, R8C4=7, R8C6=?, R9C6=8, R9C5=?, R7C5=?, R8C5=?, R9C4=?.  \nLet\u2019s list box 8\u2019s existing digits: 1, 3, 7, 8, plus 9(R8C2 not in box), not relevant.  \nCheck R9C4 candidates: column 4 missing 2,3,4,5,9; row 9 missing 1,2,3,4,6,7,9; box missing so far 2,4,5,6,9. Intersection: 2,4,9.  \n\nBut check R9C5: column 5 has 2(R2C5), 9(R3C5), 7(R5C5), so missing 1,3,4,5,6,8.  \nRow 9 missing 1,2,3,4,6,7,9. Box 8 missing digits from 1\u20139 not in box: box currently has 1,3,7,8, plus R8C6=?, R9C5=?, R7C5=?, R8C5=?, R9C4=?. Let\u2019s fill systematically:  \n\nActually, let\u2019s find a clear hidden single:  \nLook at R8C6. In box 8, digits present: R7C4=1, R7C6=3, R8C4=7, R9C6=8. Missing in box: 2,4,5,6,9.  \nColumn 6 has: 4(R1C6), 7(R2C6), 1(R3C6), 5(R4C6), 6(R5C6), 8(R9C6), 3(R7C6), so missing 2,9. Row 8 has: 9,1,7,3,8, so missing 2,4,5,6.  \nIntersection of missing in box (2,4,5,6,9) and missing in column (2,9) and missing in row (2,4,5,6) is {2,9} intersect {2,4,5,6} = {2}.  \nSo R8C6 must be 2 (hidden single in box 8 because only cell in column 6 that can be 2 in that box).  \n\nREASONING: In box 8, only R8C6 can be 2 (column 6 missing 2 and 9, row 8 missing 2,4,5,6, but 9 not possible in R8C6 because column 6 already has a 9? Wait, column 6 has 9? No, column 6: 4,7,1,5,6,8,3,?,8. Actually R9C6=8, so no 9 yet in column 6. So 2 and 9 both possible in column 6 missing. But in box 8, R7C6=3, R8C6=?, R9C6=8. For digit 2 in box 8, possible cells: R7C5, R8C5, R8C6, R9C4, R9C5. But column constraint: column 5 already has 2 (R2C5), so 2 not possible in R7C5, R8C5, R9C5. Column 4 already has 2? No, column 4: R3C4=6, R6C4=8, R7C4=1, R8C4=7, R9C4=?, so 2 possible in R9C4. So 2 possible in R9C4 and R8C6 in box 8. But row 9: R9C4 candidates 2,4,9; row 8: R8C6 candidates 2,9. So 2 not unique yet.  \n\nBut check column 6: missing 2,9. In box 8, R8C6 and R9C6 (but R9C6=8 fixed), so R8C6 and R9C6 not both, only R8C6 and R9C? Wait R9C6 is 8, so 2 can\u2019t go there. So 2 in box 8 must be in R8C6 or R9C4 or R9C5. But R9C5: column 5 has 2 already (R2C5), so 2 not possible in R9C5. So 2 in box 8 is R8C6 or R9C4.  \n\nNow check row 8: R8C6 and R8C9 are empty. Row 8 missing 2,4,5,6. If 2 is in R8C6, okay. If 2 in R9C4, then R8C6 not 2. But then column 6\u2019s 2 must be in R4C6 or R8C6, but R4C6=5, so 2 must be in R8C6. So yes, column 6\u2019s only cell for 2 is R8C6. That\u2019s the hidden single in column 6.  \n\nREASONING: Column 6 needs a 2, only possible in R8C6.",
+      "parsed_move": {
+        "row": 7,
+        "col": 5,
+        "value": 2
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 2,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          0,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          0,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          0,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          0,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          0,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          0,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          0,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5
+        ],
+        "R1C5": [
+          3,
+          5
+        ],
+        "R1C8": [
+          6
+        ],
+        "R2C1": [
+          3,
+          9
+        ],
+        "R2C3": [
+          3,
+          4,
+          9
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C7": [
+          1,
+          4,
+          5
+        ],
+        "R2C8": [
+          1,
+          4
+        ],
+        "R2C9": [
+          1,
+          4,
+          5,
+          8,
+          9
+        ],
+        "R3C2": [
+          4,
+          5,
+          7
+        ],
+        "R3C3": [
+          4,
+          7
+        ],
+        "R3C7": [
+          4,
+          5
+        ],
+        "R3C9": [
+          4,
+          5,
+          8
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          1,
+          3,
+          4
+        ],
+        "R4C9": [
+          1,
+          3,
+          4
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          3,
+          4,
+          9
+        ],
+        "R5C8": [
+          4
+        ],
+        "R5C9": [
+          3,
+          4
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          2,
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          6,
+          7
+        ],
+        "R7C5": [
+          4,
+          5,
+          6
+        ],
+        "R7C7": [
+          4,
+          5,
+          6
+        ],
+        "R7C9": [
+          2,
+          4,
+          5
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          5,
+          6
+        ],
+        "R8C6": [
+          2
+        ],
+        "R8C9": [
+          2,
+          4,
+          5
+        ],
+        "R9C1": [
+          3,
+          6
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          2,
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [
+          1,
+          4,
+          6
+        ],
+        "R9C8": [
+          1,
+          4,
+          6,
+          7
+        ],
+        "R9C9": [
+          1,
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 5,
+      "reasoning": "In row 7, column 5 must be 5 because 1,2,3,4,6,7,8,9 are already in the row, column, or box.",
+      "parsed_move": {
+        "row": 6,
+        "col": 4,
+        "value": 5
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 5,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          0,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          0,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          0,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          0,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          0,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5
+        ],
+        "R1C5": [
+          3,
+          5
+        ],
+        "R1C8": [
+          6
+        ],
+        "R2C1": [
+          3,
+          9
+        ],
+        "R2C3": [
+          3,
+          4,
+          9
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C7": [
+          1,
+          4,
+          5
+        ],
+        "R2C8": [
+          1,
+          4
+        ],
+        "R2C9": [
+          1,
+          4,
+          5,
+          8,
+          9
+        ],
+        "R3C2": [
+          4,
+          5,
+          7
+        ],
+        "R3C3": [
+          4,
+          7
+        ],
+        "R3C7": [
+          4,
+          5
+        ],
+        "R3C9": [
+          4,
+          5,
+          8
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          1,
+          3,
+          4
+        ],
+        "R4C9": [
+          1,
+          3,
+          4
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          3,
+          4,
+          9
+        ],
+        "R5C8": [
+          4
+        ],
+        "R5C9": [
+          3,
+          4
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          6,
+          7
+        ],
+        "R7C5": [
+          4,
+          5,
+          6
+        ],
+        "R7C7": [
+          4,
+          5,
+          6
+        ],
+        "R7C9": [
+          2,
+          4,
+          5
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          5,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C1": [
+          3,
+          6
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [
+          1,
+          4,
+          6
+        ],
+        "R9C8": [
+          1,
+          4,
+          6,
+          7
+        ],
+        "R9C9": [
+          1,
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 6,
+      "reasoning": "Let's check for hidden singles first.  \n\nLooking at row 4: 7 . . . . 5 9 2 .  \nMissing digits: 1,3,4,6,8.  \nColumn 2 in row 4: R4C2 sees 6 in R2C2, 1 in R5C2, 3 in R6C2, 9 in R8C2, so candidates for R4C2 are 4,8.  \nColumn 3 in row 4: R4C3 sees 8 in R1C3, 5 in R9C3, 1 in R8C3, 3 in R2C3? No R2C3 is empty but 3 is in R3C8, R6C2, etc. Let's check box 4 (rows 4-6, cols 1-3):  \nBox 4 contains: R4C1=7, R4C2=?, R4C3=?; R5C1=5, R5C2=1, R5C3=?; R6C1=4, R6C2=3, R6C3=?.  \nMissing in box 4: 2,6,8,9.  \nR4C2 can't be 2,6,9 because of column 2 (6 in R2C2, 9 in R8C2, 2 not in box 4 column 2 but 2 is in R3C1, R1C7, etc., not in col 2 except maybe later). Wait, 2 is not in col 2 yet, but 2 is not missing in box 4? Let's list box 4 missing: 2,6,8,9.  \nColumn 2 already has 6 (R2C2), 1 (R5C2), 3 (R6C2), 9 (R8C2), so R4C2 cannot be 6,1,3,9. So candidates for R4C2 are {2,4,8}.  \nBut 2 is missing in box 4, so possible.  \n\nBut maybe hidden single elsewhere. Let's check column 9:  \nDigits in column 9: 7 (R1), none (R2), none (R3), none (R4), none (R5), 6 (R6), none (R7), none (R8), none (R9).  \nMissing in col 9: 1,2,3,4,5,8,9.  \nBox 9 (rows 7-9, cols 7-9) has: R7C7=?, R7C8=9, R7C9=?; R8C7=3, R8C8=8, R8C9=?; R9C7=?, R9C8=?, R9C9=?.  \nMissing in col 9 within box 9: R7C9, R8C9, R9C9.  \nDigit 4 in col 9: not yet placed, but 4 is not in box 9 yet. Check R9C9: row 9 missing digits: row 9 is . . 5 . . 8 . . . \u2192 missing 1,2,3,4,6,7,9.  \nColumn 9 missing 1,2,3,4,5,8,9. Intersection for R9C9: {1,2,3,4,6,7,9} \u2229 {1,2,3,4,5,8,9} = {1,2,3,4,9}.  \nBut in box 9, missing digits: from 1-9, box 9 has: R7C8=9, R8C7=3, R8C8=8, plus R7C7=?, R7C9=?, R8C9=?, R9C7=?, R9C8=?, R9C9=?.  \nDigits in box 9 so far: 3,8,9. Missing: 1,2,4,5,6,7.  \nSo R9C9 candidates: intersection of row 9 candidates {1,2,3,4,6,7,9} and box 9 missing {1,2,4,5,6,7} and col 9 missing {1,2,3,4,5,8,9} = {1,2,4,6,7} \u2229 {1,2,4,5,6,7} \u2229 {1,2,3,4,5,8,9} = {1,2,4,6,7} \u2229 {1,2,4,5,6,7} = {1,2,4,6,7} \u2229 {1,2,3,4,5,8,9} = {1,2,4}.  \n\nBut no hidden single yet.  \n\nLet's check box 6 (rows 4-6, cols 7-9):  \nDigits: R4C7=9, R4C8=2, R4C9=?; R5C7=8, R5C8=?, R5C9=?; R6C7=7, R6C8=5, R6C9=6.  \nMissing in box 6: 1,3,4.  \nR4C9: col 9 missing 1,2,3,4,5,8,9, but 2 is in R4C8, so R4C9 can't be 2. Row 4 missing: 1,3,4,6,8. So R4C9 candidates: {1,3,4} (from box 6 missing) \u2229 {1,3,4,6,8} \u2229 col9 missing {1,3,4,5,8,9} = {1,3,4}.  \nR5C9: row 5 missing: 2,3,4,9. Col 9 missing {1,3,4,5,8,9} \u2229 {2,3,4,9} = {3,4,9}. But box 6 missing {1,3,4} so R5C9 can't be 9. So R5C9 = {3} only? Wait: {3,4,9} \u2229 {1,3,4} = {3,4}. So not single.  \n\nCheck R5C8: row 5 missing {2,3,4,9}, col 8: has 2 (R4), 3 (R3), 5 (R6), 8 (R8), 9 (R7), so missing in col 8: 1,4,6,7. Intersect with row 5 missing: {2,3,4,9} \u2229 {1,4,6,7} = {4}. That\u2019s a hidden single!  \n\nSo R5C8 must be 4.  \n\nREASONING: In column 8, digit 4 must go in row 5 because other rows in col 8 already have 2,3,5,8,9 and box constraints allow only R5C8 to be 4.",
+      "parsed_move": {
+        "row": 4,
+        "col": 7,
+        "value": 4
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 4,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          0,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          0,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          0,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5
+        ],
+        "R1C5": [
+          3
+        ],
+        "R1C8": [
+          6
+        ],
+        "R2C1": [
+          3,
+          9
+        ],
+        "R2C3": [
+          3,
+          4,
+          9
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C7": [
+          1,
+          4,
+          5
+        ],
+        "R2C8": [
+          1,
+          4
+        ],
+        "R2C9": [
+          1,
+          4,
+          5,
+          8,
+          9
+        ],
+        "R3C2": [
+          4,
+          5,
+          7
+        ],
+        "R3C3": [
+          4,
+          7
+        ],
+        "R3C7": [
+          4,
+          5
+        ],
+        "R3C9": [
+          4,
+          5,
+          8
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          1,
+          3,
+          4
+        ],
+        "R4C9": [
+          1,
+          3,
+          4
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          3,
+          4,
+          9
+        ],
+        "R5C8": [
+          4
+        ],
+        "R5C9": [
+          3,
+          4
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          6,
+          7
+        ],
+        "R7C7": [
+          4,
+          6
+        ],
+        "R7C9": [
+          2,
+          4
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C1": [
+          3,
+          6
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [
+          1,
+          4,
+          6
+        ],
+        "R9C8": [
+          1,
+          4,
+          6,
+          7
+        ],
+        "R9C9": [
+          1,
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 7,
+      "reasoning": "Let's check for naked/hidden singles.\n\nLooking at R3C7: Row has 2,6,9,1,3. Column has 2,9,8,7,3,5,? Box (rows 1-3, cols 7-9) has 2,7,3. Missing digits in box: 1,4,5,6,8,9.  \nBut column 7 has 2,9,8,7,3,5 \u2192 missing 1,4,6. Intersect with box missing: 1,4,6. Row 3 missing: 4,5,7,8. Intersect with {1,4,6} \u2192 only 4 possible. So R3C7 is 4.\n\nREASONING: In box 3, column 7 missing 1,4,6; row 3 missing 4,5,7,8; only 4 fits.",
+      "parsed_move": {
+        "row": 2,
+        "col": 6,
+        "value": 4
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 4,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          0,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5
+        ],
+        "R1C5": [
+          3
+        ],
+        "R1C8": [
+          6
+        ],
+        "R2C1": [
+          3,
+          9
+        ],
+        "R2C3": [
+          3,
+          4,
+          9
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C7": [
+          1,
+          4,
+          5
+        ],
+        "R2C8": [
+          1
+        ],
+        "R2C9": [
+          1,
+          4,
+          5,
+          8,
+          9
+        ],
+        "R3C2": [
+          4,
+          5,
+          7
+        ],
+        "R3C3": [
+          4,
+          7
+        ],
+        "R3C7": [
+          4,
+          5
+        ],
+        "R3C9": [
+          4,
+          5,
+          8
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          1,
+          3,
+          4
+        ],
+        "R4C9": [
+          1,
+          3
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          3,
+          9
+        ],
+        "R5C9": [
+          3
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          6,
+          7
+        ],
+        "R7C7": [
+          4,
+          6
+        ],
+        "R7C9": [
+          2,
+          4
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C1": [
+          3,
+          6
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [
+          1,
+          4,
+          6
+        ],
+        "R9C8": [
+          1,
+          6,
+          7
+        ],
+        "R9C9": [
+          1,
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 8,
+      "reasoning": "Let\u2019s check for hidden singles first.  \n\nLooking at R4C4 (box 5: rows 4\u20136, cols 4\u20136):  \nRow 4: {7, _, _, _, 5, 9, 2, _}, missing {1,3,4,6,8} in row.  \nColumn 4: R1C4=?, R2C4=?, R3C4=6, R5C4=?, R6C4=8, R7C4=1, R8C4=7, R9C4=?.  \nSo column 4 has {6,8,1,7} so far, missing {2,3,4,5,9}.  \n\nBox 5 (R4-6, C4-6):  \nR4: C4=?, C5=?, C6=5.  \nR5: C4=?, C5=7, C6=6.  \nR6: C4=8, C5=?, C6=?.  \nSo in box 5, digits present: 5,7,6,8, plus R4C5 unknown, R5C4 unknown, R6C5 unknown, R6C6 unknown.  \n\nLet\u2019s check digit 3 in box 5:  \nRow 4: 3 not in row yet.  \nRow 5: 3 not in row yet.  \nRow 6: 3 in C2, so R6 can have 3 elsewhere.  \nColumn 4: 3 not yet.  \nColumn 5: 3 not yet.  \nColumn 6: 3 not yet.  \nWhere can 3 go in box 5?  \nPossible cells: R4C4, R4C5, R5C4, R6C5, R6C6.  \nCheck column constraints:  \nR4C4: col 4 allows 3, row 4 allows 3.  \nR4C5: col 5 allows 3, row 4 allows 3.  \nR5C4: col 4 allows 3, row 5 allows 3.  \n\nNow, check digit 1 in box 5:  \nRow 4: no 1 yet.  \nRow 5: has 1 in C2, so row 5 can\u2019t have 1 elsewhere.  \nRow 6: no 1 yet.  \nColumn 4: no 1 yet (R7C4=1 is outside box 5).  \nColumn 5: no 1 yet.  \nColumn 6: no 1 yet.  \nPossible: R4C4, R4C5, R6C5, R6C6.  \n\nBut check digit 4 in box 5:  \nRow 4: no 4 yet.  \nRow 5: has 4 in C8, so row 5 can have 4 elsewhere.  \nRow 6: no 4 yet.  \nColumn 4: no 4 yet.  \nColumn 5: no 4 yet.  \nColumn 6: no 4 yet.  \nPossible: R4C4, R4C5, R5C4, R6C5, R6C6.  \n\nThis is not giving a single. Let\u2019s try a different cell.  \n\nLook at R9C1:  \nRow 9 missing {1,2,3,4,6,7,9} (has 5 in C3, 8 in C6).  \nColumn 1: {1,2,7,5,4,8,?} missing {3,6,9}.  \nBox 7 (R7-9, C1-3): has {8,9,1,5} missing {2,3,4,6,7}.  \nIntersect missing in row, col, box:  \nRow 9 missing {1,2,3,4,6,7,9}  \nColumn 1 missing {3,6,9} \u2192 intersection: {3,6,9}  \nBox 7 missing {2,3,4,6,7} \u2192 intersection of {3,6,9} and {2,3,4,6,7} = {3,6}.  \n\nSo R9C1 is {3,6}. Not a single.  \n\nLet\u2019s check R1C4:  \nRow 1: {1,8,4,2,7} missing {3,5,6,9}.  \nColumn 4: {6,?,8,1,7} missing {2,3,4,5,9}.  \nBox 2 (R1-3, C4-6): has {4,2,7,6,9,1} missing {3,5,8}.  \nIntersect: Row missing {3,5,6,9}, col missing {2,3,4,5,9}, box missing {3,5,8}.  \nCommon: {3,5}.  \n\nSo R1C4 is {3,5}. Not a single.  \n\nLet\u2019s check R2C1:  \nRow 2: {6,2,7} missing {1,3,4,5,8,9}.  \nColumn 1: {1,2,7,5,4,8} missing {3,6,9}.  \nBox 1 (R1-3, C1-3): has {1,8,6,2} missing {3,4,5,7,9}.  \nIntersect row missing {1,3,4,5,8,9}, col missing {3,6,9}, box missing {3,4,5,7,9} \u2192 common: {3,9}.  \n\nSo R2C1 is {3,9}. Not a single.  \n\nLet\u2019s check R3C9:  \nRow 3: {2,6,9,1,4,3} missing {5,7,8}.  \nColumn 9: {7,?,?,?,6,?,?,?} (R1C9=7, R6C9=6) missing {1,2,3,4,5,8,9}.  \nBox 3 (R1-3, C7-9): has {2,7,4,3} missing {1,5,6,8,9}.  \nIntersect: row missing {5,7,8}, col missing {1,2,3,4,5,8,9}, box missing {1,5,6,8,9} \u2192 common: {5,8}.  \n\nSo R3C9 is {5,8}. Not a single.  \n\nLet\u2019s try hidden single in box 3 (R1-3, C7-9):  \nMissing digits: {1,5,6,8,9}.  \nR1C7=2, R1C8=?, R1C9=7.  \nR2C7=?, R2C8=?, R2C9=?.  \nR3C7=4, R3C8=3, R3C9={5,8}.  \n\nCheck 9:  \nColumn 7: R4C7=9, R8C7=3, so 9 not in col 7. So 9 in box 3 must be in col 8 or 9.  \nCol 8: R4C8=2, R5C8=4, R6C8=5, R7C8=9, R8C8=8, so col 8 has 9 already (R7C8), so 9 cannot be in col 8 in box 3.  \nSo 9 in box 3 must be in col 9: R2C9 or R3C9.  \nR3C9 is {5,8}, so 9 must be in R2C9.  \n\nThat\u2019s a hidden single.  \n\nREASONING: In box 3, digit 9 must go in R2C9 because column 7 already has 9 elsewhere and column 8 already has 9 elsewhere.",
+      "parsed_move": {
+        "row": 1,
+        "col": 8,
+        "value": 9
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 9,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5
+        ],
+        "R1C5": [
+          3
+        ],
+        "R1C8": [
+          6
+        ],
+        "R2C1": [
+          3,
+          9
+        ],
+        "R2C3": [
+          3,
+          4,
+          9
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C7": [
+          1,
+          5
+        ],
+        "R2C8": [
+          1
+        ],
+        "R2C9": [
+          1,
+          5,
+          8,
+          9
+        ],
+        "R3C2": [
+          5,
+          7
+        ],
+        "R3C3": [
+          7
+        ],
+        "R3C9": [
+          5,
+          8
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          1,
+          3,
+          4
+        ],
+        "R4C9": [
+          1,
+          3
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          3,
+          9
+        ],
+        "R5C9": [
+          3
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          6,
+          7
+        ],
+        "R7C7": [
+          6
+        ],
+        "R7C9": [
+          2,
+          4
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C1": [
+          3,
+          6
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [
+          1,
+          6
+        ],
+        "R9C8": [
+          1,
+          6,
+          7
+        ],
+        "R9C9": [
+          1,
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 9,
+      "reasoning": "Let's start by checking for naked singles.\n\nLook at R3C9: Row has 2,6,9,1,4,3. Column has 7,9,?,?,6,5,?,8. Box 3 (top right 3x3) has 1,8,4,2,7,6,9,1,4,3. Missing digits in box: 5,8? Wait, check carefully:  \nBox 3 (rows 1-3, cols 7-9): R1: 2,7, R2: .,9, R3: 4,3,. Filled: 2,7,9,4,3. Missing: 1,5,6,8.  \nBut 1 is in R1C1, not in box 3? Wait, 1 is in R1C1, not in box 3. So 1 is possible? No, R3 already has 1 in R3C6. So 1 not possible for R3C9.  \nCheck column 9: filled: 7,9,?,?,6,5,?,8 (R9C9=8? No, R9 is . . 5 . . 8 . . . so R9C9 is .). Let's list systematically:  \nC9: R1=7, R2=9, R3=?, R4=., R5=., R6=6, R7=., R8=., R9=?.  \nFilled in C9: 7,9,6. Missing: 1,2,3,4,5,8.  \nRow 3 missing: digits in row 3: 2,6,9,1,4,3. So missing in row: 5,7,8.  \nIntersect missing in row (5,7,8) with missing in column (1,2,3,4,5,8) and missing in box (1,5,6,8):  \nRow missing: 5,7,8.  \nColumn allowed: 5,8 (since col missing includes 5,8, but not 7).  \nBox allowed: 5,8 (since box missing includes 5,8, but not 7).  \nSo R3C9 can be 5 or 8. Not a single.\n\nCheck R4C9: Row 4: 7,.,.,.,5,9,2,. Missing: 1,3,4,6,8.  \nColumn 9 missing: 1,2,3,4,5,8 (but 5 is in row already so not possible for R4C9). So col missing for C9: actually 1,2,3,4,5,8, but row missing excludes 2,5,9. So possible: 1,3,4,6,8 intersect with col 9 missing (1,2,3,4,5,8) = 1,3,4,8.  \nBox 6 (rows 4-6, cols 7-9): R4: 9,2,., R5: 8,4,., R6: 7,5,6. Filled: 9,2,8,4,7,5,6. Missing: 1,3.  \nSo R4C9 must be in {1,3} intersect {1,3,4,8} = {1,3}. Not a single.\n\nCheck R5C9: Row 5 missing: 2,3,9.  \nColumn 9 missing: 1,2,3,4,5,8.  \nBox 6 missing: 1,3.  \nIntersect: {2,3,9} \u2229 {1,2,3,4,5,8} \u2229 {1,3} = {3}.  \nYes! So R5C9 is a naked single: 3.",
+      "parsed_move": {
+        "row": 4,
+        "col": 8,
+        "value": 3
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 3,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5
+        ],
+        "R1C5": [
+          3
+        ],
+        "R1C8": [
+          6
+        ],
+        "R2C1": [
+          3
+        ],
+        "R2C3": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C7": [
+          1,
+          5
+        ],
+        "R2C8": [
+          1
+        ],
+        "R3C2": [
+          5,
+          7
+        ],
+        "R3C3": [
+          7
+        ],
+        "R3C9": [
+          5,
+          8
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          1,
+          3,
+          4
+        ],
+        "R4C9": [
+          1,
+          3
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          3,
+          9
+        ],
+        "R5C9": [
+          3
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          6,
+          7
+        ],
+        "R7C7": [
+          6
+        ],
+        "R7C9": [
+          2,
+          4
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C1": [
+          3,
+          6
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [
+          1,
+          6
+        ],
+        "R9C8": [
+          1,
+          6,
+          7
+        ],
+        "R9C9": [
+          1,
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 10,
+      "reasoning": "Let's check for hidden singles.  \n\nLooking at R3C9:  \nRow 3 has {1,2,3,4,6,9} present, missing {5,7,8}.  \nColumn 9 has {7,9,3,6} from R1C9=7, R2C9=9, R5C9=3, R6C9=6, missing {1,2,4,5,8}.  \nBox 3 (rows 1-3, cols 7-9) has {2,4,7,9,3} in R1C7=2, R1C9=7, R2C9=9, R3C7=4, R3C8=3, missing {1,5,6,8}.  \n\nCombining: possible for R3C9 are {5,8} (7 is in col 9 already, so not possible).  \n\nNow check R2C7:  \nRow 2 missing digits: {1,3,4,5,8} (has {2,6,7,9}).  \nColumn 7 has {2,4,8,7,9,3} from R1C7=2, R3C7=4, R4C7=9, R5C7=8, R6C7=7, R8C7=3, missing {1,5,6}.  \nBox 3 missing digits: {1,5,6,8} as above.  \n\nIntersection: Row2 missing {1,3,4,5,8}, col7 missing {1,5,6}, box3 missing {1,5,6,8}.  \nOnly common missing digit across all three is 1.  \n\nSo R2C7 must be 1.  \n\nREASONING: Hidden single in box 3 / row 2 / column 7: only possible digit is 1.",
+      "parsed_move": {
+        "row": 1,
+        "col": 6,
+        "value": 1
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 1,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          0,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5
+        ],
+        "R1C5": [
+          3
+        ],
+        "R1C8": [
+          6
+        ],
+        "R2C1": [
+          3
+        ],
+        "R2C3": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C7": [
+          1,
+          5
+        ],
+        "R2C8": [
+          1
+        ],
+        "R3C2": [
+          5,
+          7
+        ],
+        "R3C3": [
+          7
+        ],
+        "R3C9": [
+          5,
+          8
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          1,
+          3,
+          4
+        ],
+        "R4C9": [
+          1
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          9
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          6,
+          7
+        ],
+        "R7C7": [
+          6
+        ],
+        "R7C9": [
+          2,
+          4
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C1": [
+          3,
+          6
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [
+          1,
+          6
+        ],
+        "R9C8": [
+          1,
+          6,
+          7
+        ],
+        "R9C9": [
+          1,
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 11,
+      "reasoning": "Let\u2019s check R3C9.  \nRow 3 has: 2, 6, 9, 1, 4, 3. Column 9 has: 7, 9, (R6C9=6), (R5C9=3), (R4C9 empty), (R7C9 empty), (R8C9 empty). Box 3 (rows 1\u20133, cols 7\u20139) has: 2, 7, 1, 9, 4, 3. Missing digits in box 3: 5, 6, 8.  \nRow 3 missing digits: 5, 7, 8.  \nIntersection of box 3 missing (5,6,8) and row 3 missing (5,7,8) is {5,8}.  \nColumn 9 has 7, 9, 6, 3 so far, so 5 and 8 are both possible in column 9.  \nBut check R1C9=7, R2C9=9, R3C9=?, R4C9=?, R5C9=3, R6C9=6, R7C9=?, R8C9=?, R9C9=?.  \nIn column 9, 5 is possible.  \nBut hidden single? Let\u2019s check box 3: R1C7=2, R1C8 empty, R1C9=7; R2C7=1, R2C8 empty, R2C9=9; R3C7=4, R3C8=3, R3C9=?. Missing in box 3: 5,6,8.  \n6 appears in column 9 already (R6C9), so 6 not possible in R3C9.  \nSo R3C9 candidates: 5,8.  \n\nNow check R3C1=2, R3C2 empty, R3C3 empty, R3C4=6, R3C5=9, R3C6=1, R3C7=4, R3C8=3, R3C9=?  \nRow 3 missing: 5,7,8.  \nIn column 9: R7C9, R8C9, R9C9 empty, but 8 is possible in column 9.  \n\nBut maybe R3C9=5 is a hidden single in column 9? Let\u2019s check column 9 digits needed: 1,2,4,5,8 missing? Wait, column 9 has: R1=7, R2=9, R3=?, R4=?, R5=3, R6=6, R7=?, R8=?, R9=?.  \nSo missing: 1,2,4,5,8. That\u2019s 5 missing digits, so no hidden single yet.  \n\nLet\u2019s instead look at R7C9:  \nRow 7: 8, ?, ?, 1, 5, 3, ?, 9, ? \u2192 missing: 2,4,6,7.  \nColumn 9 missing: 1,2,4,5,8.  \nBox 9 (rows 7\u20139, cols 7\u20139): R7C7=?, R7C8=9, R7C9=?; R8C7=3, R8C8=8, R8C9=?; R9C7=?, R9C8=?, R9C9=?.  \nDigits in box 9 so far: 3,8,9. Missing: 1,2,4,5,6,7.  \nNo obvious single yet.  \n\nLet\u2019s check R9C9: Row 9: ?, ?, 5, ?, ?, 8, ?, ?, ?.  \nColumn 9 missing: 1,2,4,5,8. But 5 is in row 9 already (R9C3=5), so R9C9 cannot be 5. So R9C9 candidates: 1,2,4,8.  \n\nActually, let\u2019s find a certain move:  \nLook at R4C9: Row 4 missing: 1,3,4,6,8. Column 9 missing: 1,2,4,5,8. Box 6 (rows 4\u20136, cols 7\u20139): R4C7=9, R4C8=2, R4C9=?; R5C7=8, R5C8=4, R5C9=3; R6C7=7, R6C8=5, R6C9=6.  \nBox 6 missing: 1.  \nSo hidden single in R4C9 = 1.  \n\nREASONING: Hidden single in box 6: only R4C9 can be 1.",
+      "parsed_move": {
+        "row": 3,
+        "col": 8,
+        "value": 1
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 1,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          0
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5
+        ],
+        "R1C5": [
+          3
+        ],
+        "R1C8": [
+          6
+        ],
+        "R2C1": [
+          3
+        ],
+        "R2C3": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C8": [],
+        "R3C2": [
+          5,
+          7
+        ],
+        "R3C3": [
+          7
+        ],
+        "R3C9": [
+          5,
+          8
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          1,
+          3,
+          4
+        ],
+        "R4C9": [
+          1
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          9
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          6,
+          7
+        ],
+        "R7C7": [
+          6
+        ],
+        "R7C9": [
+          2,
+          4
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C1": [
+          3,
+          6
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [
+          6
+        ],
+        "R9C8": [
+          1,
+          6,
+          7
+        ],
+        "R9C9": [
+          1,
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 12,
+      "reasoning": "Let\u2019s check for hidden singles first.  \n\nLooking at **R3C9**:  \nRow 3 has {2, 6, 9, 1, 4, 3} plus R3C3 unknown, R3C9 unknown.  \nColumn 9: R1=7, R2=9, R4=1, R5=3, R6=6, R7 unknown, R8 unknown, R9 unknown.  \nBox 3 (rows 1\u20133, cols 7\u20139): contains 2, 7, 1, 9, 4, 3, missing {5, 6, 8}.  \nBut 6 is already in R6C9 (same column), so 6 not possible in R3C9.  \n5 is not in row 3 yet, not in column 9 yet, not in box 3 yet.  \nSo R3C9 must be 5.  \n\n**REASONING:** R3C9 only possible digit is 5 (hidden single in box 3).  \n**MOVE:** R3C9 = 5",
+      "parsed_move": null,
+      "valid": false,
+      "validation_errors": [
+        "Could not parse MOVE from response"
+      ],
+      "value": null,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5
+        ],
+        "R1C5": [
+          3
+        ],
+        "R1C8": [
+          6
+        ],
+        "R2C1": [
+          3
+        ],
+        "R2C3": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C8": [],
+        "R3C2": [
+          5,
+          7
+        ],
+        "R3C3": [
+          7
+        ],
+        "R3C9": [
+          5,
+          8
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          3,
+          4
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          9
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          6,
+          7
+        ],
+        "R7C7": [
+          6
+        ],
+        "R7C9": [
+          2,
+          4
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C1": [
+          3,
+          6
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [
+          6
+        ],
+        "R9C8": [
+          1,
+          6,
+          7
+        ],
+        "R9C9": [
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 13,
+      "reasoning": "Let's check for hidden singles in row 3: Row 3 is 2, _, _, 6, 9, 1, 4, 3, _.  \nMissing digits: 5, 7, 8.  \nColumn 9 candidates:  \nRow 1 col 9 = 7, so 7 not possible in R3C9.  \nRow 7 col 9 is blank, but check box 3 (rows 1\u20133, cols 7\u20139):  \nR1C7=2, R1C8=blank, R1C9=7  \nR2C7=1, R2C8=blank, R2C9=9  \nR3C7=4, R3C8=3, R3C9=blank.  \nIn that box, missing digits are 5, 6, 8.  \nColumn 9 already has 7 (R1C9) and 9 (R2C9), so R3C9 cannot be 7 or 9.  \nSo R3C9 must be 5, 6, or 8.  \n\nBut check column 9 overall:  \nCol 9 values: R1=7, R2=9, R3=?, R4=1, R5=3, R6=6, R7=?, R8=?, R9=?. Missing in column: 2,4,5,8.  \nSo R3C9 could be 5 or 8.  \n\nBut check row 3 missing digits again: 5,7,8.  \n7 is not possible in R3C9 (col 9 has no 7 yet, but row constraints? Actually row 3 has no 7 yet, but col 9 already has 7 in R1C9, so 7 not possible in R3C9. So row 3 missing 5,7,8, with 7 not possible in R3C9.  \n\nCheck R3C2: Row 3 col 2 blank, col 2 has 6 (R2), 1 (R5), 3 (R6), 9 (R8), missing 2,4,5,7,8. Row 3 missing 5,7,8, so possible for R3C2: 5,7,8.  \n\nCheck R3C3 blank, col 3 has 8 (R1), 1 (R8), 5 (R9), missing 2,3,4,6,7,9. Row 3 missing 5,7,8, so possible for R3C3: 7,8 (5 is in col 3 already in R9C3, so 5 not possible).  \n\nSo R3C3 can be 7 or 8.  \n\nNow check hidden single in box 2 (rows 1\u20133, cols 4\u20136):  \nDigits present in box 2: R1C4=?, R1C5=?, R1C6=4; R2C4=?, R2C5=2, R2C6=7; R3C4=6, R3C5=9, R3C6=1.  \nSo missing digits in box 2: 3,5,8.  \nLook at R1C4: col 4 has no 3,5,8 yet. Row 1 missing digits: row 1: 1,8,?,?,4,2,?,7 \u2192 missing 3,5,6,9. Intersection with {3,5,8} is {3,5}. So R1C4 could be 3 or 5.  \n\nR1C5: row 1 missing 3,5,6,9; box missing 3,5,8 \u2192 possible {3,5}.  \n\nR2C4: row 2: ?,6,?,?,2,7,1,?,9 \u2192 missing 3,4,5,8. Intersection with {3,5,8} is {3,5,8}.  \n\nBut check column 4:  \nCol 4: R1=?, R2=?, R3=6, R4=?, R5=?, R6=8, R7=1, R8=7, R9=?. Missing in col 4: 2,3,4,5,9.  \nSo in box 2, R1C4, R2C4 must come from {3,5,8} but col 4 missing {2,3,4,5,9}, so possible {3,5} for R1C4 and R2C4.  \n\nBut 8 is not possible in col 4 (since col 4 missing digits don't include 8? Wait, col 4 missing 2,3,4,5,9 \u2014 indeed 8 is already in R6C4, so 8 not possible in R1C4 or R2C4).  \n\nSo in box 2, missing {3,5,8}, but 8 not possible in R1C4 or R2C4, so 8 must be in R1C5 or R2C5? But R2C5=2, R3C5=9, R1C5 blank. So 8 must be in R1C5.  \n\nThat\u2019s a hidden single in box 2: R1C5 = 8.",
+      "parsed_move": {
+        "row": 0,
+        "col": 4,
+        "value": 8
+      },
+      "valid": false,
+      "validation_errors": [
+        "Row 1 already has 8 at C3"
+      ],
+      "value": 8,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5
+        ],
+        "R1C5": [
+          3
+        ],
+        "R1C8": [
+          6
+        ],
+        "R2C1": [
+          3
+        ],
+        "R2C3": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C8": [],
+        "R3C2": [
+          5,
+          7
+        ],
+        "R3C3": [
+          7
+        ],
+        "R3C9": [
+          5,
+          8
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          3,
+          4
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          9
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          6,
+          7
+        ],
+        "R7C7": [
+          6
+        ],
+        "R7C9": [
+          2,
+          4
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C1": [
+          3,
+          6
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [
+          6
+        ],
+        "R9C8": [
+          1,
+          6,
+          7
+        ],
+        "R9C9": [
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 14,
+      "reasoning": "Let\u2019s check for hidden singles first.  \n\nLooking at R9C1:  \nRow 9 has {3, 5, 8, 9, 6, 2, 7, 4, 1?} \u2014 let\u2019s check column 1:  \nColumn 1 has {1, 2, 7, 5, 4, 8, missing 3, 6, 9}.  \nSo missing in column 1: {3, 6, 9}.  \nBox 7 (rows 7-9, cols 1-3) already has 8, 9, 1, 5 in R7C1=8, R8C2=9, R9C3=5, R7C2 empty but not in R9C1.  \nCheck R9C1 candidates:  \nRow 9 missing digits: Row 9 currently: R9C3=5, R9C6=8, R9C4 empty, R9C7 empty, R9C9 empty, R9C1 empty, R9C2 empty, R9C5 empty, R9C8 empty \u2014 so row 9 missing: {1,2,3,4,6,7,9} except 5 and 8 are given.  \nBut column 1 missing: {3,6,9}. Intersection for R9C1: {3,6,9}.  \nBox 7 missing digits: In box 7 (rows 7-9, cols 1-3):  \nR7C1=8, R7C2=?, R7C3=?  \nR8C1=?, R8C2=9, R8C3=1  \nR9C1=?, R9C2=?, R9C3=5  \nUsed in box: {8,9,1,5} missing {2,3,4,6,7}.  \nBut row 9 missing {1,2,3,4,6,7,9} \u2014 so for R9C1, possible from missing box {2,3,4,6,7} intersect column 1 missing {3,6,9} intersect row 9 missing {1,2,3,4,6,7,9} \u2192 {3,6}.  \nNow check column 1 missing {3,6,9}, but 9 is in row 9 already? Wait, row 9 has no 9 yet, so 9 is possible for R9C1? But box 7 missing doesn't have 9? Actually box 7 has 9 already (R8C2), so 9 not possible in box 7 again. So R9C1 candidates: {3,6}.  \n\nLet\u2019s check R9C2:  \nColumn 2: {6 in R2, 9 in R8, 3 in R6, 1 in R5, missing {2,4,5,7,8} plus maybe? Wait, column 2: R1C2=?, R2C2=6, R3C2=?, R4C2=?, R5C2=1, R6C2=3, R7C2=?, R8C2=9, R9C2=?.  \nUsed in column 2: {6,1,3,9} missing {2,4,5,7,8}.  \nBox 7 missing {2,3,4,6,7}, row 9 missing {1,2,3,4,6,7,9}. Intersection for R9C2: col missing {2,4,5,7,8} \u2229 box missing {2,3,4,6,7} \u2229 row missing {1,2,3,4,6,7,9} = {2,4,7}.  \n\nSo no hidden single yet.  \n\nLet\u2019s check R3C9:  \nRow 3: {2, ?, ?, 6, 9, 1, 4, 3, ?} so missing {5,7,8}.  \nColumn 9: {7,9,?,1,3,6,?,?,?} used {7,9,1,3,6} missing {2,4,5,8}.  \nBox 3 (rows 1-3, cols 7-9): R1: 2, ?, 7; R2: 1, ?, 9; R3: 4, 3, ?. Used {2,7,1,9,4,3} missing {5,6,8}.  \nIntersection for R3C9: row missing {5,7,8} \u2229 col missing {2,4,5,8} \u2229 box missing {5,6,8} = {5,8}.  \n\nCheck column 9 missing {2,4,5,8} but 2 in box 3? No, 2 is in R1C7, so 2 not possible in R3C9 because col 9 has no 2 yet but box 3 has 2 already (R1C7), so 2 not possible in R3C9 (box 3 already has 2). So col missing irrelevant here, intersection with row missing {5,7,8} and box missing {5,6,8} = {5,8}.  \n\nNo hidden single.  \n\nLet\u2019s check R7C3:  \nRow 7: 8, ?, ?, 1, 5, 3, ?, 9, ? \u2192 missing {2,4,6,7}.  \nColumn 3: {8, ?, ?, ?, ?, ?, ?, 1, 5} used {8,1,5} missing {2,3,4,6,7,9}.  \nBox 7 missing {2,3,4,6,7}. Intersection: row missing {2,4,6,7} \u2229 col missing {2,3,4,6,7,9} \u2229 box missing {2,3,4,6,7} = {2,4,6,7}.  \n\nNo hidden single.  \n\nLet\u2019s try a cell with only 2 candidates: R3C9 has {5,8}.  \n\nCheck column 9: R4C9=1, R5C9=3, R6C9=6, R7C9=?, R8C9=?, R9C9=?.  \nIf R3C9=5, then column 9 has 5 used, so 8 must go in R7C9 or R8C9 or R9C9.  \n\nBut maybe easier: Look at R1C8:  \nRow 1: {1, ?, 8, ?, ?, 4, 2, ?, 7} missing {3,5,6,9}.  \nColumn 8: {?, ?, 3, 2, 4, 5, 9, 8, ?} missing {1,6,7}.  \nBox 3: missing {5,6,8} from earlier? Actually box 3 used {2,7,1,9,4,3} plus R1C8 and R2C8 and R3C9. So missing {5,6,8}.  \nIntersection for R1C8: row missing {3,5,6,9} \u2229 col missing {1,6,7} \u2229 box missing {5,6,8} = {6}.  \n\nYes! That\u2019s a hidden single: only 6 possible in R1C8.  \n\n**REASONING:** In box 3, digit 6 must be in column 8 (col 7 has 2,4,1; col 9 has 7,9,? but 6 not in col 9 yet in box), and only R1C8 can be 6 in box 3 because R2C8 col missing 6 but row 2 has 6 already, so no, R2C8 can\u2019t be 6. R3C8=3 fixed. So only R1C8 can be 6 in box 3.",
+      "parsed_move": {
+        "row": 0,
+        "col": 7,
+        "value": 6
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 6,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          0,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          6,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5
+        ],
+        "R1C5": [
+          3
+        ],
+        "R1C8": [
+          6
+        ],
+        "R2C1": [
+          3
+        ],
+        "R2C3": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C8": [],
+        "R3C2": [
+          5,
+          7
+        ],
+        "R3C3": [
+          7
+        ],
+        "R3C9": [
+          5,
+          8
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          3,
+          4
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          9
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          6,
+          7
+        ],
+        "R7C7": [
+          6
+        ],
+        "R7C9": [
+          2,
+          4
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C1": [
+          3,
+          6
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [
+          6
+        ],
+        "R9C8": [
+          1,
+          6,
+          7
+        ],
+        "R9C9": [
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 15,
+      "reasoning": "In row 3, only column 9 is missing a digit; missing numbers are 5,8. Column 9 has 5 in row 4, so R3C9 must be 8.",
+      "parsed_move": {
+        "row": 2,
+        "col": 8,
+        "value": 8
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 8,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          6,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          6,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          8
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5
+        ],
+        "R1C5": [
+          3
+        ],
+        "R2C1": [
+          3
+        ],
+        "R2C3": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C8": [],
+        "R3C2": [
+          5,
+          7
+        ],
+        "R3C3": [
+          7
+        ],
+        "R3C9": [
+          5,
+          8
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          3,
+          4
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          9
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          6,
+          7
+        ],
+        "R7C7": [
+          6
+        ],
+        "R7C9": [
+          2,
+          4
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C1": [
+          3,
+          6
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [
+          6
+        ],
+        "R9C8": [
+          1,
+          7
+        ],
+        "R9C9": [
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 16,
+      "reasoning": "Let's check for hidden singles.  \n\nIn Row 7 (8 . . 1 5 3 . 9 .), missing numbers: 2, 4, 6, 7.  \nColumn 7: R1C7=2, R2C7=1, R3C7=4, R4C7=9, R5C7=8, R6C7=7, R8C7=3, R9C7=?. So missing in column 7: 5, 6.  \nFor R7C7, possible: 2,4,6,7 but column excludes 2,4,7, so only 6 possible.  \n\nREASONING: R7C7 can only be 6 (hidden single in column 7).",
+      "parsed_move": {
+        "row": 6,
+        "col": 6,
+        "value": 6
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 6,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          6,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          8
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          6,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          8
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          6,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5
+        ],
+        "R1C5": [
+          3
+        ],
+        "R2C1": [
+          3
+        ],
+        "R2C3": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C8": [],
+        "R3C2": [
+          5,
+          7
+        ],
+        "R3C3": [
+          7
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          3,
+          4
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          9
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          6,
+          7
+        ],
+        "R7C7": [
+          6
+        ],
+        "R7C9": [
+          2,
+          4
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C1": [
+          3,
+          6
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [
+          6
+        ],
+        "R9C8": [
+          1,
+          7
+        ],
+        "R9C9": [
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 17,
+      "reasoning": "Let's check for hidden singles.  \n\nIn Row 7: R7C9 is empty. Column 9 has {7,9,3,6,8,1,?}, missing {2,4}. Row 7 has {8,1,5,3,6,9}, missing {2,4,7}. Box 9 (rows 7\u20139, cols 7\u20139) has {6,9,3,8,?}, missing {2,4,7,1,5}.  \nBut in Box 9, column 9 already has 1 in R4C9, 3 in R5C9, 6 in R6C9 \u2014 so for R7C9, possible digits are {2,4,7}.  \n\nCheck column 9 overall: digits present are 7,9,8,1,3,6. Missing {2,4,5}.  \nRow 7 has 8,1,5,3,6,9 \u2014 so 5 is already in row, so R7C9 cannot be 5. So candidates for R7C9 are {2,4}.  \n\nNow look at Box 9: R7C7=6, R7C8=9, R8C7=3, R8C8=8, R9C7 empty, R9C8 empty, R9C9 empty.  \nMissing digits in Box 9: {1,2,4,5,7}.  \n\nBut column 9: R1C9=7, R2C9=9, R3C9=8, R4C9=1, R5C9=3, R6C9=6, R8C9 empty, R9C9 empty.  \nSo in column 9, missing {2,4,5}.  \n\nNow, R9C9: Row 9 missing digits {1,2,3,4,6,7,9}? Wait, let's list Row 9: . . 5 . . 8 . . . \u2192 digits present: 5,8. Missing {1,2,3,4,6,7,9}.  \nColumn 9 missing {2,4,5} but 5 already in row, so R9C9 candidates {2,4}.  \n\nBut R8C9: Row 8: . 9 1 7 . 2 3 8 . \u2192 digits present: 9,1,7,2,3,8. Missing {4,5,6}. Column 9 missing {2,4,5} but 2 already in row, so R8C9 candidates {4,5}.  \n\nNow, Box 9 missing {1,2,4,5,7}.  \nColumn 9 missing {2,4,5}.  \nIf R7C9 is 2, then R8C9 and R9C9 are {4,5} in some order, possible.  \nIf R7C9 is 4, then R8C9 and R9C9 are {2,5} in some order, possible.  \n\nBut check hidden single in Box 9 for digit 2:  \nColumn 9 missing 2. Row 7 missing 2. Row 8 has 2 already. Row 9 missing 2. So 2 in Box 9 must be in R7C9 or R9C9.  \nColumn 8 has 2 in R4C8, so no restriction from col 8.  \n\nActually, let's check a simpler hidden single:  \n\nLook at R9C1: Row 9: missing {1,2,3,4,6,7,9}. Column 1: {1,2,7,5,4,8} present, missing {3,6,9}. Box 7: rows 7\u20139, cols 1\u20133: has {8,9,1,5,?} \u2014 missing {2,3,4,6,7}.  \nIntersection of row missing and col missing and box missing: col missing {3,6,9}, row missing {1,2,3,4,6,7,9}, box missing {2,3,4,6,7}.  \nIntersection: {3,6}.  \n\nBut 6 is in column 1? No, 6 is in R2C2, not col 1. So 6 possible.  \nCheck hidden single for 3 in Box 7:  \nBox 7 missing {2,3,4,6,7}. Where can 3 go? R7C2, R7C3, R8C1, R9C1, R9C2, R9C3.  \nColumn 1: 3 not forbidden yet. Column 2: R2C2=6, R4C2 empty, R5C2=1, R6C2=3, so 3 already in col 2 (R6C2), so R7C2, R9C2 cannot be 3.  \nColumn 3: R1C3=8, R2C3 empty, R3C3 empty, R4C3 empty, R5C3 empty, R6C3 empty, R7C3 empty, R8C3=1, R9C3=5. So col 3 missing 3.  \nSo in Box 7, possible cells for 3: R7C3, R8C1, R9C1.  \nRow 7 missing {2,4,7} (and 3? Row 7 has 8,?,?,1,5,3,6,9,? \u2192 yes 3 already in R7C6, so row 7 already has 3! So R7C3 cannot be 3.  \nSo 3 in Box 7 must be in R8C1 or R9C1.  \nRow 8 missing {4,5,6}, so 3 not in row 8. So 3 not in R8C1.  \nThus 3 must be in R9C1.  \n\nThat\u2019s a hidden single.  \n\nREASONING: In Box 7, digit 3 must go in R9C1 because other cells in box either have row/col conflicts or already contain 3 in row.",
+      "parsed_move": {
+        "row": 8,
+        "col": 0,
+        "value": 3
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 3,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          6,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          8
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          6,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          6,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          8
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          6,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          3,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5
+        ],
+        "R1C5": [
+          3
+        ],
+        "R2C1": [
+          3
+        ],
+        "R2C3": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C8": [],
+        "R3C2": [
+          5,
+          7
+        ],
+        "R3C3": [
+          7
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          3,
+          4
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          9
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          7
+        ],
+        "R7C9": [
+          2,
+          4
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C1": [
+          3,
+          6
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [],
+        "R9C8": [
+          1,
+          7
+        ],
+        "R9C9": [
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 18,
+      "reasoning": "Let\u2019s check for hidden singles first.  \n\nLooking at **Row 7**:  \n8 . . 1 5 3 6 9 .  \nMissing digits: 2, 4, 7.  \n\nCheck **R7C9**:  \nColumn 9 has: R1=7, R2=9, R3=8, R4=1, R5=3, R6=6, R8=?, R9=?.  \nMissing in column 9: 2, 4, 5.  \nBox 9 (rows 7\u20139, cols 7\u20139) has: R7C7=6, R7C8=9, R8C7=3, R8C8=8, R9C7=?, R9C8=?, R9C9=?, R8C9=?, R7C9=?.  \nIn box 9, missing digits: 1, 2, 4, 5, 7.  \n\nBut check R7C2:  \nRow 7 missing {2,4,7}.  \nColumn 2 has: R1=?, R2=6, R3=?, R4=?, R5=1, R6=3, R7=?, R8=9, R9=?. Missing in col 2: 2,4,5,7,8.  \nBox 7 (rows 7\u20139, cols 1\u20133) has: R7C1=8, R7C2=?, R7C3=?, R8C1=?, R8C2=9, R8C3=1, R9C1=3, R9C2=?, R9C3=5.  \nMissing in box 7: 2,4,6,7.  \n\nFor R7C2, possible: {2,4,7} intersect col 2 missing {2,4,5,7,8} intersect box 7 missing {2,4,6,7} \u2192 {2,4,7}.  \n\nBut check R7C3:  \nRow 7 missing {2,4,7}.  \nColumn 3: R1=8, R2=?, R3=?, R4=?, R5=?, R6=?, R7=?, R8=1, R9=5 \u2192 missing in col 3: 2,3,4,6,7,9.  \nBox 7 missing {2,4,6,7}. Intersect with row missing {2,4,7} \u2192 {2,4,7}.  \n\nNo hidden singles there yet.  \n\nLet\u2019s check **R9C2**:  \nRow 9: 3 . 5 . . 8 . . . \u2192 missing {1,2,4,6,7,9}.  \nColumn 2 missing {2,4,5,7,8} (from earlier: col 2 has 6,1,3,9 so far).  \nBox 7 missing {2,4,6,7}.  \nIntersect: row missing {1,2,4,6,7,9} \u2229 col missing {2,4,5,7,8} \u2229 box missing {2,4,6,7} \u2192 {2,4,7}.  \n\nStill no hidden single.  \n\nLet\u2019s check **R1C2**:  \nRow 1: 1 . 8 . . 4 2 6 7 \u2192 missing {3,5,9}.  \nColumn 2 missing {2,4,5,7,8}.  \nBox 1 (rows 1\u20133, cols 1\u20133):  \nR1: 1,?,8  \nR2: ?,6,?  \nR3: 2,?,?  \nMissing in box 1: 3,4,5,7,9.  \n\nIntersect row missing {3,5,9} \u2229 col missing {2,4,5,7,8} \u2229 box missing {3,4,5,7,9} \u2192 {5}.  \n\nYes! That\u2019s a hidden single: 5 is only possible in R1C2 for box 1 (since col 2 missing 5, row 1 missing includes 5, box 1 missing includes 5, and no other cell in box 1 can be 5 because R2C1 col 1 has 5 in row 5, so not in col 1? Wait, check: R5C1=5, so col 1 has 5, so R2C1 can\u2019t be 5. R3C2? Row 3 missing {5,7} but col 2 missing 5, so R3C2 could be 5 or 7. But R1C2 is the only cell in box 1 that can be 5? Check R3C2: possible {5,7}, R2C1 possible? R2C1 missing digits in row 2: {3,4,5,8}? Row 2: . 6 . . 2 7 1 . 9 \u2192 missing {3,4,5,8}. Box 1 missing {3,4,5,7,9}. Col 1: R1=1, R3=2, R4=7, R5=5, R6=4, R7=8, R8=?, R9=3 \u2192 missing {6,9} in col 1? Wait that\u2019s wrong: col 1 has 1,2,7,5,4,8,?,3 \u2192 missing {6,9} indeed. So R2C1 possible {3,4,5,7,9} \u2229 col 1 missing {6,9} \u2229 row 2 missing {3,4,5,8} \u2192 {3,4,5}? But col 1 missing {6,9} so all {3,4,5,7,9} except 9? No 9 not in col 1 missing? Col 1 has 9? No, col 1: R1=1, R2=?, R3=2, R4=7, R5=5, R6=4, R7=8, R8=?, R9=3. Missing {6,9}. So R2C1 possible {3,4,5,7,9} intersect {6,9} missing means 9 not possible, so {3,4,5,7}. Intersect row 2 missing {3,4,5,8} \u2192 {3,4,5}. So R2C1 could be 5. So R1C2 is not the only 5 in box 1? That means my earlier hidden single logic is wrong.  \n\nLet\u2019s check box 1 cells:  \nR1C2: possible {3,5,9} \u2229 col 2 missing {2,4,5,7,8} \u2192 {5} only? Wait col 2 missing {2,4,5,7,8} so 3 and 9 are not missing in col 2? They are present? Col 2: R2=6, R5=1, R6=3, R8=9, so 3 and 9 already in col 2! Yes! So R1C2 cannot be 3 or 9 because col 2 already has 3 and 9. So indeed R1C2 = 5 only. That\u2019s the hidden single.  \n\nSo:  \nREASONING: Column 2 already has 3 and 9, so R1C2 must be 5.",
+      "parsed_move": {
+        "row": 0,
+        "col": 1,
+        "value": 5
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 5,
+      "grid_before": [
+        [
+          1,
+          0,
+          8,
+          0,
+          0,
+          4,
+          2,
+          6,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          8
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          6,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          3,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          5,
+          8,
+          0,
+          0,
+          4,
+          2,
+          6,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          8
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          6,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          3,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          5
+        ],
+        "R1C4": [
+          3,
+          5
+        ],
+        "R1C5": [
+          3
+        ],
+        "R2C1": [],
+        "R2C3": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C8": [],
+        "R3C2": [
+          5,
+          7
+        ],
+        "R3C3": [
+          7
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          3,
+          4
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          9
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          7
+        ],
+        "R7C9": [
+          2,
+          4
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [],
+        "R9C8": [
+          1,
+          7
+        ],
+        "R9C9": [
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 19,
+      "reasoning": "Let\u2019s check for hidden singles.  \n\nLook at R4C4 (box 5: rows 4\u20136, cols 4\u20136).  \nIn that box, digits missing: 3, 4, 6, 8, 9.  \nColumn 4 has: R3C4=6, R6C4=8, R8C4=7, R9C4=4 (R9C4 is actually blank? Wait, R9C4 is \u201c.\u201d, so not 4 yet). Let\u2019s check column 4 carefully:  \nCol 4: R1C4=., R2C4=., R3C4=6, R4C4=., R5C4=., R6C4=8, R7C4=1, R8C4=7, R9C4=.  \nSo missing in column 4: 2,3,4,5,9.  \n\nBut in box 5 (R4\u2013R6, C4\u2013C6), let\u2019s list all filled cells:  \nR4C5=., R4C6=5, R5C4=., R5C5=7, R5C6=6, R6C4=8, R6C5=., R6C6=.  \nMissing in box 5: 2,3,4,9.  \n\nNow, R4C4 sees column 4 and row 4. Row 4 has: 7,.,.,.,.,5,9,2,1 \u2192 missing 3,4,6,8.  \nSo R4C4 possible candidates: {3,4} (must be in missing box set {2,3,4,9} and missing row set {3,4,6,8} \u2192 intersection {3,4}).  \n\nCheck column 4 missing: {2,3,4,5,9}. Intersect with {3,4} \u2192 {3,4}.  \n\nNow check box constraints more: In box 5, where can 3 go?  \nPossible cells in box 5: R4C4, R4C5, R5C4, R6C5, R6C6.  \nColumn 6: R4C6=5, R5C6=6, R6C6=., R9C6=8, R3C6=1, R2C6=7. So column 6 missing 2,3,4,9.  \nRow 4 missing 3,4,6,8. Row 5 missing 2,9. Row 6 missing 1,2,9.  \n\nFor 3 in box 5:  \n- R4C4 possible (row4 missing 3, col4 missing 3, box5 missing 3).  \n- R4C5 possible (row4 missing 3, col5: col5 has R3C5=9, R5C5=7, R7C5=5, R8C5=., R9C5=., R2C5=2, R1C5=., R6C5=., R4C5=.; col5 missing 1,3,4,6,8). So yes possible.  \n- R5C4 possible? Row5 missing 2,9 only? Wait, row5: 5,1,.,.,7,6,8,4,3 \u2192 missing 2,9. So R5C4 cannot be 3 (row5 has no 3 missing, row5 already has 3 in R5C9). So R5C4 not possible for 3.  \n- R6C5 possible? Row6 missing 1,2,9 only? Row6: 4,3,.,8,.,.,7,5,6 \u2192 missing 1,2,9. So R6C5 not possible for 3.  \n- R6C6 possible? Row6 missing 1,2,9, so not possible for 3.  \n\nSo 3 in box 5 can only go in R4C4 or R4C5.  \n\nNow check hidden single for 4 in box 5:  \nPossible cells: R4C4, R4C5, R5C4, R6C5, R6C6.  \nRow4 missing 3,4,6,8 \u2192 so R4C4 and R4C5 possible for 4.  \nRow5 missing 2,9 \u2192 so R5C4 not possible for 4.  \nRow6 missing 1,2,9 \u2192 so R6C5, R6C6 not possible for 4.  \nSo 4 in box 5 can only go in R4C4 or R4C5.  \n\nBut look at column 4 for 4: possible cells: R1C4, R2C4, R4C4, R5C4, R9C4.  \nR5C4 not possible (row5 missing 2,9).  \nR9C4: row9 missing 2,4,6,7,9? Row9: 3,.,5,.,.,8,.,.,. \u2192 missing 1,2,4,6,7,9. So R9C4 possible.  \nSo column 4 has at least R9C4 possible for 4, so 4 not forced in R4C4 for column 4.  \n\nNow, check 3 in column 4: possible cells: R1C4, R2C4, R4C4, R5C4, R9C4.  \nR5C4 not possible (row5 missing 2,9).  \nR9C4 possible (row9 missing 3? yes missing 1,2,4,6,7,9 \u2192 no 3 missing? Wait, row9 has 3 in R9C1, so row9 missing 1,2,4,6,7,9, not 3. So R9C4 cannot be 3).  \nR1C4: row1 missing 3,9? Row1: 1,5,8,.,.,4,2,6,7 \u2192 yes missing 3,9. So possible.  \nR2C4: row2 missing 3,4,5,8? Row2: .,6,.,.,2,7,1,.,9 \u2192 missing 3,4,5,8. So possible.  \nR4C4: possible.  \n\nSo 3 in column 4 not forced yet.  \n\nBut in box 5, 3 must be in R4C4 or R4C5.  \nCheck R4C5\u2019s column 5: col5 missing 1,3,4,6,8. Row4 missing 3,4,6,8. So possible for 3.  \n\nNow, look at hidden single in row 4:  \nRow4 missing 3,4,6,8.  \nCheck column by column:  \nR4C1=7, R4C2=., R4C3=., R4C4=., R4C5=., R4C6=5, R4C7=9, R4C8=2, R4C9=1.  \n\nCheck 6 in row4: possible cells: R4C2, R4C3, R4C4, R4C5.  \nBut column 2: col2 has 5,6,.,.,1,3,.,9,. \u2192 missing 2,4,7,8. So 6 not possible in col2. So R4C2 not possible for 6.  \nColumn 3: col3 has 8,.,.,.,.,.,.,1,5 \u2192 missing 2,3,4,6,7,9. So 6 possible in col3.  \nColumn 4: col4 missing 2,3,4,5,9 \u2192 so 6 not possible in col4.  \nColumn 5: col5 missing 1,3,4,6,8 \u2192 so 6 possible in col5.  \n\nSo 6 in row4 can be in R4C3 or R4C5.  \n\nCheck 8 in row4: possible cells: R4C2, R4C3, R4C4, R4C5.  \nCol2 missing 2,4,7,8 \u2192 so 8 not possible in col2.  \nCol3 missing 2,3,4,6,7,9 \u2192 so 8 not possible in col3 (col3 already has 8 in R1C3).  \nCol4 missing 2,3,4,5,9 \u2192 so 8 not possible in col4 (col4 has 8 in R6C4).  \nCol5 missing 1,3,4,6,8 \u2192 so 8 possible in col5.  \n\nSo 8 in row4 must be in R4C5.  \n\nThat\u2019s a hidden single!  \n\nREASONING: Row 4 missing 8, only possible in R4C5 because other columns block 8 in other cells of row 4.",
+      "parsed_move": {
+        "row": 3,
+        "col": 4,
+        "value": 8
+      },
+      "valid": false,
+      "validation_errors": [
+        "Box (4-6, 4-6) already has 8 at R6C4"
+      ],
+      "value": 8,
+      "grid_before": [
+        [
+          1,
+          5,
+          8,
+          0,
+          0,
+          4,
+          2,
+          6,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          8
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          6,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          3,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          5,
+          8,
+          0,
+          0,
+          4,
+          2,
+          6,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          8
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          6,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          3,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C4": [
+          3
+        ],
+        "R1C5": [
+          3
+        ],
+        "R2C1": [],
+        "R2C3": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C8": [],
+        "R3C2": [
+          7
+        ],
+        "R3C3": [
+          7
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          3,
+          4
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          9
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          7
+        ],
+        "R7C9": [
+          2,
+          4
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [],
+        "R9C8": [
+          1,
+          7
+        ],
+        "R9C9": [
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 20,
+      "reasoning": "In row 7, only digit missing is 2 (check 1-9: 8,4,1,5,3,6,9,7,2).",
+      "parsed_move": {
+        "row": 6,
+        "col": 8,
+        "value": 2
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 2,
+      "grid_before": [
+        [
+          1,
+          5,
+          8,
+          0,
+          0,
+          4,
+          2,
+          6,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          8
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          6,
+          9,
+          0
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          3,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          5,
+          8,
+          0,
+          0,
+          4,
+          2,
+          6,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          8
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          6,
+          9,
+          2
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          3,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C4": [
+          3
+        ],
+        "R1C5": [
+          3
+        ],
+        "R2C1": [],
+        "R2C3": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C8": [],
+        "R3C2": [
+          7
+        ],
+        "R3C3": [
+          7
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          3,
+          4
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          9
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          2,
+          4,
+          7
+        ],
+        "R7C3": [
+          2,
+          4,
+          7
+        ],
+        "R7C9": [
+          2,
+          4
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [],
+        "R9C8": [
+          1,
+          7
+        ],
+        "R9C9": [
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 21,
+      "reasoning": "Let\u2019s check for hidden singles first.  \n\nLooking at R4C4:  \nRow 4 has {7,5,9,2,1} \u2192 missing {3,4,6,8}.  \nColumn 4: R1C4=., R2C4=., R3C4=6, R5C4=., R6C4=8, R7C4=1, R8C4=7, R9C4=. \u2192 in column 4 we have {6,8,1,7}.  \nBox 5 (rows 4\u20136, cols 4\u20136):  \nR4C4=., R4C5=., R4C6=5  \nR5C4=., R5C5=7, R5C6=6  \nR6C4=8, R6C5=., R6C6=.  \nDigits already in box 5: {5,7,6,8}. Missing {1,2,3,4,9}.  \n\nBut R4C4 can\u2019t be 1 (col 4 has 1), can\u2019t be 2 (row 4 has 2), can\u2019t be 3? Let\u2019s check column 4 for 3: none yet. Row 4 for 3: none yet. Box 5 for 3: none yet. So 3 is possible.  \n\nCheck if any digit is forced in R4C4: Look at missing digits in row 4: {3,4,6,8}.  \n- 4: col 4 doesn\u2019t have 4, box 5 doesn\u2019t have 4 \u2192 possible.  \n- 6: col 4 has 6 (R3C4) \u2192 no.  \n- 8: col 4 has 8 (R6C4) \u2192 no.  \nSo R4C4 can only be {3,4}.  \n\nNot a hidden single yet.  \n\nLet\u2019s check R2C1:  \nRow 2 missing digits: {3,4,5,8} (row 2 has {6,2,7,1,9}).  \nColumn 1: {1,2,7,5,4,8,3} \u2192 missing {6,9} but 6,9 are in row 2, so column 1 already has {1,2,7,5,4,8,3}. Actually 3 is in col 1? R9C1=3, yes. So column 1 has {1,2,7,5,4,8,3} \u2192 missing {6,9} for column, but row 2 has 6,9 already, so R2C1 can\u2019t be 6 or 9 anyway.  \nFrom row 2 missing {3,4,5,8}, remove col 1 digits already in col 1: {3,4,5,8} minus {3,8} (since col 1 has 3 and 8) \u2192 leaves {4,5}.  \nBox 1 (rows 1\u20133, cols 1\u20133): has {1,5,8,6,2,4} \u2192 missing {3,7,9}.  \nSo R2C1 candidates: {4,5} intersect box 1 missing {3,7,9} \u2192 {4,5} both possible. Not single yet.  \n\nLet\u2019s try R8C5:  \nRow 8: {9,1,7,2,3,8} \u2192 missing {4,5,6}.  \nColumn 5: R1C5=., R2C5=2, R3C5=9, R4C5=., R5C5=7, R6C5=., R7C5=5, R8C5=., R9C5=. \u2192 col 5 has {2,9,7,5}. Missing {1,3,4,6,8}. Intersect with row 8 missing {4,5,6} \u2192 possible {4,6} (5 is in col 5 already).  \nBox 8 (rows 7\u20139, cols 4\u20136):  \nR7C4=1, R7C5=5, R7C6=3  \nR8C4=7, R8C5=., R8C6=2  \nR9C4=., R9C5=., R9C6=8  \nDigits in box 8: {1,5,3,7,2,8} \u2192 missing {4,6,9}.  \nSo R8C5 candidates: {4,6} intersect box 8 missing {4,6,9} \u2192 {4,6}. Not a single.  \n\nLet\u2019s check R9C2:  \nRow 9: {3,5,8} \u2192 missing {1,2,4,6,7,9}.  \nColumn 2: R1C2=5, R2C2=6, R3C2=., R4C2=., R5C2=1, R6C2=3, R7C2=., R8C2=9, R9C2=. \u2192 col 2 has {5,6,1,3,9} \u2192 missing {2,4,7,8}.  \nBox 7 (rows 7\u20139, cols 1\u20133):  \nR7C1=8, R7C2=., R7C3=.  \nR8C1=., R8C2=9, R8C3=1  \nR9C1=3, R9C2=., R9C3=5  \nDigits in box 7: {8,9,1,3,5} \u2192 missing {2,4,6,7}.  \n\nIntersect: row 9 missing {1,2,4,6,7,9} with col 2 missing {2,4,7,8} with box 7 missing {2,4,6,7} \u2192 common: {2,4,7}.  \n\nNot a single.  \n\nLet\u2019s check R3C2:  \nRow 3: {2,6,9,1,4,3,8} \u2192 missing {5,7}.  \nColumn 2 missing {2,4,7,8}. Intersect: {5,7} \u2229 {2,4,7,8} = {7}.  \nBox 1 missing {3,7,9}. 7 is in box 1 missing set, so yes.  \n\nSo R3C2 is a hidden single: must be 7.  \n\nREASONING: R3C2 only possible digit 7 (row missing {5,7}, column missing {2,4,7,8}, 5 not in column missing set, so 7).",
+      "parsed_move": {
+        "row": 2,
+        "col": 1,
+        "value": 7
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 7,
+      "grid_before": [
+        [
+          1,
+          5,
+          8,
+          0,
+          0,
+          4,
+          2,
+          6,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          0,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          8
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          6,
+          9,
+          2
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          3,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          5,
+          8,
+          0,
+          0,
+          4,
+          2,
+          6,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          7,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          8
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          6,
+          9,
+          2
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          3,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C4": [
+          3
+        ],
+        "R1C5": [
+          3
+        ],
+        "R2C1": [],
+        "R2C3": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C8": [],
+        "R3C2": [
+          7
+        ],
+        "R3C3": [
+          7
+        ],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          3,
+          4
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          9
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          4,
+          7
+        ],
+        "R7C3": [
+          4,
+          7
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C2": [
+          2,
+          4,
+          7
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [],
+        "R9C8": [
+          1,
+          7
+        ],
+        "R9C9": [
+          4
+        ]
+      }
+    },
+    {
+      "turn": 22,
+      "reasoning": "Let\u2019s check for hidden singles first.  \n\n**Row 4:** R4C1=7, R4C6=5, R4C7=9, R4C8=2, R4C9=1.  \nMissing digits: 3,4,6,8.  \nColumn 2 has 5,6,7,3,9,1, so 4 and 8 are possible in R4C2.  \nColumn 3 has 8,?,6,?,?,?,1,5, so 4 is possible in R4C3.  \nColumn 4: R4C4 missing digits from {1..9} but check box: Box 4 (rows 4-6, cols 1-3) has 7,?,? in row4, row5 has 5,1,?, row6 has 4,3,?.  \nDigits in box 4: 7,5,1,4,3, plus 9,2,1 in row4 outside box, so in box 4 missing: 6,8,9? Wait, 9 not in box 4, but row4 already has 9 in col7.  \nActually list box 4 cells:  \nR4C1=7, R4C2=?, R4C3=?,  \nR5C1=5, R5C2=1, R5C3=?,  \nR6C1=4, R6C2=3, R6C3=?.  \nDigits present: 7,5,1,4,3. Missing: 2,6,8,9. But row4 already has 2,9 elsewhere, so R4C2 and R4C3 can only take 6 or 8.  \n\nCheck column 2: digits present: R1C2=5, R2C2=6, R3C2=7, R4C2=?, R5C2=1, R6C2=3, R7C2=?, R8C2=9, R9C2=?. Missing in col2: 2,4,8. So R4C2 cannot be 6 (6 already in R2C2), so R4C2 must be 8.  \n\nThat\u2019s a hidden single in column 2 (only R4C2 can be 8 in col2).  \n\n**REASONING:** Column 2 missing 2,4,8; R4C2 only possible 8 due to box 4 constraints.  \n**MOVE:** R4C2 = 8",
+      "parsed_move": null,
+      "valid": false,
+      "validation_errors": [
+        "Could not parse MOVE from response"
+      ],
+      "value": null,
+      "grid_before": [
+        [
+          1,
+          5,
+          8,
+          0,
+          0,
+          4,
+          2,
+          6,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          7,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          8
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          6,
+          9,
+          2
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          3,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "grid_after": [
+        [
+          1,
+          5,
+          8,
+          0,
+          0,
+          4,
+          2,
+          6,
+          7
+        ],
+        [
+          0,
+          6,
+          0,
+          0,
+          2,
+          7,
+          1,
+          0,
+          9
+        ],
+        [
+          2,
+          7,
+          0,
+          6,
+          9,
+          1,
+          4,
+          3,
+          8
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          5,
+          9,
+          2,
+          1
+        ],
+        [
+          5,
+          1,
+          0,
+          0,
+          7,
+          6,
+          8,
+          4,
+          3
+        ],
+        [
+          4,
+          3,
+          0,
+          8,
+          0,
+          0,
+          7,
+          5,
+          6
+        ],
+        [
+          8,
+          0,
+          0,
+          1,
+          5,
+          3,
+          6,
+          9,
+          2
+        ],
+        [
+          0,
+          9,
+          1,
+          7,
+          0,
+          2,
+          3,
+          8,
+          0
+        ],
+        [
+          3,
+          0,
+          5,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ]
+      ],
+      "candidates_before": {
+        "R1C4": [
+          3
+        ],
+        "R1C5": [
+          3
+        ],
+        "R2C1": [],
+        "R2C3": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3,
+          5
+        ],
+        "R2C8": [],
+        "R3C3": [],
+        "R4C2": [
+          8
+        ],
+        "R4C3": [
+          6
+        ],
+        "R4C4": [
+          3,
+          4
+        ],
+        "R4C5": [
+          3,
+          4
+        ],
+        "R5C3": [
+          2,
+          9
+        ],
+        "R5C4": [
+          2,
+          9
+        ],
+        "R6C3": [
+          2,
+          9
+        ],
+        "R6C5": [
+          1
+        ],
+        "R6C6": [
+          9
+        ],
+        "R7C2": [
+          4
+        ],
+        "R7C3": [
+          4,
+          7
+        ],
+        "R8C1": [
+          6
+        ],
+        "R8C5": [
+          4,
+          6
+        ],
+        "R8C9": [
+          4,
+          5
+        ],
+        "R9C2": [
+          2,
+          4
+        ],
+        "R9C4": [
+          4,
+          9
+        ],
+        "R9C5": [
+          4,
+          6
+        ],
+        "R9C7": [],
+        "R9C8": [
+          1,
+          7
+        ],
+        "R9C9": [
+          4
+        ]
+      }
+    }
+  ],
+  "error_steps": [
+    {
+      "turn": 1,
+      "reasoning": "Let\u2019s check for hidden singles first.  \n\nLooking at R3C5:  \nRow 3 has {2,4,5,7,8,9} missing, but column 5 has 2,7,6,5 used, box 2 (rows 1-3, cols 4-6) has {1,4,6,2,7} used.  \nMissing in box 2: {3,5,8,9}.  \nColumn 5 missing: {1,3,4,8,9}.  \nIntersection for R3C5: missing in row 3, col 5, box 2: {3,5,8,9} \u2229 {3,4,8,9} \u2229 {3,5,8,9} = {3,8,9}? Wait, let\u2019s check carefully.  \n\nRow 3 currently: [?, 6, ?, 1, ?, 3, ?] \u2192 digits present in row 3: 1,6,3, plus maybe others from clues? Row 3 given: (1) . 8 . . 4 2 . 7? No, that\u2019s Row 1. Row 3 is: . . . 6 . 1 . 3 .  \nSo row 3 has {6,1,3}.  \nColumn 5: R2C5=2, R4C5=?, R5C5=7, R6C5=?, R7C5=?, R8C5=?, R9C5=?.  \nFrom clues: R1C5=?, R2C5=2, R3C5=?, R4C5=?, R5C5=7, R6C5=?, R7C5=?, R8C5=?, R9C5=?  \nWe can find column 5 used digits: R2C5=2, R5C5=7, R? maybe others? R1C5 unknown, R3C5 unknown, R4C5 unknown, R6C5 unknown, R7C5 unknown, R8C5 unknown, R9C5 unknown \u2014 not enough to deduce.  \n\nLet\u2019s try a simpler hidden single:  \nLook at R7C7: Row 7 missing {2,4,5,6,7}? Actually row 7 is 8 . . 1 . 3 . 9 . \u2192 digits present: 8,1,3,9.  \nColumn 7: R1C7=2, R2C7=?, R3C7=?, R4C7=9, R5C7=8, R6C7=7, R7C7=?, R8C7=3, R9C7=?.  \nUsed in column 7: {2,9,8,7,3}. Missing {1,4,5,6}.  \nBox 9 (rows 7-9, cols 7-9): R7C7=?, R7C8=9, R7C9=?, R8C7=3, R8C8=8, R8C9=?, R9C7=?, R9C8=?, R9C9=?.  \nDigits in box 9 so far: {9,3,8}. Missing {1,2,4,5,6,7}.  \n\nBut in box 9, column 7 missing {1,4,5,6}, row 7 missing {2,4,5,6,7}. Intersect: {4,5,6}.  \n\nBut check R9C9: Row 9: . . 5 . . 8 . . . \u2192 digits {5,8}. Column 9: R1C9=7, R2C9=?, R3C9=?, R4C9=?, R5C9=?, R6C9=6, R7C9=?, R8C9=?, R9C9=?.  \nBox 9 missing digits: {1,2,4,5,6,7} minus {5,6,7,8,3,9}? Wait, box 9 has 3,8,9, plus maybe others. Let\u2019s check systematically:  \n\nBetter: Look at R8C9: Row 8: . 9 1 7 . . 3 8 . \u2192 digits {9,1,7,3,8}. Missing {2,4,5,6}.  \nColumn 9 missing {1,2,3,4,5,8,9}? No, column 9 has 7,6 so far. So missing {1,2,3,4,5,8,9}.  \nBox 9 missing digits: In box 9: R7C8=9, R8C7=3, R8C8=8, plus R7C7, R7C9, R8C9, R9C7, R9C8, R9C9 empty. Digits in box 9: {3,8,9}. Missing {1,2,4,5,6,7}.  \n\nNow, R8C9 missing in row {2,4,5,6}, missing in box {1,2,4,5,6,7}, missing in col {1,2,3,4,5,8,9}. Intersect: {2,4,5}.  \n\nBut 2 in column 9? R1C9=7, R2C9=?, R3C9=?, R4C9=?, R5C9=?, R6C9=6, R7C9=?, R8C9=?, R9C9=?. No 2 in column 9 yet. So 2 possible for R8C9.  \n\nBut is 2 a hidden single in box 9 for column 9? Check R7C9: missing in row 7 {2,4,5,6,7}, missing in col 9 {1,2,3,4,5,8,9}, missing in box {1,2,4,5,6,7} \u2192 intersect {2,4,5}. So 2 possible for R7C9 too. So not unique.  \n\nLet\u2019s find a definite hidden single:  \nLook at R4C5: Row 4: 7 . . . . 5 9 2 . \u2192 digits {7,5,9,2}. Missing {1,3,4,6,8}.  \nColumn 5: used digits: R2C5=2, R5C5=7, R? others? R1C5=?, R3C5=?, R6C5=?, R7C5=?, R8C5=?, R9C5=?. So col 5 has {2,7}.  \nBox 5 (rows4-6, cols4-6): digits: R4C6=5, R5C5=7, R5C6=6, R6C4=8, R6C6=?, plus R4C4, R4C5, R5C4, R6C5 empty.  \nDigits in box 5: {5,7,6,8}. Missing {1,2,3,4,9}.  \n\nNow, R4C5 missing in row {1,3,4,6,8}, missing in col {1,3,4,5,6,8,9} (since col 5 has {2,7}), missing in box {1,2,3,4,9}. Intersect: {1,3,4} \u2229 {1,3,4,6,8} \u2229 {1,3,4,9} = {1,3,4}.  \n\nBut check column 5 missing {1,3,4,5,6,8,9}? Wait, col 5: R1C5=?, R2C5=2, R3C5=?, R4C5=?, R5C5=7, R6C5=?, R7C5=?, R8C5=?, R9C5=?. So used in col 5: {2,7}. Missing {1,3,4,5,6,8,9}.  \n\nSo R4C5 candidates: row missing {1,3,4,6,8}, col missing {1,3,4,5,6,8,9}, box missing {1,2,3,4,9}. Intersect: {1,3,4}.  \n\nBut 1 in box 5? Could be in R5C4 or R6C5 too. Not a hidden single.  \n\nLet\u2019s check R3C1: Row 3: . . . 6 . 1 . 3 . \u2192 digits {6,1,3}. Missing {2,4,5,7,8,9}.  \nColumn 1: R1C1=1, R2C1=?, R4C1=7, R5C1=5, R6C1=4, R7C1=8, R8C1",
+      "parsed_move": null,
+      "validation_errors": [
+        "Could not parse MOVE from response"
+      ]
+    },
+    {
+      "turn": 12,
+      "reasoning": "Let\u2019s check for hidden singles first.  \n\nLooking at **R3C9**:  \nRow 3 has {2, 6, 9, 1, 4, 3} plus R3C3 unknown, R3C9 unknown.  \nColumn 9: R1=7, R2=9, R4=1, R5=3, R6=6, R7 unknown, R8 unknown, R9 unknown.  \nBox 3 (rows 1\u20133, cols 7\u20139): contains 2, 7, 1, 9, 4, 3, missing {5, 6, 8}.  \nBut 6 is already in R6C9 (same column), so 6 not possible in R3C9.  \n5 is not in row 3 yet, not in column 9 yet, not in box 3 yet.  \nSo R3C9 must be 5.  \n\n**REASONING:** R3C9 only possible digit is 5 (hidden single in box 3).  \n**MOVE:** R3C9 = 5",
+      "parsed_move": null,
+      "validation_errors": [
+        "Could not parse MOVE from response"
+      ]
+    },
+    {
+      "turn": 13,
+      "reasoning": "Let's check for hidden singles in row 3: Row 3 is 2, _, _, 6, 9, 1, 4, 3, _.  \nMissing digits: 5, 7, 8.  \nColumn 9 candidates:  \nRow 1 col 9 = 7, so 7 not possible in R3C9.  \nRow 7 col 9 is blank, but check box 3 (rows 1\u20133, cols 7\u20139):  \nR1C7=2, R1C8=blank, R1C9=7  \nR2C7=1, R2C8=blank, R2C9=9  \nR3C7=4, R3C8=3, R3C9=blank.  \nIn that box, missing digits are 5, 6, 8.  \nColumn 9 already has 7 (R1C9) and 9 (R2C9), so R3C9 cannot be 7 or 9.  \nSo R3C9 must be 5, 6, or 8.  \n\nBut check column 9 overall:  \nCol 9 values: R1=7, R2=9, R3=?, R4=1, R5=3, R6=6, R7=?, R8=?, R9=?. Missing in column: 2,4,5,8.  \nSo R3C9 could be 5 or 8.  \n\nBut check row 3 missing digits again: 5,7,8.  \n7 is not possible in R3C9 (col 9 has no 7 yet, but row constraints? Actually row 3 has no 7 yet, but col 9 already has 7 in R1C9, so 7 not possible in R3C9. So row 3 missing 5,7,8, with 7 not possible in R3C9.  \n\nCheck R3C2: Row 3 col 2 blank, col 2 has 6 (R2), 1 (R5), 3 (R6), 9 (R8), missing 2,4,5,7,8. Row 3 missing 5,7,8, so possible for R3C2: 5,7,8.  \n\nCheck R3C3 blank, col 3 has 8 (R1), 1 (R8), 5 (R9), missing 2,3,4,6,7,9. Row 3 missing 5,7,8, so possible for R3C3: 7,8 (5 is in col 3 already in R9C3, so 5 not possible).  \n\nSo R3C3 can be 7 or 8.  \n\nNow check hidden single in box 2 (rows 1\u20133, cols 4\u20136):  \nDigits present in box 2: R1C4=?, R1C5=?, R1C6=4; R2C4=?, R2C5=2, R2C6=7; R3C4=6, R3C5=9, R3C6=1.  \nSo missing digits in box 2: 3,5,8.  \nLook at R1C4: col 4 has no 3,5,8 yet. Row 1 missing digits: row 1: 1,8,?,?,4,2,?,7 \u2192 missing 3,5,6,9. Intersection with {3,5,8} is {3,5}. So R1C4 could be 3 or 5.  \n\nR1C5: row 1 missing 3,5,6,9; box missing 3,5,8 \u2192 possible {3,5}.  \n\nR2C4: row 2: ?,6,?,?,2,7,1,?,9 \u2192 missing 3,4,5,8. Intersection with {3,5,8} is {3,5,8}.  \n\nBut check column 4:  \nCol 4: R1=?, R2=?, R3=6, R4=?, R5=?, R6=8, R7=1, R8=7, R9=?. Missing in col 4: 2,3,4,5,9.  \nSo in box 2, R1C4, R2C4 must come from {3,5,8} but col 4 missing {2,3,4,5,9}, so possible {3,5} for R1C4 and R2C4.  \n\nBut 8 is not possible in col 4 (since col 4 missing digits don't include 8? Wait, col 4 missing 2,3,4,5,9 \u2014 indeed 8 is already in R6C4, so 8 not possible in R1C4 or R2C4).  \n\nSo in box 2, missing {3,5,8}, but 8 not possible in R1C4 or R2C4, so 8 must be in R1C5 or R2C5? But R2C5=2, R3C5=9, R1C5 blank. So 8 must be in R1C5.  \n\nThat\u2019s a hidden single in box 2: R1C5 = 8.",
+      "parsed_move": {
+        "row": 0,
+        "col": 4,
+        "value": 8
+      },
+      "validation_errors": [
+        "Row 1 already has 8 at C3"
+      ]
+    },
+    {
+      "turn": 19,
+      "reasoning": "Let\u2019s check for hidden singles.  \n\nLook at R4C4 (box 5: rows 4\u20136, cols 4\u20136).  \nIn that box, digits missing: 3, 4, 6, 8, 9.  \nColumn 4 has: R3C4=6, R6C4=8, R8C4=7, R9C4=4 (R9C4 is actually blank? Wait, R9C4 is \u201c.\u201d, so not 4 yet). Let\u2019s check column 4 carefully:  \nCol 4: R1C4=., R2C4=., R3C4=6, R4C4=., R5C4=., R6C4=8, R7C4=1, R8C4=7, R9C4=.  \nSo missing in column 4: 2,3,4,5,9.  \n\nBut in box 5 (R4\u2013R6, C4\u2013C6), let\u2019s list all filled cells:  \nR4C5=., R4C6=5, R5C4=., R5C5=7, R5C6=6, R6C4=8, R6C5=., R6C6=.  \nMissing in box 5: 2,3,4,9.  \n\nNow, R4C4 sees column 4 and row 4. Row 4 has: 7,.,.,.,.,5,9,2,1 \u2192 missing 3,4,6,8.  \nSo R4C4 possible candidates: {3,4} (must be in missing box set {2,3,4,9} and missing row set {3,4,6,8} \u2192 intersection {3,4}).  \n\nCheck column 4 missing: {2,3,4,5,9}. Intersect with {3,4} \u2192 {3,4}.  \n\nNow check box constraints more: In box 5, where can 3 go?  \nPossible cells in box 5: R4C4, R4C5, R5C4, R6C5, R6C6.  \nColumn 6: R4C6=5, R5C6=6, R6C6=., R9C6=8, R3C6=1, R2C6=7. So column 6 missing 2,3,4,9.  \nRow 4 missing 3,4,6,8. Row 5 missing 2,9. Row 6 missing 1,2,9.  \n\nFor 3 in box 5:  \n- R4C4 possible (row4 missing 3, col4 missing 3, box5 missing 3).  \n- R4C5 possible (row4 missing 3, col5: col5 has R3C5=9, R5C5=7, R7C5=5, R8C5=., R9C5=., R2C5=2, R1C5=., R6C5=., R4C5=.; col5 missing 1,3,4,6,8). So yes possible.  \n- R5C4 possible? Row5 missing 2,9 only? Wait, row5: 5,1,.,.,7,6,8,4,3 \u2192 missing 2,9. So R5C4 cannot be 3 (row5 has no 3 missing, row5 already has 3 in R5C9). So R5C4 not possible for 3.  \n- R6C5 possible? Row6 missing 1,2,9 only? Row6: 4,3,.,8,.,.,7,5,6 \u2192 missing 1,2,9. So R6C5 not possible for 3.  \n- R6C6 possible? Row6 missing 1,2,9, so not possible for 3.  \n\nSo 3 in box 5 can only go in R4C4 or R4C5.  \n\nNow check hidden single for 4 in box 5:  \nPossible cells: R4C4, R4C5, R5C4, R6C5, R6C6.  \nRow4 missing 3,4,6,8 \u2192 so R4C4 and R4C5 possible for 4.  \nRow5 missing 2,9 \u2192 so R5C4 not possible for 4.  \nRow6 missing 1,2,9 \u2192 so R6C5, R6C6 not possible for 4.  \nSo 4 in box 5 can only go in R4C4 or R4C5.  \n\nBut look at column 4 for 4: possible cells: R1C4, R2C4, R4C4, R5C4, R9C4.  \nR5C4 not possible (row5 missing 2,9).  \nR9C4: row9 missing 2,4,6,7,9? Row9: 3,.,5,.,.,8,.,.,. \u2192 missing 1,2,4,6,7,9. So R9C4 possible.  \nSo column 4 has at least R9C4 possible for 4, so 4 not forced in R4C4 for column 4.  \n\nNow, check 3 in column 4: possible cells: R1C4, R2C4, R4C4, R5C4, R9C4.  \nR5C4 not possible (row5 missing 2,9).  \nR9C4 possible (row9 missing 3? yes missing 1,2,4,6,7,9 \u2192 no 3 missing? Wait, row9 has 3 in R9C1, so row9 missing 1,2,4,6,7,9, not 3. So R9C4 cannot be 3).  \nR1C4: row1 missing 3,9? Row1: 1,5,8,.,.,4,2,6,7 \u2192 yes missing 3,9. So possible.  \nR2C4: row2 missing 3,4,5,8? Row2: .,6,.,.,2,7,1,.,9 \u2192 missing 3,4,5,8. So possible.  \nR4C4: possible.  \n\nSo 3 in column 4 not forced yet.  \n\nBut in box 5, 3 must be in R4C4 or R4C5.  \nCheck R4C5\u2019s column 5: col5 missing 1,3,4,6,8. Row4 missing 3,4,6,8. So possible for 3.  \n\nNow, look at hidden single in row 4:  \nRow4 missing 3,4,6,8.  \nCheck column by column:  \nR4C1=7, R4C2=., R4C3=., R4C4=., R4C5=., R4C6=5, R4C7=9, R4C8=2, R4C9=1.  \n\nCheck 6 in row4: possible cells: R4C2, R4C3, R4C4, R4C5.  \nBut column 2: col2 has 5,6,.,.,1,3,.,9,. \u2192 missing 2,4,7,8. So 6 not possible in col2. So R4C2 not possible for 6.  \nColumn 3: col3 has 8,.,.,.,.,.,.,1,5 \u2192 missing 2,3,4,6,7,9. So 6 possible in col3.  \nColumn 4: col4 missing 2,3,4,5,9 \u2192 so 6 not possible in col4.  \nColumn 5: col5 missing 1,3,4,6,8 \u2192 so 6 possible in col5.  \n\nSo 6 in row4 can be in R4C3 or R4C5.  \n\nCheck 8 in row4: possible cells: R4C2, R4C3, R4C4, R4C5.  \nCol2 missing 2,4,7,8 \u2192 so 8 not possible in col2.  \nCol3 missing 2,3,4,6,7,9 \u2192 so 8 not possible in col3 (col3 already has 8 in R1C3).  \nCol4 missing 2,3,4,5,9 \u2192 so 8 not possible in col4 (col4 has 8 in R6C4).  \nCol5 missing 1,3,4,6,8 \u2192 so 8 possible in col5.  \n\nSo 8 in row4 must be in R4C5.  \n\nThat\u2019s a hidden single!  \n\nREASONING: Row 4 missing 8, only possible in R4C5 because other columns block 8 in other cells of row 4.",
+      "parsed_move": {
+        "row": 3,
+        "col": 4,
+        "value": 8
+      },
+      "validation_errors": [
+        "Box (4-6, 4-6) already has 8 at R6C4"
+      ]
+    },
+    {
+      "turn": 22,
+      "reasoning": "Let\u2019s check for hidden singles first.  \n\n**Row 4:** R4C1=7, R4C6=5, R4C7=9, R4C8=2, R4C9=1.  \nMissing digits: 3,4,6,8.  \nColumn 2 has 5,6,7,3,9,1, so 4 and 8 are possible in R4C2.  \nColumn 3 has 8,?,6,?,?,?,1,5, so 4 is possible in R4C3.  \nColumn 4: R4C4 missing digits from {1..9} but check box: Box 4 (rows 4-6, cols 1-3) has 7,?,? in row4, row5 has 5,1,?, row6 has 4,3,?.  \nDigits in box 4: 7,5,1,4,3, plus 9,2,1 in row4 outside box, so in box 4 missing: 6,8,9? Wait, 9 not in box 4, but row4 already has 9 in col7.  \nActually list box 4 cells:  \nR4C1=7, R4C2=?, R4C3=?,  \nR5C1=5, R5C2=1, R5C3=?,  \nR6C1=4, R6C2=3, R6C3=?.  \nDigits present: 7,5,1,4,3. Missing: 2,6,8,9. But row4 already has 2,9 elsewhere, so R4C2 and R4C3 can only take 6 or 8.  \n\nCheck column 2: digits present: R1C2=5, R2C2=6, R3C2=7, R4C2=?, R5C2=1, R6C2=3, R7C2=?, R8C2=9, R9C2=?. Missing in col2: 2,4,8. So R4C2 cannot be 6 (6 already in R2C2), so R4C2 must be 8.  \n\nThat\u2019s a hidden single in column 2 (only R4C2 can be 8 in col2).  \n\n**REASONING:** Column 2 missing 2,4,8; R4C2 only possible 8 due to box 4 constraints.  \n**MOVE:** R4C2 = 8",
+      "parsed_move": null,
+      "validation_errors": [
+        "Could not parse MOVE from response"
+      ]
+    }
+  ]
+}

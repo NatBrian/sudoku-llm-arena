@@ -1,0 +1,3354 @@
+{
+  "run_id": "6x6_002_s1-direct_r2",
+  "puzzle_id": "6x6_002",
+  "strategy_id": "s1-direct",
+  "strategy_label": "The Impulsive",
+  "run_number": 2,
+  "solved": false,
+  "correct_against_solution": false,
+  "total_turns": 19,
+  "total_errors": 12,
+  "total_prompt_tokens": 5460,
+  "total_completion_tokens": 1960,
+  "duration_ms": 146717,
+  "final_grid": [
+    [
+      2,
+      0,
+      0,
+      0,
+      5,
+      0
+    ],
+    [
+      1,
+      5,
+      6,
+      0,
+      0,
+      4
+    ],
+    [
+      4,
+      1,
+      3,
+      5,
+      6,
+      2
+    ],
+    [
+      0,
+      6,
+      2,
+      4,
+      3,
+      1
+    ],
+    [
+      5,
+      0,
+      0,
+      1,
+      0,
+      6
+    ],
+    [
+      0,
+      2,
+      1,
+      3,
+      4,
+      5
+    ]
+  ],
+  "steps": [
+    {
+      "turn": 1,
+      "reasoning": "Looking at row 5, only digit 5 is missing from 1\u20136 in that row (row 5 currently has 1, 2, 3, 4, 6 in other rows/columns/box constraints).  \nChecking column 4: row 2 already has 4, row 3 has 5, row 4 has 4, row 6 has 3, so 5 is allowed in R5C4.",
+      "parsed_move": {
+        "row": 4,
+        "col": 3,
+        "value": 5
+      },
+      "valid": false,
+      "validation_errors": [
+        "Column 4 already has 5 at R3",
+        "Box (5-6, 4-6) already has 5 at R6C6"
+      ],
+      "value": 5,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          1,
+          6
+        ],
+        "R1C6": [
+          1,
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2,
+          3
+        ],
+        "R3C2": [
+          1
+        ],
+        "R3C5": [
+          1,
+          2,
+          6
+        ],
+        "R3C6": [
+          1,
+          2
+        ],
+        "R4C1": [
+          5
+        ],
+        "R4C5": [
+          1,
+          3
+        ],
+        "R4C6": [
+          1,
+          3
+        ],
+        "R5C1": [
+          3,
+          5
+        ],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4,
+          5
+        ],
+        "R5C4": [
+          1,
+          2
+        ],
+        "R5C5": [
+          1,
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 2,
+      "reasoning": "Looking at row 5, it only has a 6 in column 6. The missing numbers in row 5 are 1, 2, 3, 4, 5.  \nColumn 1 already has 1, 2, 4 in rows 1\u20134 and row 6 is empty there, but checking box 4 (rows 4\u20136, cols 1\u20132): row 4 col 1 is empty, row 5 col 1 is empty, row 6 col 1 is empty.  \nIn box 4, numbers present: row 4 col 2 has 6, row 5 col 2 empty, row 6 col 2 has 2, row 6 col 1 empty.  \nBut easier: Look at column 1 in the whole grid: used digits so far: R1C1=2, R2C1=1, R3C1=4, R4C1 empty, R5C1 empty, R6C1 empty. Missing in column 1: 3, 5, 6.  \nRow 5 already has 6 in column 6, so 6 can't go in R5C1. Row 5's missing numbers: {1,2,3,4,5}. For column 1, possible for R5C1: {3,5}.  \nCheck box 4 (rows 4\u20136, cols 1\u20132): already has 6 (R4C2), 2 (R6C2), 1 (R6C3 but that's col3, not in box 4), so in box 4 missing numbers: {3,4,5} (since 1 is in R6C3 outside this 3x2 box).  \nNow, R4C1 can be {3,5}, R5C1 can be {3,5}, R6C1 can be {4} because 4 not yet in box 4 and column 1 allows 4. Yes, column 1 missing {3,5,6}, but row 6 has 4 in col5, so 4 not yet in box 4, and column 1 has no 4 yet, so R6C1 must be 4.  \n\nREASONING: Column 1 missing 3,5,6; box 4 missing 3,4,5; row 6 missing 4 in box 4; so R6C1 must be 4.",
+      "parsed_move": {
+        "row": 5,
+        "col": 0,
+        "value": 4
+      },
+      "valid": false,
+      "validation_errors": [
+        "Row 6 already has 4 at C5",
+        "Column 1 already has 4 at R3"
+      ],
+      "value": 4,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          1,
+          6
+        ],
+        "R1C6": [
+          1,
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2,
+          3
+        ],
+        "R3C2": [
+          1
+        ],
+        "R3C5": [
+          1,
+          2,
+          6
+        ],
+        "R3C6": [
+          1,
+          2
+        ],
+        "R4C1": [
+          5
+        ],
+        "R4C5": [
+          1,
+          3
+        ],
+        "R4C6": [
+          1,
+          3
+        ],
+        "R5C1": [
+          3,
+          5
+        ],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4,
+          5
+        ],
+        "R5C4": [
+          1,
+          2
+        ],
+        "R5C5": [
+          1,
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 3,
+      "reasoning": "Looking at row 5, it only has a 6 in column 6, and the 3x2 box covering rows 4-5, columns 1-3 already contains 6 in row 4 column 2, so the only place for 6 in row 5 is column 4.",
+      "parsed_move": {
+        "row": 4,
+        "col": 3,
+        "value": 6
+      },
+      "valid": false,
+      "validation_errors": [
+        "Row 5 already has 6 at C6",
+        "Box (5-6, 4-6) already has 6 at R5C6"
+      ],
+      "value": 6,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          1,
+          6
+        ],
+        "R1C6": [
+          1,
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2,
+          3
+        ],
+        "R3C2": [
+          1
+        ],
+        "R3C5": [
+          1,
+          2,
+          6
+        ],
+        "R3C6": [
+          1,
+          2
+        ],
+        "R4C1": [
+          5
+        ],
+        "R4C5": [
+          1,
+          3
+        ],
+        "R4C6": [
+          1,
+          3
+        ],
+        "R5C1": [
+          3,
+          5
+        ],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4,
+          5
+        ],
+        "R5C4": [
+          1,
+          2
+        ],
+        "R5C5": [
+          1,
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 4,
+      "reasoning": "Looking at row 5, it's missing 1, 2, 3, 4, 5.  \nColumn 1 already has 1, 2, 4 in rows 1\u20134, and 3 is not possible in box 4 because column 1 in box 4 (row 4\u20136) already has 6 and 2 in rows 4 and 6, so R5C1 must be 5 to avoid conflict in row 5 and column 1.",
+      "parsed_move": {
+        "row": 4,
+        "col": 0,
+        "value": 5
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 5,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          1,
+          6
+        ],
+        "R1C6": [
+          1,
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2,
+          3
+        ],
+        "R3C2": [
+          1
+        ],
+        "R3C5": [
+          1,
+          2,
+          6
+        ],
+        "R3C6": [
+          1,
+          2
+        ],
+        "R4C1": [
+          5
+        ],
+        "R4C5": [
+          1,
+          3
+        ],
+        "R4C6": [
+          1,
+          3
+        ],
+        "R5C1": [
+          3,
+          5
+        ],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4,
+          5
+        ],
+        "R5C4": [
+          1,
+          2
+        ],
+        "R5C5": [
+          1,
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 5,
+      "reasoning": "Looking at row 4, it's missing digits 1, 3, 5.  \nColumn 1 already has 1, 4, 5, 6, so R4C1 can only be 3.",
+      "parsed_move": {
+        "row": 3,
+        "col": 0,
+        "value": 3
+      },
+      "valid": false,
+      "validation_errors": [
+        "Box (3-4, 1-3) already has 3 at R3C3"
+      ],
+      "value": 3,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          1,
+          6
+        ],
+        "R1C6": [
+          1,
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2,
+          3
+        ],
+        "R3C2": [
+          1
+        ],
+        "R3C5": [
+          1,
+          2,
+          6
+        ],
+        "R3C6": [
+          1,
+          2
+        ],
+        "R4C1": [],
+        "R4C5": [
+          1,
+          3
+        ],
+        "R4C6": [
+          1,
+          3
+        ],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4
+        ],
+        "R5C4": [
+          1,
+          2
+        ],
+        "R5C5": [
+          1,
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 6,
+      "reasoning": "Looking at row 5, it is missing 1, 2, 3, 4.  \nColumn 1 already has 2, 1, 4, 5, so R5C1 can only be 3 or 6, but 6 is already in row 5 (R5C6).  \nThus R5C1 must be 3.",
+      "parsed_move": {
+        "row": 4,
+        "col": 0,
+        "value": 3
+      },
+      "valid": false,
+      "validation_errors": [
+        "Cell R5C1 already has value 5"
+      ],
+      "value": 3,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          1,
+          6
+        ],
+        "R1C6": [
+          1,
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2,
+          3
+        ],
+        "R3C2": [
+          1
+        ],
+        "R3C5": [
+          1,
+          2,
+          6
+        ],
+        "R3C6": [
+          1,
+          2
+        ],
+        "R4C1": [],
+        "R4C5": [
+          1,
+          3
+        ],
+        "R4C6": [
+          1,
+          3
+        ],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4
+        ],
+        "R5C4": [
+          1,
+          2
+        ],
+        "R5C5": [
+          1,
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 7,
+      "reasoning": "Looking at row 5, it has only one given digit (5 in R5C1 and 6 in R5C6).  \nColumn 4 has digits 5, 4, 3 already in rows 1\u20136, and row 5 currently has no digit in column 4.  \nChecking box 5 (rows 4\u20135, cols 3\u20134), digits 2 and 4 are already there, but digit 1 is missing from the box and not in row 5 or column 4 yet.",
+      "parsed_move": {
+        "row": 4,
+        "col": 3,
+        "value": 1
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 1,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          1,
+          6
+        ],
+        "R1C6": [
+          1,
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2,
+          3
+        ],
+        "R3C2": [
+          1
+        ],
+        "R3C5": [
+          1,
+          2,
+          6
+        ],
+        "R3C6": [
+          1,
+          2
+        ],
+        "R4C1": [],
+        "R4C5": [
+          1,
+          3
+        ],
+        "R4C6": [
+          1,
+          3
+        ],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4
+        ],
+        "R5C4": [
+          1,
+          2
+        ],
+        "R5C5": [
+          1,
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 8,
+      "reasoning": "In row 4, only 3 and 5 are missing; column 1 already has 5 in row 5, so R4C1 must be 3.",
+      "parsed_move": {
+        "row": 3,
+        "col": 0,
+        "value": 3
+      },
+      "valid": false,
+      "validation_errors": [
+        "Box (3-4, 1-3) already has 3 at R3C3"
+      ],
+      "value": 3,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          6
+        ],
+        "R1C6": [
+          1,
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2,
+          3
+        ],
+        "R3C2": [
+          1
+        ],
+        "R3C5": [
+          1,
+          2,
+          6
+        ],
+        "R3C6": [
+          1,
+          2
+        ],
+        "R4C1": [],
+        "R4C5": [
+          1,
+          3
+        ],
+        "R4C6": [
+          1,
+          3
+        ],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4
+        ],
+        "R5C5": [
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 9,
+      "reasoning": "Looking at row 4, it is missing digits 1, 3, 5.  \nColumn 5 already has 5 in row 1 and 4 in row 6, so R4C5 cannot be 5.  \nIn box 5 (rows 4-6, cols 3-4), digit 3 is missing and not in column 5 yet, so R4C5 must be 3.",
+      "parsed_move": {
+        "row": 3,
+        "col": 4,
+        "value": 3
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 3,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          6
+        ],
+        "R1C6": [
+          1,
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2,
+          3
+        ],
+        "R3C2": [
+          1
+        ],
+        "R3C5": [
+          1,
+          2,
+          6
+        ],
+        "R3C6": [
+          1,
+          2
+        ],
+        "R4C1": [],
+        "R4C5": [
+          1,
+          3
+        ],
+        "R4C6": [
+          1,
+          3
+        ],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4
+        ],
+        "R5C5": [
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 10,
+      "reasoning": "Looking at row 3: it's missing digits 1, 2, and 6.  \nColumn 2 already has 5, 6, 2, and 4, so R3C2 can only be 1 or 2.  \nBut box 1 (rows 1\u20133, cols 1\u20132) already contains 2 in R1C1, so R3C2 cannot be 2.  \nTherefore, R3C2 must be 1.",
+      "parsed_move": {
+        "row": 2,
+        "col": 1,
+        "value": 1
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 1,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          6
+        ],
+        "R1C6": [
+          1,
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2
+        ],
+        "R3C2": [
+          1
+        ],
+        "R3C5": [
+          1,
+          2,
+          6
+        ],
+        "R3C6": [
+          1,
+          2
+        ],
+        "R4C1": [],
+        "R4C6": [
+          1
+        ],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4
+        ],
+        "R5C5": [
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 11,
+      "reasoning": "Looking at row 4, it is missing digits 1 and 5. Column 6 already has 1 in row 2, so R4C6 cannot be 1. Therefore R4C6 must be 5, and then R4C1 must be 1.",
+      "parsed_move": {
+        "row": 3,
+        "col": 5,
+        "value": 5
+      },
+      "valid": false,
+      "validation_errors": [
+        "Column 6 already has 5 at R6",
+        "Box (3-4, 4-6) already has 5 at R3C4"
+      ],
+      "value": 5,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          6
+        ],
+        "R1C6": [
+          1,
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2
+        ],
+        "R3C5": [
+          2,
+          6
+        ],
+        "R3C6": [
+          2
+        ],
+        "R4C1": [],
+        "R4C6": [
+          1
+        ],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4
+        ],
+        "R5C5": [
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 12,
+      "reasoning": "Looking at row 3, it already has 1, 3, 4, 5, so it's missing 2 and 6.  \nIn column 5, the value 2 is already present in row 4, so R3C5 cannot be 2, must be 6.",
+      "parsed_move": {
+        "row": 2,
+        "col": 4,
+        "value": 6
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 6,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          6,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          6
+        ],
+        "R1C6": [
+          1,
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2
+        ],
+        "R3C5": [
+          2,
+          6
+        ],
+        "R3C6": [
+          2
+        ],
+        "R4C1": [],
+        "R4C6": [
+          1
+        ],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4
+        ],
+        "R5C5": [
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 13,
+      "reasoning": "Looking at row 3, it is missing only digit 2.  \nColumn 6 in row 3 is empty and can only be 2.",
+      "parsed_move": {
+        "row": 2,
+        "col": 5,
+        "value": 2
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 2,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          6,
+          0
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          6,
+          2
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          6
+        ],
+        "R1C6": [
+          1,
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2
+        ],
+        "R3C6": [
+          2
+        ],
+        "R4C1": [],
+        "R4C6": [
+          1
+        ],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4
+        ],
+        "R5C5": [
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 14,
+      "reasoning": "Looking at row 4, it is missing digits 1 and 5.  \nColumn 6 already has 5 in row 6, so R4C6 cannot be 5, so R4C6 must be 1, and R4C1 must be 5.",
+      "parsed_move": {
+        "row": 3,
+        "col": 5,
+        "value": 1
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 1,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          6,
+          2
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          6,
+          2
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          6
+        ],
+        "R1C6": [
+          1,
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2
+        ],
+        "R4C1": [],
+        "R4C6": [
+          1
+        ],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4
+        ],
+        "R5C5": [
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 15,
+      "reasoning": "Looking at row 4, it's missing only 5 in column 1.  \nColumn 1 already has 1, 4, 5 elsewhere, so R4C1 must be 5.",
+      "parsed_move": {
+        "row": 3,
+        "col": 0,
+        "value": 5
+      },
+      "valid": false,
+      "validation_errors": [
+        "Column 1 already has 5 at R5"
+      ],
+      "value": 5,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          6,
+          2
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          6,
+          2
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          6
+        ],
+        "R1C6": [
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2
+        ],
+        "R4C1": [],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4
+        ],
+        "R5C5": [
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 16,
+      "reasoning": "Looking at row 4: it has 6,2,4,3,1 \u2014 missing 5.  \nColumn 1 already has 1,4,5,6, so R4C1 must be the only digit left for that row: 5.",
+      "parsed_move": {
+        "row": 3,
+        "col": 0,
+        "value": 5
+      },
+      "valid": false,
+      "validation_errors": [
+        "Column 1 already has 5 at R5"
+      ],
+      "value": 5,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          6,
+          2
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          6,
+          2
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          6
+        ],
+        "R1C6": [
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2
+        ],
+        "R4C1": [],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4
+        ],
+        "R5C5": [
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 17,
+      "reasoning": "Looking at row 4, it is missing 5. Column 1 already has 5 in row 5, and the 3x2 box (rows 4-6, cols 1-2) already has 5 in row 5 col 1, so 5 in row 4 must be in column 1.",
+      "parsed_move": {
+        "row": 3,
+        "col": 0,
+        "value": 5
+      },
+      "valid": false,
+      "validation_errors": [
+        "Column 1 already has 5 at R5"
+      ],
+      "value": 5,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          6,
+          2
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          6,
+          2
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          6
+        ],
+        "R1C6": [
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2
+        ],
+        "R4C1": [],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4
+        ],
+        "R5C5": [
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 18,
+      "reasoning": "Looking at row 4, it's missing only 5 in column 1.  \nColumn 1 already has 1, 4, 5, so 5 fits in R4C1 without conflict in the box.",
+      "parsed_move": {
+        "row": 3,
+        "col": 0,
+        "value": 5
+      },
+      "valid": false,
+      "validation_errors": [
+        "Column 1 already has 5 at R5"
+      ],
+      "value": 5,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          6,
+          2
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          6,
+          2
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          6
+        ],
+        "R1C6": [
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2
+        ],
+        "R4C1": [],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4
+        ],
+        "R5C5": [
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    },
+    {
+      "turn": 19,
+      "reasoning": "Looking at row 4: it has 6,2,4,3,1, so missing digit 5.  \nColumn 1 already has 5 in row 5, so row 4\u2019s empty cell in column 1 must be 5.",
+      "parsed_move": {
+        "row": 3,
+        "col": 0,
+        "value": 5
+      },
+      "valid": false,
+      "validation_errors": [
+        "Column 1 already has 5 at R5"
+      ],
+      "value": 5,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          6,
+          2
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          1,
+          5,
+          6,
+          0,
+          0,
+          4
+        ],
+        [
+          4,
+          1,
+          3,
+          5,
+          6,
+          2
+        ],
+        [
+          0,
+          6,
+          2,
+          4,
+          3,
+          1
+        ],
+        [
+          5,
+          0,
+          0,
+          1,
+          0,
+          6
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          4
+        ],
+        "R1C4": [
+          6
+        ],
+        "R1C6": [
+          3
+        ],
+        "R2C4": [
+          2
+        ],
+        "R2C5": [
+          2
+        ],
+        "R4C1": [],
+        "R5C2": [
+          3,
+          4
+        ],
+        "R5C3": [
+          4
+        ],
+        "R5C5": [
+          2
+        ],
+        "R6C1": [
+          6
+        ]
+      }
+    }
+  ],
+  "error_steps": [
+    {
+      "turn": 1,
+      "reasoning": "Looking at row 5, only digit 5 is missing from 1\u20136 in that row (row 5 currently has 1, 2, 3, 4, 6 in other rows/columns/box constraints).  \nChecking column 4: row 2 already has 4, row 3 has 5, row 4 has 4, row 6 has 3, so 5 is allowed in R5C4.",
+      "parsed_move": {
+        "row": 4,
+        "col": 3,
+        "value": 5
+      },
+      "validation_errors": [
+        "Column 4 already has 5 at R3",
+        "Box (5-6, 4-6) already has 5 at R6C6"
+      ]
+    },
+    {
+      "turn": 2,
+      "reasoning": "Looking at row 5, it only has a 6 in column 6. The missing numbers in row 5 are 1, 2, 3, 4, 5.  \nColumn 1 already has 1, 2, 4 in rows 1\u20134 and row 6 is empty there, but checking box 4 (rows 4\u20136, cols 1\u20132): row 4 col 1 is empty, row 5 col 1 is empty, row 6 col 1 is empty.  \nIn box 4, numbers present: row 4 col 2 has 6, row 5 col 2 empty, row 6 col 2 has 2, row 6 col 1 empty.  \nBut easier: Look at column 1 in the whole grid: used digits so far: R1C1=2, R2C1=1, R3C1=4, R4C1 empty, R5C1 empty, R6C1 empty. Missing in column 1: 3, 5, 6.  \nRow 5 already has 6 in column 6, so 6 can't go in R5C1. Row 5's missing numbers: {1,2,3,4,5}. For column 1, possible for R5C1: {3,5}.  \nCheck box 4 (rows 4\u20136, cols 1\u20132): already has 6 (R4C2), 2 (R6C2), 1 (R6C3 but that's col3, not in box 4), so in box 4 missing numbers: {3,4,5} (since 1 is in R6C3 outside this 3x2 box).  \nNow, R4C1 can be {3,5}, R5C1 can be {3,5}, R6C1 can be {4} because 4 not yet in box 4 and column 1 allows 4. Yes, column 1 missing {3,5,6}, but row 6 has 4 in col5, so 4 not yet in box 4, and column 1 has no 4 yet, so R6C1 must be 4.  \n\nREASONING: Column 1 missing 3,5,6; box 4 missing 3,4,5; row 6 missing 4 in box 4; so R6C1 must be 4.",
+      "parsed_move": {
+        "row": 5,
+        "col": 0,
+        "value": 4
+      },
+      "validation_errors": [
+        "Row 6 already has 4 at C5",
+        "Column 1 already has 4 at R3"
+      ]
+    },
+    {
+      "turn": 3,
+      "reasoning": "Looking at row 5, it only has a 6 in column 6, and the 3x2 box covering rows 4-5, columns 1-3 already contains 6 in row 4 column 2, so the only place for 6 in row 5 is column 4.",
+      "parsed_move": {
+        "row": 4,
+        "col": 3,
+        "value": 6
+      },
+      "validation_errors": [
+        "Row 5 already has 6 at C6",
+        "Box (5-6, 4-6) already has 6 at R5C6"
+      ]
+    },
+    {
+      "turn": 5,
+      "reasoning": "Looking at row 4, it's missing digits 1, 3, 5.  \nColumn 1 already has 1, 4, 5, 6, so R4C1 can only be 3.",
+      "parsed_move": {
+        "row": 3,
+        "col": 0,
+        "value": 3
+      },
+      "validation_errors": [
+        "Box (3-4, 1-3) already has 3 at R3C3"
+      ]
+    },
+    {
+      "turn": 6,
+      "reasoning": "Looking at row 5, it is missing 1, 2, 3, 4.  \nColumn 1 already has 2, 1, 4, 5, so R5C1 can only be 3 or 6, but 6 is already in row 5 (R5C6).  \nThus R5C1 must be 3.",
+      "parsed_move": {
+        "row": 4,
+        "col": 0,
+        "value": 3
+      },
+      "validation_errors": [
+        "Cell R5C1 already has value 5"
+      ]
+    },
+    {
+      "turn": 8,
+      "reasoning": "In row 4, only 3 and 5 are missing; column 1 already has 5 in row 5, so R4C1 must be 3.",
+      "parsed_move": {
+        "row": 3,
+        "col": 0,
+        "value": 3
+      },
+      "validation_errors": [
+        "Box (3-4, 1-3) already has 3 at R3C3"
+      ]
+    },
+    {
+      "turn": 11,
+      "reasoning": "Looking at row 4, it is missing digits 1 and 5. Column 6 already has 1 in row 2, so R4C6 cannot be 1. Therefore R4C6 must be 5, and then R4C1 must be 1.",
+      "parsed_move": {
+        "row": 3,
+        "col": 5,
+        "value": 5
+      },
+      "validation_errors": [
+        "Column 6 already has 5 at R6",
+        "Box (3-4, 4-6) already has 5 at R3C4"
+      ]
+    },
+    {
+      "turn": 15,
+      "reasoning": "Looking at row 4, it's missing only 5 in column 1.  \nColumn 1 already has 1, 4, 5 elsewhere, so R4C1 must be 5.",
+      "parsed_move": {
+        "row": 3,
+        "col": 0,
+        "value": 5
+      },
+      "validation_errors": [
+        "Column 1 already has 5 at R5"
+      ]
+    },
+    {
+      "turn": 16,
+      "reasoning": "Looking at row 4: it has 6,2,4,3,1 \u2014 missing 5.  \nColumn 1 already has 1,4,5,6, so R4C1 must be the only digit left for that row: 5.",
+      "parsed_move": {
+        "row": 3,
+        "col": 0,
+        "value": 5
+      },
+      "validation_errors": [
+        "Column 1 already has 5 at R5"
+      ]
+    },
+    {
+      "turn": 17,
+      "reasoning": "Looking at row 4, it is missing 5. Column 1 already has 5 in row 5, and the 3x2 box (rows 4-6, cols 1-2) already has 5 in row 5 col 1, so 5 in row 4 must be in column 1.",
+      "parsed_move": {
+        "row": 3,
+        "col": 0,
+        "value": 5
+      },
+      "validation_errors": [
+        "Column 1 already has 5 at R5"
+      ]
+    },
+    {
+      "turn": 18,
+      "reasoning": "Looking at row 4, it's missing only 5 in column 1.  \nColumn 1 already has 1, 4, 5, so 5 fits in R4C1 without conflict in the box.",
+      "parsed_move": {
+        "row": 3,
+        "col": 0,
+        "value": 5
+      },
+      "validation_errors": [
+        "Column 1 already has 5 at R5"
+      ]
+    },
+    {
+      "turn": 19,
+      "reasoning": "Looking at row 4: it has 6,2,4,3,1, so missing digit 5.  \nColumn 1 already has 5 in row 5, so row 4\u2019s empty cell in column 1 must be 5.",
+      "parsed_move": {
+        "row": 3,
+        "col": 0,
+        "value": 5
+      },
+      "validation_errors": [
+        "Column 1 already has 5 at R5"
+      ]
+    }
+  ]
+}

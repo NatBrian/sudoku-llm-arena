@@ -1,0 +1,603 @@
+{
+  "run_id": "4x4_003_s1-direct_r2",
+  "puzzle_id": "4x4_003",
+  "strategy_id": "s1-direct",
+  "strategy_label": "The Impulsive",
+  "run_number": 2,
+  "solved": true,
+  "correct_against_solution": true,
+  "total_turns": 7,
+  "total_errors": 1,
+  "total_prompt_tokens": 1687,
+  "total_completion_tokens": 807,
+  "duration_ms": 48910,
+  "final_grid": [
+    [
+      2,
+      3,
+      1,
+      4
+    ],
+    [
+      1,
+      4,
+      2,
+      3
+    ],
+    [
+      4,
+      1,
+      3,
+      2
+    ],
+    [
+      3,
+      2,
+      4,
+      1
+    ]
+  ],
+  "steps": [
+    {
+      "turn": 1,
+      "reasoning": "Looking at row 3, it's already full (4,1,3,2).  \nRow 4 is missing a 4 in column 3 (since row 4 has 3,2,1 already, and column 3 has 3 in row 3, 2 in row 2).",
+      "parsed_move": {
+        "row": 3,
+        "col": 2,
+        "value": 4
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 4,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          2,
+          0
+        ],
+        [
+          4,
+          1,
+          3,
+          2
+        ],
+        [
+          3,
+          2,
+          0,
+          1
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          2,
+          0
+        ],
+        [
+          4,
+          1,
+          3,
+          2
+        ],
+        [
+          3,
+          2,
+          4,
+          1
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          1,
+          4
+        ],
+        "R1C4": [
+          3,
+          4
+        ],
+        "R2C2": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3,
+          4
+        ],
+        "R4C3": [
+          4
+        ]
+      }
+    },
+    {
+      "turn": 2,
+      "reasoning": "Looking at the grid, row 1 is missing 1, 3, 4. Column 3 has 2, 3, 4, so R1C3 must be 1.",
+      "parsed_move": {
+        "row": 0,
+        "col": 2,
+        "value": 1
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 1,
+      "grid_before": [
+        [
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          2,
+          0
+        ],
+        [
+          4,
+          1,
+          3,
+          2
+        ],
+        [
+          3,
+          2,
+          4,
+          1
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          2,
+          0
+        ],
+        [
+          4,
+          1,
+          3,
+          2
+        ],
+        [
+          3,
+          2,
+          4,
+          1
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C3": [
+          1
+        ],
+        "R1C4": [
+          3,
+          4
+        ],
+        "R2C2": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 3,
+      "reasoning": "Looking at the grid, the only empty cells are in row 1 column 4 and row 2 column 4.  \nRow 1 already has 1, 2; row 2 already has 1, 2; column 4 already has 2, 1 in rows 3 and 4.  \nSo in column 4, missing digits are 3 and 4. Row 1 column 4 can't be 3 because box 2 (top right 2x2) already has 3 in R3C3, so it must be 4.",
+      "parsed_move": {
+        "row": 0,
+        "col": 3,
+        "value": 4
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 4,
+      "grid_before": [
+        [
+          2,
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          2,
+          0
+        ],
+        [
+          4,
+          1,
+          3,
+          2
+        ],
+        [
+          3,
+          2,
+          4,
+          1
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          1,
+          4
+        ],
+        [
+          1,
+          0,
+          2,
+          0
+        ],
+        [
+          4,
+          1,
+          3,
+          2
+        ],
+        [
+          3,
+          2,
+          4,
+          1
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3,
+          4
+        ],
+        "R1C4": [
+          3,
+          4
+        ],
+        "R2C2": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "turn": 4,
+      "reasoning": "Row 2 has 1, 2, and needs 3 and 4. Column 4 already has 1 and 2, so R2C4 must be 3 or 4. But column 4 has 1 in R4, 2 in R3, and 4 in R1, so R2C4 cannot be 4 (already in column), thus must be 3.",
+      "parsed_move": {
+        "row": 1,
+        "col": 3,
+        "value": 3
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 3,
+      "grid_before": [
+        [
+          2,
+          0,
+          1,
+          4
+        ],
+        [
+          1,
+          0,
+          2,
+          0
+        ],
+        [
+          4,
+          1,
+          3,
+          2
+        ],
+        [
+          3,
+          2,
+          4,
+          1
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          1,
+          4
+        ],
+        [
+          1,
+          0,
+          2,
+          3
+        ],
+        [
+          4,
+          1,
+          3,
+          2
+        ],
+        [
+          3,
+          2,
+          4,
+          1
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3
+        ],
+        "R2C2": [
+          3,
+          4
+        ],
+        "R2C4": [
+          3
+        ]
+      }
+    },
+    {
+      "turn": 5,
+      "reasoning": "Looking at the puzzle, the only empty cells are R1C2 and R2C2.  \nIn column 2, the missing numbers are 3 and 4.  \nRow 1 already has a 3 in box 1 (R2C4), so R1C2 cannot be 3, it must be 4.",
+      "parsed_move": {
+        "row": 0,
+        "col": 1,
+        "value": 4
+      },
+      "valid": false,
+      "validation_errors": [
+        "Row 1 already has 4 at C4"
+      ],
+      "value": 4,
+      "grid_before": [
+        [
+          2,
+          0,
+          1,
+          4
+        ],
+        [
+          1,
+          0,
+          2,
+          3
+        ],
+        [
+          4,
+          1,
+          3,
+          2
+        ],
+        [
+          3,
+          2,
+          4,
+          1
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          1,
+          4
+        ],
+        [
+          1,
+          0,
+          2,
+          3
+        ],
+        [
+          4,
+          1,
+          3,
+          2
+        ],
+        [
+          3,
+          2,
+          4,
+          1
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3
+        ],
+        "R2C2": [
+          4
+        ]
+      }
+    },
+    {
+      "turn": 6,
+      "reasoning": "Looking at the grid, the only empty cells are R1C2 and R2C2.  \nIn column 2, the numbers already present are 1 (R3) and 2 (R4), so missing numbers are 3 and 4.  \nR1C2 cannot be 3 because box 1 (top-left 2x2) already has 3 in R2C4? Wait, check box: top-left box contains R1C1=2, R1C3=1, R2C1=1 (duplicate? No, that's fine), R2C3=2. Actually box top-left is rows 1-2, cols 1-2: R1C1=2, R1C2=?, R2C1=1, R2C2=?. Missing 3 and 4 in box. In column 2, missing 3 and 4. Row 1 has 1,2,4 so missing 3. Row 2 has 1,2,3 so missing 4. So R1C2 must be 3, R2C2 must be 4.\n\nREASONING: Row 1 missing 3, row 2 missing 4, column 2 missing 3 and 4, box 1 missing 3 and 4; R1C2 can't be 4 because row 2 needs 4 in column 2.",
+      "parsed_move": {
+        "row": 0,
+        "col": 1,
+        "value": 3
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 3,
+      "grid_before": [
+        [
+          2,
+          0,
+          1,
+          4
+        ],
+        [
+          1,
+          0,
+          2,
+          3
+        ],
+        [
+          4,
+          1,
+          3,
+          2
+        ],
+        [
+          3,
+          2,
+          4,
+          1
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          3,
+          1,
+          4
+        ],
+        [
+          1,
+          0,
+          2,
+          3
+        ],
+        [
+          4,
+          1,
+          3,
+          2
+        ],
+        [
+          3,
+          2,
+          4,
+          1
+        ]
+      ],
+      "candidates_before": {
+        "R1C2": [
+          3
+        ],
+        "R2C2": [
+          4
+        ]
+      }
+    },
+    {
+      "turn": 7,
+      "reasoning": "Looking at row 2: it has 1, 2, 3 already, so the missing number is 4.  \nColumn 2 is not yet constrained for 4 in that row.",
+      "parsed_move": {
+        "row": 1,
+        "col": 1,
+        "value": 4
+      },
+      "valid": true,
+      "validation_errors": [],
+      "value": 4,
+      "grid_before": [
+        [
+          2,
+          3,
+          1,
+          4
+        ],
+        [
+          1,
+          0,
+          2,
+          3
+        ],
+        [
+          4,
+          1,
+          3,
+          2
+        ],
+        [
+          3,
+          2,
+          4,
+          1
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          3,
+          1,
+          4
+        ],
+        [
+          1,
+          4,
+          2,
+          3
+        ],
+        [
+          4,
+          1,
+          3,
+          2
+        ],
+        [
+          3,
+          2,
+          4,
+          1
+        ]
+      ],
+      "candidates_before": {
+        "R2C2": [
+          4
+        ]
+      }
+    }
+  ],
+  "error_steps": [
+    {
+      "turn": 5,
+      "reasoning": "Looking at the puzzle, the only empty cells are R1C2 and R2C2.  \nIn column 2, the missing numbers are 3 and 4.  \nRow 1 already has a 3 in box 1 (R2C4), so R1C2 cannot be 3, it must be 4.",
+      "parsed_move": {
+        "row": 0,
+        "col": 1,
+        "value": 4
+      },
+      "validation_errors": [
+        "Row 1 already has 4 at C4"
+      ]
+    }
+  ]
+}
