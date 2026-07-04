@@ -39,7 +39,10 @@ def draw_grid(
     ax.axis("off")
 
     if clues is None:
-        clues = [[c != 0 for c in row] for row in grid]
+        # No ground-truth clue mask given — don't guess which filled cells are
+        # "real" clues vs. LLM-placed digits from the current grid alone,
+        # that would mislabel every placed digit as a clue. Render plainly.
+        clues = [[False] * size for _ in range(size)]
 
     base_color = _step_color(step_number, total_steps) if step_number else "#E3F2FD"
 

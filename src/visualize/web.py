@@ -17,11 +17,13 @@ def generate_web_page(output_path=None):
     runs_json = json.dumps(runs)
     puzzles_json = json.dumps(list_puzzles(runs))
     strategies_json = json.dumps(list_strategies(runs))
+    models_json = json.dumps(list_models(runs))
 
     html = HTML_TEMPLATE.format(
         runs_data=runs_json,
         puzzles_list=puzzles_json,
         strategies_list=strategies_json,
+        models_list=models_json,
     )
 
     with open(output_path, "w", encoding="utf-8") as f:
@@ -63,6 +65,17 @@ def list_strategies(runs):
         if sid not in seen:
             seen.add(sid)
             result.append(sid)
+    return result
+
+
+def list_models(runs):
+    seen = set()
+    result = []
+    for r in runs:
+        m = r.get("model", "unknown")
+        if m not in seen:
+            seen.add(m)
+            result.append(m)
     return result
 
 
@@ -119,6 +132,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <div class="controls">
     <label>Puzzle:</label>
     <select id="selPuzzle">{puzzles_list}</select>
+    <label>Model:</label>
+    <select id="selModel">{models_list}</select>
     <label>Strategy:</label>
     <select id="selStrategy">{strategies_list}</select>
     <label>Run:</label>
@@ -158,6 +173,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 const RUNS = {runs_data};
 const PUZZLES = {puzzles_list};
 const STRATEGIES = {strategies_list};
+const MODELS = {models_list};
 
 let currentRun = null;
 let currentSteps = [];
@@ -165,6 +181,7 @@ let currentStep = 0;
 let playInterval = null;
 
 const selPuzzle = document.getElementById('selPuzzle');
+const selModel = document.getElementById('selModel');
 const selStrategy = document.getElementById('selStrategy');
 const selRun = document.getElementById('selRun');
 const btnPrev = document.getElementById('btnPrev');
@@ -175,12 +192,14 @@ const canvas = document.getElementById('gridCanvas');
 const ctx = canvas.getContext('2d');
 
 PUZZLES.forEach(p => {{ selPuzzle.add(new Option(p, p)); }});
+MODELS.forEach(m => {{ selModel.add(new Option(m, m)); }});
 STRATEGIES.forEach(s => {{ selStrategy.add(new Option(s, s)); }});
 
 function getFilteredRuns() {{
   const pid = selPuzzle.value;
+  const mid = selModel.value;
   const sid = selStrategy.value;
-  return RUNS.filter(r => r.puzzle_id === pid && r.strategy_id === sid);
+  return RUNS.filter(r => r.puzzle_id === pid && r.model === mid && r.strategy_id === sid);
 }}
 
 function populateRuns() {{
@@ -211,10 +230,11 @@ function renderStep(idx) {{
   currentStep = idx;
 
   const step = steps[idx];
-  const grid = step.grid_before || step.grid_after;
+  const grid = step.grid_after || step.grid_before;
   if (!grid) return;
   const size = grid.length;
   const move = step.parsed_move;
+  const backtrack = step.backtrack;
   const valid = step.valid;
   const clueGrid = steps.length > 0 && steps[0].grid_before ? steps[0].grid_before : grid;
 
@@ -233,7 +253,8 @@ function renderStep(idx) {{
       const val = grid[r][c];
       const isClue = (idx === 0) ? (val !== 0) : (clueGrid[r][c] !== 0);
       const isError = move && !valid && move.row === r && move.col === c;
-      const isHighlight = move && valid && move.row === r && move.col === c;
+      const isHighlight = (move && valid && move.row === r && move.col === c) ||
+        (backtrack && valid && !move && backtrack.row === r && backtrack.col === c);
       const frac = total > 1 ? idx / (total - 1) : 0;
 
       let color = '#ffffff';
@@ -287,7 +308,7 @@ function renderStep(idx) {{
   }}
 
   document.getElementById('gridTitle').textContent =
-    (currentRun.strategy_label || currentRun.strategy_id) + ' — ' + currentRun.puzzle_id;
+    (currentRun.strategy_label || currentRun.strategy_id) + ' [' + currentRun.model + '] — ' + currentRun.puzzle_id;
 
   const reasoning = step.reasoning || '(no reasoning)';
   document.getElementById('reasoning').textContent = reasoning;
@@ -306,17 +327,18 @@ function updateStats() {{
 function renderSummary() {{
   const table = document.getElementById('summaryTable');
   if (RUNS.length === 0) {{ table.innerHTML = '<p>No data yet.</p>'; return; }}
-  let html = '<table><thead><tr><th>Puzzle</th><th>Strategy</th><th>Run</th><th>Result</th><th>Turns</th><th>Errors</th><th>Tokens</th></tr></thead><tbody>';
+  let html = '<table><thead><tr><th>Puzzle</th><th>Model</th><th>Strategy</th><th>Run</th><th>Result</th><th>Turns</th><th>Errors</th><th>Tokens</th></tr></thead><tbody>';
   RUNS.forEach(r => {{
     const ok = r.solved ? 'badge badge-ok' : 'badge badge-fail';
     const lbl = r.solved ? 'Solved' : 'Failed';
-    html += '<tr><td>' + (r.puzzle_id || '-') + '</td><td>' + (r.strategy_label || r.strategy_id) + '</td><td>' + (r.run_number || '-') + '</td><td><span class="' + ok + '">' + lbl + '</span></td><td>' + (r.total_turns || '-') + '</td><td>' + (r.total_errors || '-') + '</td><td>' + (r.total_prompt_tokens + r.total_completion_tokens || '-') + '</td></tr>';
+    html += '<tr><td>' + (r.puzzle_id || '-') + '</td><td>' + (r.model || '-') + '</td><td>' + (r.strategy_label || r.strategy_id) + '</td><td>' + (r.run_number || '-') + '</td><td><span class="' + ok + '">' + lbl + '</span></td><td>' + (r.total_turns || '-') + '</td><td>' + (r.total_errors || '-') + '</td><td>' + (r.total_prompt_tokens + r.total_completion_tokens || '-') + '</td></tr>';
   }});
   html += '</tbody></table>';
   table.innerHTML = html;
 }}
 
 selPuzzle.addEventListener('change', populateRuns);
+selModel.addEventListener('change', populateRuns);
 selStrategy.addEventListener('change', populateRuns);
 selRun.addEventListener('change', () => {{
   const runs = getFilteredRuns();

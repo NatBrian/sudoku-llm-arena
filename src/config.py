@@ -8,11 +8,19 @@ RAW_DIR = DATA_DIR / "raw"
 PARSED_DIR = DATA_DIR / "parsed"
 OUTPUT_DIR = BASE_DIR / "output"
 
-API_BASE_URL = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com/v1")
-API_KEY = os.getenv("DEEPSEEK_API_KEY") or ""
-MODEL = "deepseek-chat"
 TEMPERATURE = 0.0
 MAX_TOKENS = 2000
+
+# --- Puzzle source ---------------------------------------------------------
+# "nikoli": Sakana AI's Sudoku-Bench Nikoli set (100 real 9x9 puzzles, fetched
+#   from HF and leveled via src.nikoli). "generator": the original py-sudoku
+#   procedural puzzles below, for unlimited/synthetic sizes (4x4/6x6/evil).
+PUZZLE_SOURCE = os.getenv("SUDOKU_PUZZLE_SOURCE", "nikoli")  # "nikoli" | "generator"
+
+# Which Nikoli difficulty levels to pull when PUZZLE_SOURCE == "nikoli".
+# Options: "easy", "medium", "hard", "other". None/[] means all.
+NIKOLI_LEVELS = ["easy"]
+NIKOLI_LIMIT = 5  # cap puzzles per run; None for all matching puzzles
 
 PUZZLE_SIZES = {
     "4x4": {"width": 2, "height": 2, "count": 5, "difficulty": 0.4},
@@ -21,11 +29,33 @@ PUZZLE_SIZES = {
     "9x9-evil": {"width": 3, "height": 3, "count": 3, "difficulty": 0.7},
 }
 
+# --- Models -----------------------------------------------------------------
+# Model ids are passed straight to litellm (https://docs.litellm.ai/docs/providers),
+# so any provider litellm supports works: "gpt-5", "anthropic/claude-opus-4-8",
+# "gemini/gemini-2.5-pro", "deepseek/deepseek-chat", "ollama/llama3", etc.
+# Each provider reads its key from its usual env var (OPENAI_API_KEY,
+# ANTHROPIC_API_KEY, GEMINI_API_KEY, DEEPSEEK_API_KEY, ...) — litellm handles
+# that lookup itself, nothing to configure here beyond exporting the var.
+#
+# Fill in the frontier models you want to compare, e.g.:
+#   MODELS = ["gpt-5", "anthropic/claude-opus-4-8", "gemini/gemini-2.5-pro"]
+MODELS = [
+    "deepseek/deepseek-chat",
+]
+
+# --- Eval protocol -----------------------------------------------------------
+# Mirrors Sakana's two Sudoku-Bench modes:
+#   "multi-step": one digit per turn, run halts on first invalid placement.
+#   "single-shot": model must return the full solved grid in one response.
+PROTOCOLS = ["multi-step"]  # subset of ["multi-step", "single-shot"]
+
 MAX_TURNS_MULTIPLIER = 2
 MAX_PARSE_RETRIES = 3
 MAX_CONSECUTIVE_ERRORS = 5
 MAX_API_RETRIES = 3
 
+# Multi-step prompting personas (Sakana itself uses one neutral prompt per
+# protocol; these are this repo's own added dimension for richer animations).
 STRATEGIES = [
     "s1-direct",
     "s2-naked-singles",

@@ -21,12 +21,18 @@ def main():
 
 
 def _generate():
-    print("[1/3] Generating puzzles...")
-    from src.puzzles import generate_all
-    puzzles = generate_all()
-    n_puzzles = len(puzzles)
-    n_runs = n_puzzles * 5 * 3
-    print(f"  {n_puzzles} puzzles ready ({n_runs} total runs across all strategies)")
+    from src import config
+    if config.PUZZLE_SOURCE == "nikoli":
+        print("[1/3] Fetching Sakana Sudoku-Bench (Nikoli) puzzles...")
+        from src.nikoli import load_nikoli, level_counts
+        puzzles = load_nikoli(levels=config.NIKOLI_LEVELS, limit=config.NIKOLI_LIMIT)
+        print(f"  levels available: {level_counts()}")
+        print(f"  {len(puzzles)} puzzles selected (levels={config.NIKOLI_LEVELS}, limit={config.NIKOLI_LIMIT})")
+    else:
+        print("[1/3] Generating puzzles...")
+        from src.puzzles import generate_all
+        puzzles = generate_all()
+        print(f"  {len(puzzles)} puzzles ready")
     print()
 
 

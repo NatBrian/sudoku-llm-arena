@@ -23,6 +23,21 @@ MOVE: R1C2 = 2
 If you truly cannot make any move, output:
 I'M STUCK"""
 
+SINGLE_SHOT_PROMPT = """You are solving a {size}x{size} Sudoku puzzle.
+
+RULES:
+{rules}
+- The grid is {size} rows x {size} columns, divided into {box_width}x{box_height} boxes.
+- Each row, column, and box must contain digits 1-{size} exactly once.
+- Cells pre-filled with clues cannot be changed.
+
+PUZZLE (. = empty cell):
+{grid_text}
+
+Solve the ENTIRE puzzle in this one response.
+Output ONLY the completed grid as {size} lines, each with {size} space-separated
+digits (no letters, no dots, no extra commentary, no markdown fences)."""
+
 STRATEGIES = {
     "s1-direct": {
         "label": "The Impulsive",
@@ -95,4 +110,16 @@ def build_prompt(strategy_id, puzzle, grid):
         box_height=box_height,
         grid_text=grid_text,
         strategy_instruction=strat["instruction"],
+    )
+
+
+def build_single_shot_prompt(puzzle):
+    size = puzzle["size"]
+    rules = puzzle.get("rules") or "Standard sudoku rules apply."
+    return SINGLE_SHOT_PROMPT.format(
+        size=size,
+        box_width=puzzle["box_width"],
+        box_height=puzzle["box_height"],
+        grid_text=format_grid(puzzle["clues"]),
+        rules=rules,
     )

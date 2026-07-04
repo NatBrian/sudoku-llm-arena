@@ -1,3 +1,5 @@
+import random
+
 from sudoku import Sudoku
 from . import config
 import json
@@ -8,7 +10,8 @@ def _board_to_list(board):
 
 
 def generate_puzzle(width, height, difficulty=0.5, seed=None):
-    seed = seed or config.PUZZLE_DIR.stat().st_ctime_ns if hasattr(config.PUZZLE_DIR.stat(), 'st_ctime_ns') else None
+    if seed is None:
+        seed = random.randint(0, 0xFFFFFFFF)
     puzzle = Sudoku(width, height, seed=seed)
     puzzle = puzzle.difficulty(difficulty)
     solution = puzzle.solve()

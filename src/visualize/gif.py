@@ -1,4 +1,5 @@
 """Generate animated GIF from parsed run data."""
+import json
 import os
 from io import BytesIO
 from PIL import Image
@@ -8,60 +9,37 @@ import matplotlib.pyplot as plt
 
 from .frames import draw_grid
 from .. import config
+from ..storage import model_slug
 
 
-def render_run_to_gif(puzzle_id, strategy_id, run_number, output_path=None):
-    parsed_path = config.PARSED_DIR / f"{puzzle_id}_{strategy_id}_run{run_number}.json"
-    if not parsed_path.exists():
-        print(f"  No parsed data for {puzzle_id} {strategy_id} run {run_number}")
-        return None
-
-    import json
-    with open(parsed_path) as f:
-        data = json.load(f)
-
-    size = 0
-    box_width = 0
-    box_height = 0
-
-    puzzle_path = config.PUZZLE_DIR / f"{puzzle_id}.json"
-    if puzzle_path.exists():
-        with open(puzzle_path) as f:
-            puzzle = json.load(f)
-        size = puzzle["size"]
-        box_width = puzzle["box_width"]
-        box_height = puzzle["box_height"]
-        clues_grid = puzzle["clues"]
-    else:
-        steps = data["steps"]
-        if steps and steps[0].get("grid_before"):
-            g = steps[0]["grid_before"]
-            size = len(g)
-            box_width = 2 if size == 4 else (3 if size == 6 else 3)
-            box_height = 2 if size == 4 else (2 if size == 6 else 3)
-            clues_grid = g
+def render_parsed_run_to_gif(data, output_path=None):
+    """data: a parsed-run dict as saved by src.storage.save_parsed_run."""
+    puzzle_id = data["puzzle_id"]
+    model = data["model"]
+    strategy_id = data["strategy_id"]
+    run_number = data["run_number"]
+    box_width = data["box_width"]
+    box_height = data["box_height"]
 
     if output_path is None:
-        output_path = config.OUTPUT_DIR / "gifs" / f"{puzzle_id}_{strategy_id}_run{run_number}.gif"
-
+        output_path = (
+            config.OUTPUT_DIR / "gifs"
+            / f"{puzzle_id}_{model_slug(model)}_{strategy_id}_run{run_number}.gif"
+        )
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
     frames = []
     durations = []
     steps = data["steps"]
-
     total_steps = len(steps)
     solved = data.get("solved", False)
-    label = data.get("strategy_label", strategy_id)
+    label = f"{data.get('strategy_label', strategy_id)} [{model}]"
 
     initial_grid = None
     clue_mask = None
     if steps and steps[0].get("grid_before") is not None:
         initial_grid = steps[0]["grid_before"]
-        clue_mask = [
-            [c != 0 for c in row]
-            for row in initial_grid
-        ]
+        clue_mask = [[c != 0 for c in row] for row in initial_grid]
 
     if initial_grid:
         fig, _ = draw_grid(
@@ -75,12 +53,13 @@ def render_run_to_gif(puzzle_id, strategy_id, run_number, output_path=None):
         plt.close(fig)
 
     for i, step in enumerate(steps):
-        grid = step.get("grid_before") or step.get("grid_after")
+        grid = step.get("grid_after") or step.get("grid_before")
         if grid is None:
             continue
 
-        reasoning = step.get("reasoning", "")[:200]
+        reasoning = (step.get("reasoning") or "")[:200]
         move = step.get("parsed_move")
+        backtrack = step.get("backtrack")
         valid = step.get("valid", False)
         error_cells = set()
         highlight_cell = None
@@ -89,6 +68,8 @@ def render_run_to_gif(puzzle_id, strategy_id, run_number, output_path=None):
             error_cells.add((move["row"], move["col"]))
         elif move and valid:
             highlight_cell = (move["row"], move["col"])
+        elif backtrack and valid:
+            highlight_cell = (backtrack["row"], backtrack["col"])
 
         fig, _ = draw_grid(
             grid, box_width, box_height,
@@ -142,14 +123,10 @@ def render_all_runs():
 
     count = 0
     for path in sorted(parsed_dir.glob("*.json")):
-        parts = path.stem.split("_")
-        if len(parts) >= 3:
-            puzzle_id = f"{parts[0]}_{parts[1]}"
-            strategy_id = parts[2]
-            run_number = int(parts[3].replace("run", ""))
-            result = render_run_to_gif(puzzle_id, strategy_id, run_number)
-            if result:
-                count += 1
+        with open(path) as f:
+            data = json.load(f)
+        if render_parsed_run_to_gif(data):
+            count += 1
 
     print(f"\nGenerated {count} GIFs in {config.OUTPUT_DIR / 'gifs/'}")
 
