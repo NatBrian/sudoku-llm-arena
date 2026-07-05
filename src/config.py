@@ -39,6 +39,13 @@ PUZZLE_SIZES = {
 #
 # Fill in the frontier models you want to compare, e.g.:
 #   MODELS = ["gpt-5", "anthropic/claude-opus-4-8", "gemini/gemini-2.5-pro"]
+#
+# A model id prefixed "local:<checkpoint-name>" is served locally via
+# transformers instead of litellm — see src/train/ for training your own
+# small-model checkpoints (tier1 LoRA SFT, tier2 LoRA+GRPO, tier3 full+GRPO)
+# and src/train/local_model.py for how the prefix is resolved. If any MODELS
+# entry uses this prefix, set MAX_WORKERS = 1 below (one GPU serving all
+# local checkpoints; concurrent threads would fight over it).
 MODELS = [
     "deepseek/deepseek-chat",
 ]

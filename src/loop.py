@@ -276,6 +276,13 @@ class GameLoop:
         }
 
     def _call_api(self, prompt, pfx=""):
+        # Plain string check on purpose (no import from .train here) — that
+        # module pulls in torch/transformers at import time, which would
+        # otherwise get paid by every litellm-only run, even ones that never
+        # touch a local checkpoint.
+        if self.model.startswith("local:"):
+            return self._call_local(prompt, pfx)
+
         last_error = None
         for attempt in range(1, config.MAX_API_RETRIES + 1):
             try:
@@ -314,6 +321,19 @@ class GameLoop:
                     time.sleep(wait)
         print(f"  API failed after {config.MAX_API_RETRIES} attempts: {last_error}")
         return None
+
+    def _call_local(self, prompt, pfx=""):
+        from .train.local_model import local_completion
+        try:
+            print(f"    {pfx} local inference ({self.model})...", flush=True)
+            t0 = time.time()
+            resp = local_completion(self.model, prompt, temperature=config.TEMPERATURE, max_tokens=config.MAX_TOKENS)
+            elapsed = time.time() - t0
+            print(f"    {pfx} local inference done ({elapsed:.1f}s, {resp['total_tokens']} tokens)", flush=True)
+            return resp
+        except Exception as e:
+            print(f"  {pfx} local inference error: {e}")
+            return None
 
 
 def _normalize_grid(grid, size):

@@ -2,3 +2,18 @@ litellm>=1.90.0
 py-sudoku>=2.0.0
 matplotlib>=3.7.0
 Pillow>=10.0.0
+
+# --- src/train/ small-model training pipeline (tier1-3, optional) -----------
+# Floors set to what src/train/ was actually built and smoke-tested against
+# (torch 2.10/cu126, transformers 5.7, trl 1.3, peft 0.19, accelerate 1.13,
+# datasets 4.8). trl's GRPOConfig/SFTConfig API moved a lot around this
+# range (e.g. max_prompt_length was removed, assistant_only_loss added) —
+# older trl will NOT work with src/train/sft_train.py or grpo_train.py as
+# written.
+torch>=2.10.0
+transformers>=5.7.0
+datasets>=4.8.0
+peft>=0.19.0
+trl>=1.3.0
+accelerate>=1.13.0
+bitsandbytes>=0.49.0

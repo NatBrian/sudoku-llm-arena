@@ -111,6 +111,15 @@ def run_swarm():
         print("config.MODELS is empty — add at least one litellm model id before running.")
         return []
 
+    # Plain prefix check on purpose — avoid importing torch/transformers
+    # (src.train.local_model) for pure litellm/frontier-model runs.
+    if config.MAX_WORKERS > 1 and any(m.startswith("local:") for m in config.MODELS):
+        print(
+            "WARNING: config.MODELS includes a local: checkpoint but MAX_WORKERS "
+            f"> 1 ({config.MAX_WORKERS}). All local checkpoints share one GPU — "
+            "set config.MAX_WORKERS = 1 to avoid concurrent-load contention."
+        )
+
     all_jobs = build_jobs(puzzles)
     jobs = [j for j in all_jobs if not run_exists(j[3], j[0], j[2] or j[1], j[5])]
     skipped = len(all_jobs) - len(jobs)
