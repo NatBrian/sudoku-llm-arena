@@ -10,7 +10,7 @@ import json
 import random
 from copy import deepcopy
 
-from ..validator import find_naked_singles, count_empty
+from ..validator import classify_move, count_empty
 from ..strategies import build_prompt
 from . import config as train_config
 from .synth import generate_train_puzzles
@@ -41,31 +41,40 @@ def _snapshot_states(puzzle, n_snapshots, rng):
 
 
 def _reasoning_for(grid, box_width, box_height, r, c, value):
-    naked = find_naked_singles(grid, box_width, box_height)
-    if (r, c, value) in naked:
-        return (
-            f"Row {r+1}, column {c+1}, and its box already rule out every digit "
-            f"except {value} — a naked single."
-        )
-    return (
-        f"Placing {value} at R{r+1}C{c+1} does not conflict with its row, "
-        f"column, or box, and matches the puzzle's unique solution."
-    )
+    """Returns a real justification string if `value` at (r, c) is provable by
+    an implemented solving technique (see validator.classify_move), else None.
+    Cells with no such justification are excluded from SFT training rather
+    than given a vacuous "matches the puzzle's unique solution" filler —
+    training on reasoning that doesn't explain the answer is worse than not
+    training on it at all."""
+    result = classify_move(grid, box_width, box_height, r, c, value)
+    if result is None:
+        return None
+    _technique, justification = result
+    return justification
 
 
-def build_sft_examples(strategy_id=None, seed=None):
-    """Returns a list of {"messages": [...]} chat examples for trl SFTTrainer."""
+def build_sft_examples(strategy_id=None, seed=None, box_width=3, box_height=3, difficulty_mix=None):
+    """Returns a list of {"messages": [...]} chat examples for trl SFTTrainer.
+    Snapshots whose target move isn't justified by an implemented solving
+    technique (see _reasoning_for) are skipped rather than trained on with a
+    vacuous filler, so the resulting example count is smaller than
+    len(puzzles) * SNAPSHOTS_PER_PUZZLE."""
     strategy_id = strategy_id or train_config.TRAIN_STRATEGY_ID
     seed = train_config.DATA_SEED if seed is None else seed
     rng = random.Random(seed)
 
-    puzzles = generate_train_puzzles(seed=seed)
+    puzzles = generate_train_puzzles(seed=seed, box_width=box_width, box_height=box_height, difficulty_mix=difficulty_mix)
 
     examples = []
+    skipped = 0
     for puzzle in puzzles:
         for grid, r, c, value in _snapshot_states(puzzle, train_config.SNAPSHOTS_PER_PUZZLE, rng):
-            prompt = build_prompt(strategy_id, puzzle, grid)
             reasoning = _reasoning_for(grid, puzzle["box_width"], puzzle["box_height"], r, c, value)
+            if reasoning is None:
+                skipped += 1
+                continue
+            prompt = build_prompt(strategy_id, puzzle, grid)
             completion = f"REASONING: {reasoning}\nMOVE: R{r+1}C{c+1} = {value}"
             examples.append({
                 "messages": [
@@ -79,6 +88,7 @@ def build_sft_examples(strategy_id=None, seed=None):
                 # local_model.py passes the same kwarg at inference time.
                 "chat_template_kwargs": {"enable_thinking": False},
             })
+    print(f"  {skipped} snapshots skipped (no technique justifies the target move)")
     return examples
 
 

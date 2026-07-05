@@ -153,8 +153,47 @@ doesn't carry enough learning signal to bootstrap the output format from
 scratch; it needs SFT to teach the format first. qwen2.5-1.5b (already
 Instruct-tuned) never collapses this way but also never improves much —
 it already knows chat format going in, so there's less new ground for
-SFT/GRPO to cover. See `HANDOFF_TRAINING.md` (untracked, local-only) for the
-detailed diagnosis and a prioritized plan for a follow-up training pass.
+SFT/GRPO to cover.
+
+### Results (round 2: curriculum + technique-justified SFT data + denser GRPO reward, qwen3-0.6b/1.7b only)
+
+Round 1's diagnosis found that `src/train/data.py`'s SFT completions only
+ever justified naked singles — every other cell (~87% of the training set)
+got a content-free "matches the puzzle's unique solution" filler instead of
+real reasoning, likely why tier1/tier2 learned output format but not solving
+logic. This round:
+
+- `src/validator.py` + `src/train/data.py` — added hidden-single, naked-pair,
+  pointing-pair, and box-line-reduction detectors; SFT snapshots whose target
+  move isn't justified by any implemented technique are now **skipped**, not
+  filler-trained.
+- `src/train/config.py`/`synth.py`/`sft_train.py` — added a 4x4 → 6x6 → 9x9
+  curriculum before the canonical tier1 SFT pass, each stage's LoRA adapter
+  continuing the previous stage's.
+- `src/train/reward.py` — GRPO reward now adds a bonus for technique-justified
+  moves and a scaled bonus for net candidate-count reduction, on top of the
+  original valid-move/solution-match bonuses.
+- `src/train/run_experiment.py`/`grpo_train.py` — tier3 now checks GPU0
+  headroom and tries a relaxed rollout size (4 generations / 160 tokens)
+  before falling back to the known-safe squeeze (2/96) on OOM.
+
+| tier | qwen3-0.6b (round1 → round2) | qwen3-1.7b (round1 → round2) |
+|---|---|---|
+| tier0 zero-shot | 1.00 → 1.00 | 5.54 → 5.54 |
+| tier1 (SFT, now w/ curriculum) | 7.43 → 6.34 | 7.72 → 6.25 |
+| tier2 LoRA+GRPO | 12.17 → 9.96 | 10.42 → 12.84 |
+| tier3 full+GRPO | 1.00 (collapsed) → 1.00 (collapsed) | 5.55 (collapsed) → 5.73 (collapsed) |
+
+`solved` is still 0/100 on every round-2 checkpoint — same as round 1.
+Mixed result on the `avg_turns` proxy: qwen3-1.7b's tier2 improved
+(10.42→12.84) but qwen3-0.6b regressed on tier1/tier2, and tier3's collapse
+to near-zero-shot behavior persists for both model sizes despite the
+curriculum, technique-filtered data, and denser reward — a cold full-fine-tune
+GRPO start still doesn't preserve tier2's learned validity/logic once the
+LoRA scaffold is removed. See `HANDOFF_TRAINING.md` (untracked, local-only)
+for the round-1 diagnosis this round attempted to address, and for ideas
+not yet tried (larger curriculum, partial-credit-only reward ablation,
+keeping tier3 warm-started from tier2 instead of cold).
 
 ### Train
 

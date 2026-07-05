@@ -12,18 +12,18 @@
   "box_height": 3,
   "solved": false,
   "correct_against_solution": false,
-  "total_turns": 9,
-  "valid_moves": 4,
+  "total_turns": 8,
+  "valid_moves": 3,
   "total_errors": 5,
-  "total_prompt_tokens": 3689,
-  "total_completion_tokens": 387,
-  "duration_ms": 12009,
+  "total_prompt_tokens": 3274,
+  "total_completion_tokens": 360,
+  "duration_ms": 11337,
   "final_grid": [
     [
       0,
       8,
+      1,
       0,
-      3,
       2,
       0,
       0,
@@ -34,7 +34,7 @@
       0,
       0,
       7,
-      4,
+      0,
       0,
       5,
       0,
@@ -46,7 +46,7 @@
       0,
       0,
       0,
-      0,
+      1,
       0,
       0,
       0,
@@ -54,7 +54,7 @@
     ],
     [
       0,
-      2,
+      0,
       9,
       0,
       0,
@@ -89,10 +89,10 @@
       6,
       0,
       0,
+      1,
       0,
       0,
       0,
-      2,
       0,
       8
     ],
@@ -122,16 +122,16 @@
   "steps": [
     {
       "turn": 1,
-      "reasoning": "Placing 2 at R7C7 does not conflict with its row, column, or box, and matches the puzzle's unique solution.",
+      "reasoning": "1 can only go in R1C3 within its row, column, or box, even though that cell has other candidates \u2014 a hidden single.",
       "parsed_move": {
-        "row": 6,
-        "col": 6,
-        "value": 2
+        "row": 0,
+        "col": 2,
+        "value": 1
       },
       "backtrack": null,
       "valid": true,
       "validation_errors": [],
-      "value": 2,
+      "value": 1,
       "grid_before": [
         [
           0,
@@ -237,7 +237,7 @@
         [
           0,
           8,
-          0,
+          1,
           0,
           2,
           0,
@@ -307,7 +307,7 @@
           0,
           0,
           0,
-          2,
+          0,
           0,
           8
         ],
@@ -337,21 +337,21 @@
     },
     {
       "turn": 2,
-      "reasoning": "Placing 2 at R4C2 does not conflict with its row, column, or box, and matches the puzzle's unique solution.",
+      "reasoning": "1 can only go in R7C4 within its row, column, or box, even though that cell has other candidates \u2014 a hidden single.",
       "parsed_move": {
-        "row": 3,
-        "col": 1,
-        "value": 2
+        "row": 6,
+        "col": 3,
+        "value": 1
       },
       "backtrack": null,
       "valid": true,
       "validation_errors": [],
-      "value": 2,
+      "value": 1,
       "grid_before": [
         [
           0,
           8,
-          0,
+          1,
           0,
           2,
           0,
@@ -421,7 +421,7 @@
           0,
           0,
           0,
-          2,
+          0,
           0,
           8
         ],
@@ -452,7 +452,7 @@
         [
           0,
           8,
-          0,
+          1,
           0,
           2,
           0,
@@ -484,7 +484,7 @@
         ],
         [
           0,
-          2,
+          0,
           9,
           0,
           0,
@@ -519,10 +519,10 @@
           6,
           0,
           0,
+          1,
           0,
           0,
           0,
-          2,
           0,
           8
         ],
@@ -552,21 +552,21 @@
     },
     {
       "turn": 3,
-      "reasoning": "Placing 3 at R1C4 does not conflict with its row, column, or box, and matches the puzzle's unique solution.",
+      "reasoning": "1 can only go in R3C5 within its row, column, or box, even though that cell has other candidates \u2014 a hidden single.",
       "parsed_move": {
-        "row": 0,
-        "col": 3,
-        "value": 3
+        "row": 2,
+        "col": 4,
+        "value": 1
       },
       "backtrack": null,
       "valid": true,
       "validation_errors": [],
-      "value": 3,
+      "value": 1,
       "grid_before": [
         [
           0,
           8,
-          0,
+          1,
           0,
           2,
           0,
@@ -598,7 +598,7 @@
         ],
         [
           0,
-          2,
+          0,
           9,
           0,
           0,
@@ -633,10 +633,10 @@
           6,
           0,
           0,
+          1,
           0,
           0,
           0,
-          2,
           0,
           8
         ],
@@ -667,8 +667,8 @@
         [
           0,
           8,
+          1,
           0,
-          3,
           2,
           0,
           0,
@@ -691,7 +691,7 @@
           0,
           0,
           0,
-          0,
+          1,
           0,
           0,
           0,
@@ -699,7 +699,7 @@
         ],
         [
           0,
-          2,
+          0,
           9,
           0,
           0,
@@ -734,10 +734,10 @@
           6,
           0,
           0,
+          1,
           0,
           0,
           0,
-          2,
           0,
           8
         ],
@@ -767,22 +767,26 @@
     },
     {
       "turn": 4,
-      "reasoning": "Placing 4 at R2C4 does not conflict with its row, column, or box, and matches the puzzle's unique solution.",
+      "reasoning": "1 can only go in R4C4 within its row, column, or box, even though that cell has other candidates \u2014 a hidden single.",
       "parsed_move": {
-        "row": 1,
+        "row": 3,
         "col": 3,
-        "value": 4
+        "value": 1
       },
       "backtrack": null,
-      "valid": true,
-      "validation_errors": [],
-      "value": 4,
+      "valid": false,
+      "validation_errors": [
+        "Row 4 already has 1 at C6",
+        "Column 4 already has 1 at R7",
+        "Box (4-6, 4-6) already has 1 at R4C6"
+      ],
+      "value": 1,
       "grid_before": [
         [
           0,
           8,
+          1,
           0,
-          3,
           2,
           0,
           0,
@@ -805,7 +809,7 @@
           0,
           0,
           0,
-          0,
+          1,
           0,
           0,
           0,
@@ -813,7 +817,7 @@
         ],
         [
           0,
-          2,
+          0,
           9,
           0,
           0,
@@ -848,10 +852,10 @@
           6,
           0,
           0,
+          1,
           0,
           0,
           0,
-          2,
           0,
           8
         ],
@@ -882,8 +886,8 @@
         [
           0,
           8,
+          1,
           0,
-          3,
           2,
           0,
           0,
@@ -894,7 +898,7 @@
           0,
           0,
           7,
-          4,
+          0,
           0,
           5,
           0,
@@ -906,7 +910,7 @@
           0,
           0,
           0,
-          0,
+          1,
           0,
           0,
           0,
@@ -914,7 +918,7 @@
         ],
         [
           0,
-          2,
+          0,
           9,
           0,
           0,
@@ -949,10 +953,10 @@
           6,
           0,
           0,
+          1,
           0,
           0,
           0,
-          2,
           0,
           8
         ],
@@ -982,24 +986,26 @@
     },
     {
       "turn": 5,
-      "reasoning": "Placing 2 at R3C7 does not conflict with its row, column, or box, and matches the puzzle's unique solution.",
+      "reasoning": "1 can only go in R4C4 within its row, column, or box, even though that cell has other candidates \u2014 a hidden single.",
       "parsed_move": {
-        "row": 2,
-        "col": 6,
-        "value": 2
+        "row": 3,
+        "col": 3,
+        "value": 1
       },
       "backtrack": null,
       "valid": false,
       "validation_errors": [
-        "Column 7 already has 2 at R7"
+        "Row 4 already has 1 at C6",
+        "Column 4 already has 1 at R7",
+        "Box (4-6, 4-6) already has 1 at R4C6"
       ],
-      "value": 2,
+      "value": 1,
       "grid_before": [
         [
           0,
           8,
+          1,
           0,
-          3,
           2,
           0,
           0,
@@ -1010,7 +1016,7 @@
           0,
           0,
           7,
-          4,
+          0,
           0,
           5,
           0,
@@ -1022,7 +1028,7 @@
           0,
           0,
           0,
-          0,
+          1,
           0,
           0,
           0,
@@ -1030,7 +1036,7 @@
         ],
         [
           0,
-          2,
+          0,
           9,
           0,
           0,
@@ -1065,10 +1071,10 @@
           6,
           0,
           0,
+          1,
           0,
           0,
           0,
-          2,
           0,
           8
         ],
@@ -1099,8 +1105,8 @@
         [
           0,
           8,
+          1,
           0,
-          3,
           2,
           0,
           0,
@@ -1111,7 +1117,7 @@
           0,
           0,
           7,
-          4,
+          0,
           0,
           5,
           0,
@@ -1123,7 +1129,7 @@
           0,
           0,
           0,
-          0,
+          1,
           0,
           0,
           0,
@@ -1131,7 +1137,7 @@
         ],
         [
           0,
-          2,
+          0,
           9,
           0,
           0,
@@ -1166,10 +1172,10 @@
           6,
           0,
           0,
+          1,
           0,
           0,
           0,
-          2,
           0,
           8
         ],
@@ -1199,24 +1205,26 @@
     },
     {
       "turn": 6,
-      "reasoning": "Placing 2 at R3C7 does not conflict with its row, column, or box, and matches the puzzle's unique solution.",
+      "reasoning": "1 can only go in R4C4 within its row, column, or box, even though that cell has other candidates \u2014 a hidden single.",
       "parsed_move": {
-        "row": 2,
-        "col": 6,
-        "value": 2
+        "row": 3,
+        "col": 3,
+        "value": 1
       },
       "backtrack": null,
       "valid": false,
       "validation_errors": [
-        "Column 7 already has 2 at R7"
+        "Row 4 already has 1 at C6",
+        "Column 4 already has 1 at R7",
+        "Box (4-6, 4-6) already has 1 at R4C6"
       ],
-      "value": 2,
+      "value": 1,
       "grid_before": [
         [
           0,
           8,
+          1,
           0,
-          3,
           2,
           0,
           0,
@@ -1227,7 +1235,7 @@
           0,
           0,
           7,
-          4,
+          0,
           0,
           5,
           0,
@@ -1239,7 +1247,7 @@
           0,
           0,
           0,
-          0,
+          1,
           0,
           0,
           0,
@@ -1247,7 +1255,7 @@
         ],
         [
           0,
-          2,
+          0,
           9,
           0,
           0,
@@ -1282,10 +1290,10 @@
           6,
           0,
           0,
+          1,
           0,
           0,
           0,
-          2,
           0,
           8
         ],
@@ -1316,8 +1324,8 @@
         [
           0,
           8,
+          1,
           0,
-          3,
           2,
           0,
           0,
@@ -1328,7 +1336,7 @@
           0,
           0,
           7,
-          4,
+          0,
           0,
           5,
           0,
@@ -1340,7 +1348,7 @@
           0,
           0,
           0,
-          0,
+          1,
           0,
           0,
           0,
@@ -1348,7 +1356,7 @@
         ],
         [
           0,
-          2,
+          0,
           9,
           0,
           0,
@@ -1383,10 +1391,10 @@
           6,
           0,
           0,
+          1,
           0,
           0,
           0,
-          2,
           0,
           8
         ],
@@ -1416,24 +1424,26 @@
     },
     {
       "turn": 7,
-      "reasoning": "Placing 2 at R3C7 does not conflict with its row, column, or box, and matches the puzzle's unique solution.",
+      "reasoning": "1 can only go in R4C4 within its row, column, or box, even though that cell has other candidates \u2014 a hidden single.",
       "parsed_move": {
-        "row": 2,
-        "col": 6,
-        "value": 2
+        "row": 3,
+        "col": 3,
+        "value": 1
       },
       "backtrack": null,
       "valid": false,
       "validation_errors": [
-        "Column 7 already has 2 at R7"
+        "Row 4 already has 1 at C6",
+        "Column 4 already has 1 at R7",
+        "Box (4-6, 4-6) already has 1 at R4C6"
       ],
-      "value": 2,
+      "value": 1,
       "grid_before": [
         [
           0,
           8,
+          1,
           0,
-          3,
           2,
           0,
           0,
@@ -1444,7 +1454,7 @@
           0,
           0,
           7,
-          4,
+          0,
           0,
           5,
           0,
@@ -1456,7 +1466,7 @@
           0,
           0,
           0,
-          0,
+          1,
           0,
           0,
           0,
@@ -1464,7 +1474,7 @@
         ],
         [
           0,
-          2,
+          0,
           9,
           0,
           0,
@@ -1499,10 +1509,10 @@
           6,
           0,
           0,
+          1,
           0,
           0,
           0,
-          2,
           0,
           8
         ],
@@ -1533,8 +1543,8 @@
         [
           0,
           8,
+          1,
           0,
-          3,
           2,
           0,
           0,
@@ -1545,7 +1555,7 @@
           0,
           0,
           7,
-          4,
+          0,
           0,
           5,
           0,
@@ -1557,7 +1567,7 @@
           0,
           0,
           0,
-          0,
+          1,
           0,
           0,
           0,
@@ -1565,7 +1575,7 @@
         ],
         [
           0,
-          2,
+          0,
           9,
           0,
           0,
@@ -1600,10 +1610,10 @@
           6,
           0,
           0,
+          1,
           0,
           0,
           0,
-          2,
           0,
           8
         ],
@@ -1633,24 +1643,26 @@
     },
     {
       "turn": 8,
-      "reasoning": "Placing 2 at R3C7 does not conflict with its row, column, or box, and matches the puzzle's unique solution.",
+      "reasoning": "1 can only go in R4C4 within its row, column, or box, even though that cell has other candidates \u2014 a hidden single.",
       "parsed_move": {
-        "row": 2,
-        "col": 6,
-        "value": 2
+        "row": 3,
+        "col": 3,
+        "value": 1
       },
       "backtrack": null,
       "valid": false,
       "validation_errors": [
-        "Column 7 already has 2 at R7"
+        "Row 4 already has 1 at C6",
+        "Column 4 already has 1 at R7",
+        "Box (4-6, 4-6) already has 1 at R4C6"
       ],
-      "value": 2,
+      "value": 1,
       "grid_before": [
         [
           0,
           8,
+          1,
           0,
-          3,
           2,
           0,
           0,
@@ -1661,7 +1673,7 @@
           0,
           0,
           7,
-          4,
+          0,
           0,
           5,
           0,
@@ -1673,7 +1685,7 @@
           0,
           0,
           0,
-          0,
+          1,
           0,
           0,
           0,
@@ -1681,7 +1693,7 @@
         ],
         [
           0,
-          2,
+          0,
           9,
           0,
           0,
@@ -1716,10 +1728,10 @@
           6,
           0,
           0,
+          1,
           0,
           0,
           0,
-          2,
           0,
           8
         ],
@@ -1750,8 +1762,8 @@
         [
           0,
           8,
+          1,
           0,
-          3,
           2,
           0,
           0,
@@ -1762,7 +1774,7 @@
           0,
           0,
           7,
-          4,
+          0,
           0,
           5,
           0,
@@ -1774,7 +1786,7 @@
           0,
           0,
           0,
-          0,
+          1,
           0,
           0,
           0,
@@ -1782,7 +1794,7 @@
         ],
         [
           0,
-          2,
+          0,
           9,
           0,
           0,
@@ -1817,227 +1829,10 @@
           6,
           0,
           0,
-          0,
-          0,
-          0,
-          2,
-          0,
-          8
-        ],
-        [
-          0,
           1,
           0,
-          6,
           0,
           0,
-          7,
-          0,
-          0
-        ],
-        [
-          0,
-          0,
-          0,
-          0,
-          9,
-          0,
-          0,
-          4,
-          0
-        ]
-      ]
-    },
-    {
-      "turn": 9,
-      "reasoning": "Placing 2 at R3C7 does not conflict with its row, column, or box, and matches the puzzle's unique solution.",
-      "parsed_move": {
-        "row": 2,
-        "col": 6,
-        "value": 2
-      },
-      "backtrack": null,
-      "valid": false,
-      "validation_errors": [
-        "Column 7 already has 2 at R7"
-      ],
-      "value": 2,
-      "grid_before": [
-        [
-          0,
-          8,
-          0,
-          3,
-          2,
-          0,
-          0,
-          0,
-          0
-        ],
-        [
-          0,
-          0,
-          7,
-          4,
-          0,
-          5,
-          0,
-          1,
-          0
-        ],
-        [
-          4,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          3
-        ],
-        [
-          0,
-          2,
-          9,
-          0,
-          0,
-          1,
-          0,
-          5,
-          0
-        ],
-        [
-          3,
-          0,
-          0,
-          0,
-          4,
-          0,
-          0,
-          0,
-          1
-        ],
-        [
-          0,
-          7,
-          0,
-          5,
-          0,
-          0,
-          6,
-          0,
-          0
-        ],
-        [
-          6,
-          0,
-          0,
-          0,
-          0,
-          0,
-          2,
-          0,
-          8
-        ],
-        [
-          0,
-          1,
-          0,
-          6,
-          0,
-          0,
-          7,
-          0,
-          0
-        ],
-        [
-          0,
-          0,
-          0,
-          0,
-          9,
-          0,
-          0,
-          4,
-          0
-        ]
-      ],
-      "grid_after": [
-        [
-          0,
-          8,
-          0,
-          3,
-          2,
-          0,
-          0,
-          0,
-          0
-        ],
-        [
-          0,
-          0,
-          7,
-          4,
-          0,
-          5,
-          0,
-          1,
-          0
-        ],
-        [
-          4,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          3
-        ],
-        [
-          0,
-          2,
-          9,
-          0,
-          0,
-          1,
-          0,
-          5,
-          0
-        ],
-        [
-          3,
-          0,
-          0,
-          0,
-          4,
-          0,
-          0,
-          0,
-          1
-        ],
-        [
-          0,
-          7,
-          0,
-          5,
-          0,
-          0,
-          6,
-          0,
-          0
-        ],
-        [
-          6,
-          0,
-          0,
-          0,
-          0,
-          0,
-          2,
           0,
           8
         ],
@@ -2068,63 +1863,73 @@
   ],
   "error_steps": [
     {
-      "turn": 5,
-      "reasoning": "Placing 2 at R3C7 does not conflict with its row, column, or box, and matches the puzzle's unique solution.",
+      "turn": 4,
+      "reasoning": "1 can only go in R4C4 within its row, column, or box, even though that cell has other candidates \u2014 a hidden single.",
       "parsed_move": {
-        "row": 2,
-        "col": 6,
-        "value": 2
+        "row": 3,
+        "col": 3,
+        "value": 1
       },
       "validation_errors": [
-        "Column 7 already has 2 at R7"
+        "Row 4 already has 1 at C6",
+        "Column 4 already has 1 at R7",
+        "Box (4-6, 4-6) already has 1 at R4C6"
+      ]
+    },
+    {
+      "turn": 5,
+      "reasoning": "1 can only go in R4C4 within its row, column, or box, even though that cell has other candidates \u2014 a hidden single.",
+      "parsed_move": {
+        "row": 3,
+        "col": 3,
+        "value": 1
+      },
+      "validation_errors": [
+        "Row 4 already has 1 at C6",
+        "Column 4 already has 1 at R7",
+        "Box (4-6, 4-6) already has 1 at R4C6"
       ]
     },
     {
       "turn": 6,
-      "reasoning": "Placing 2 at R3C7 does not conflict with its row, column, or box, and matches the puzzle's unique solution.",
+      "reasoning": "1 can only go in R4C4 within its row, column, or box, even though that cell has other candidates \u2014 a hidden single.",
       "parsed_move": {
-        "row": 2,
-        "col": 6,
-        "value": 2
+        "row": 3,
+        "col": 3,
+        "value": 1
       },
       "validation_errors": [
-        "Column 7 already has 2 at R7"
+        "Row 4 already has 1 at C6",
+        "Column 4 already has 1 at R7",
+        "Box (4-6, 4-6) already has 1 at R4C6"
       ]
     },
     {
       "turn": 7,
-      "reasoning": "Placing 2 at R3C7 does not conflict with its row, column, or box, and matches the puzzle's unique solution.",
+      "reasoning": "1 can only go in R4C4 within its row, column, or box, even though that cell has other candidates \u2014 a hidden single.",
       "parsed_move": {
-        "row": 2,
-        "col": 6,
-        "value": 2
+        "row": 3,
+        "col": 3,
+        "value": 1
       },
       "validation_errors": [
-        "Column 7 already has 2 at R7"
+        "Row 4 already has 1 at C6",
+        "Column 4 already has 1 at R7",
+        "Box (4-6, 4-6) already has 1 at R4C6"
       ]
     },
     {
       "turn": 8,
-      "reasoning": "Placing 2 at R3C7 does not conflict with its row, column, or box, and matches the puzzle's unique solution.",
+      "reasoning": "1 can only go in R4C4 within its row, column, or box, even though that cell has other candidates \u2014 a hidden single.",
       "parsed_move": {
-        "row": 2,
-        "col": 6,
-        "value": 2
+        "row": 3,
+        "col": 3,
+        "value": 1
       },
       "validation_errors": [
-        "Column 7 already has 2 at R7"
-      ]
-    },
-    {
-      "turn": 9,
-      "reasoning": "Placing 2 at R3C7 does not conflict with its row, column, or box, and matches the puzzle's unique solution.",
-      "parsed_move": {
-        "row": 2,
-        "col": 6,
-        "value": 2
-      },
-      "validation_errors": [
-        "Column 7 already has 2 at R7"
+        "Row 4 already has 1 at C6",
+        "Column 4 already has 1 at R7",
+        "Box (4-6, 4-6) already has 1 at R4C6"
       ]
     }
   ]

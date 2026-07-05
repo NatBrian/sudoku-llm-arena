@@ -21,7 +21,7 @@ from .data import build_grpo_examples
 from .reward import reward_func
 
 
-def train(model_key, tier, init_adapter=None, out_name=None):
+def train(model_key, tier, init_adapter=None, out_name=None, num_generations=None, max_completion_length=None):
     base_model_id = train_config.BASE_MODELS[model_key]
     out_name = out_name or f"{model_key}-{tier}"
     out_dir = train_config.checkpoint_dir(out_name)
@@ -33,8 +33,14 @@ def train(model_key, tier, init_adapter=None, out_name=None):
         base_model_id, torch_dtype=torch.bfloat16, device_map={"": 0}
     )
 
-    num_generations = train_config.GRPO_NUM_GENERATIONS
-    max_completion_length = train_config.GRPO_MAX_COMPLETION_LENGTH
+    # CLI overrides (run_experiment.py uses these to try a headroom-dependent
+    # relaxed rollout size before falling back to the known-safe squeeze
+    # below) take priority over config/tier defaults, AND over tier3's
+    # automatic squeeze — an explicit override means the caller already made
+    # the headroom judgment call, so tier3 shouldn't silently re-clamp it.
+    explicit_overrides = num_generations is not None or max_completion_length is not None
+    num_generations = num_generations if num_generations is not None else train_config.GRPO_NUM_GENERATIONS
+    max_completion_length = max_completion_length if max_completion_length is not None else train_config.GRPO_MAX_COMPLETION_LENGTH
     beta = train_config.GRPO_BETA
 
     if tier == "tier2-lora-grpo":
@@ -65,9 +71,12 @@ def train(model_key, tier, init_adapter=None, out_name=None):
         optim = "adafactor"
         # qwen3-1.7b's full-FT footprint left only ~900MB free at the first
         # optimizer step even with beta=0 (no ref model) — tighter than the
-        # 1.5B model's margin, so trim rollout memory further for tier3 here.
-        num_generations = min(num_generations, 2)
-        max_completion_length = min(max_completion_length, 96)
+        # 1.5B model's margin, so trim rollout memory further for tier3 here,
+        # unless the caller (run_experiment.py) already picked explicit
+        # values based on a live headroom check.
+        if not explicit_overrides:
+            num_generations = min(num_generations, 2)
+            max_completion_length = min(max_completion_length, 96)
         beta = 0.0
     else:
         raise ValueError(f"unknown tier {tier!r}, expected tier2-lora-grpo or tier3-full-grpo")
@@ -138,5 +147,7 @@ if __name__ == "__main__":
     parser.add_argument("--tier", required=True, choices=["tier2-lora-grpo", "tier3-full-grpo"])
     parser.add_argument("--init-adapter", default=None, help="tier1 checkpoint name to continue from (tier2 only)")
     parser.add_argument("--out-name", default=None)
+    parser.add_argument("--num-generations", type=int, default=None, help="override GRPO_NUM_GENERATIONS (bypasses tier3's automatic squeeze)")
+    parser.add_argument("--max-completion-length", type=int, default=None, help="override GRPO_MAX_COMPLETION_LENGTH (bypasses tier3's automatic squeeze)")
     args = parser.parse_args()
-    train(args.model, args.tier, args.init_adapter, args.out_name)
+    train(args.model, args.tier, args.init_adapter, args.out_name, args.num_generations, args.max_completion_length)

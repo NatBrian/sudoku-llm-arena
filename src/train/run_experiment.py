@@ -36,6 +36,37 @@ _STAGE_ENV = dict(
     PYTORCH_CUDA_ALLOC_CONF="expandable_segments:True",
 )
 
+# tier3's known-safe rollout settings (see grpo_train.py's automatic squeeze)
+# — used as the fallback if a relaxed attempt below OOMs.
+TIER3_SAFE_NUM_GENERATIONS = 2
+TIER3_SAFE_MAX_COMPLETION_LENGTH = 96
+# Only attempt relaxed rollout settings if GPU0 has comfortably more free
+# memory than what the safe squeeze needs — this host is shared and another
+# process can hold >100GB of it at any time (see handoff's known pitfalls).
+TIER3_RELAX_FREE_MIB_THRESHOLD = 20000
+TIER3_RELAXED_NUM_GENERATIONS = 4
+TIER3_RELAXED_MAX_COMPLETION_LENGTH = 160
+
+
+def _gpu0_free_mib():
+    try:
+        out = subprocess.run(
+            ["nvidia-smi", "--query-gpu=memory.free", "--format=csv,noheader,nounits", "-i", "0"],
+            capture_output=True, text=True, check=True, timeout=10,
+        )
+        return int(out.stdout.strip().splitlines()[0])
+    except Exception as e:
+        print(f"nvidia-smi headroom check failed ({e}); assuming no extra headroom.")
+        return 0
+
+
+def _log_mentions_oom(log_path):
+    try:
+        text = log_path.read_text(errors="ignore").lower()
+        return "out of memory" in text or "cuda oom" in text
+    except OSError:
+        return False
+
 
 def _save_status(model_key, status):
     exp_dir = EXPERIMENTS_DIR / model_key
@@ -73,8 +104,23 @@ def run_experiment(model_key):
         _run_stage(model_key, "tier0-eval",
                    [py, "-m", "src.train.eval_cli", "--checkpoint", f"{model_key}-tier0-zeroshot"], status)
 
-    tier1_ok = _run_stage(model_key, "tier1-train",
-                           [py, "-m", "src.train.sft_train", "--model", model_key], status)
+    prev_adapter = None
+    curriculum_ok = True
+    for stage in train_config.TRAIN_CURRICULUM_STAGES:
+        stage_out = f"{model_key}-tier1-{stage['name']}"
+        argv = [py, "-m", "src.train.sft_train", "--model", model_key,
+                "--stage", stage["name"], "--out-name", stage_out]
+        if prev_adapter:
+            argv += ["--init-adapter", prev_adapter]
+        curriculum_ok = _run_stage(model_key, f"tier1-{stage['name']}", argv, status)
+        if not curriculum_ok:
+            break
+        prev_adapter = stage_out
+
+    tier1_argv = [py, "-m", "src.train.sft_train", "--model", model_key]
+    if curriculum_ok and prev_adapter:
+        tier1_argv += ["--init-adapter", prev_adapter]
+    tier1_ok = curriculum_ok and _run_stage(model_key, "tier1-train", tier1_argv, status)
     if tier1_ok:
         _run_stage(model_key, "tier1-eval",
                    [py, "-m", "src.train.eval_cli", "--checkpoint", f"{model_key}-tier1-lora-sft"], status)
@@ -89,10 +135,26 @@ def run_experiment(model_key):
         _run_stage(model_key, "tier2-eval",
                    [py, "-m", "src.train.eval_cli", "--checkpoint", f"{model_key}-tier2-lora-grpo"], status)
 
-    tier3_ok = _run_stage(
-        model_key, "tier3-train",
-        [py, "-m", "src.train.grpo_train", "--model", model_key, "--tier", "tier3-full-grpo"], status,
-    )
+    tier3_argv = [py, "-m", "src.train.grpo_train", "--model", model_key, "--tier", "tier3-full-grpo"]
+    free_mib = _gpu0_free_mib()
+    tried_relaxed = free_mib > TIER3_RELAX_FREE_MIB_THRESHOLD
+    if tried_relaxed:
+        print(f"GPU0 has {free_mib}MiB free (> {TIER3_RELAX_FREE_MIB_THRESHOLD}MiB threshold); "
+              f"attempting relaxed tier3 rollout settings first.")
+        tier3_ok = _run_stage(model_key, "tier3-train", tier3_argv + [
+            "--num-generations", str(TIER3_RELAXED_NUM_GENERATIONS),
+            "--max-completion-length", str(TIER3_RELAXED_MAX_COMPLETION_LENGTH),
+        ], status)
+        if not tier3_ok and _log_mentions_oom(EXPERIMENTS_DIR / model_key / "tier3-train.log"):
+            print("Relaxed tier3 settings OOM'd; retrying with the known-safe squeezed settings.")
+            tier3_ok = _run_stage(model_key, "tier3-train", tier3_argv + [
+                "--num-generations", str(TIER3_SAFE_NUM_GENERATIONS),
+                "--max-completion-length", str(TIER3_SAFE_MAX_COMPLETION_LENGTH),
+            ], status)
+    else:
+        print(f"GPU0 has {free_mib}MiB free (<= {TIER3_RELAX_FREE_MIB_THRESHOLD}MiB threshold); "
+              f"using tier3's default squeezed rollout settings.")
+        tier3_ok = _run_stage(model_key, "tier3-train", tier3_argv, status)
     if tier3_ok:
         _run_stage(model_key, "tier3-eval",
                    [py, "-m", "src.train.eval_cli", "--checkpoint", f"{model_key}-tier3-full-grpo"], status)

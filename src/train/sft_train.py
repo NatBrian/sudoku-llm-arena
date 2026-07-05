@@ -10,7 +10,7 @@ import json
 
 import torch
 from datasets import Dataset
-from peft import LoraConfig
+from peft import LoraConfig, PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from trl import SFTConfig, SFTTrainer
 
@@ -18,11 +18,25 @@ from . import config as train_config
 from .data import build_sft_examples
 
 
-def train(model_key, out_name=None):
+def _find_stage(stage_name):
+    for stage in train_config.TRAIN_CURRICULUM_STAGES:
+        if stage["name"] == stage_name:
+            return stage
+    raise ValueError(f"unknown curriculum stage {stage_name!r}, expected one of "
+                      f"{[s['name'] for s in train_config.TRAIN_CURRICULUM_STAGES]}")
+
+
+def train(model_key, out_name=None, init_adapter=None, stage=None):
     base_model_id = train_config.BASE_MODELS[model_key]
     out_name = out_name or f"{model_key}-tier1-lora-sft"
     out_dir = train_config.checkpoint_dir(out_name)
     out_dir.mkdir(parents=True, exist_ok=True)
+
+    box_width, box_height, difficulty_mix, epochs = 3, 3, None, train_config.SFT_EPOCHS
+    if stage is not None:
+        stage_cfg = _find_stage(stage)
+        box_width, box_height = stage_cfg["box_width"], stage_cfg["box_height"]
+        difficulty_mix, epochs = stage_cfg["mix"], stage_cfg["epochs"]
 
     print(f"Loading base model {base_model_id}...")
     tokenizer = AutoTokenizer.from_pretrained(base_model_id)
@@ -31,21 +45,31 @@ def train(model_key, out_name=None):
     )
 
     print("Building SFT examples from synthetic (non-Nikoli) puzzles...")
-    examples = build_sft_examples()
+    examples = build_sft_examples(box_width=box_width, box_height=box_height, difficulty_mix=difficulty_mix)
     print(f"  {len(examples)} examples")
     dataset = Dataset.from_list(examples)
 
-    peft_config = LoraConfig(
-        r=train_config.LORA_R,
-        lora_alpha=train_config.LORA_ALPHA,
-        lora_dropout=train_config.LORA_DROPOUT,
-        target_modules=train_config.LORA_TARGET_MODULES,
-        task_type="CAUSAL_LM",
-    )
+    if init_adapter:
+        # Curriculum stage continuing a previous stage's adapter forward,
+        # rather than starting a fresh LoRA (mirrors grpo_train.py's tier2
+        # pattern of loading tier1's adapter).
+        adapter_path = train_config.checkpoint_dir(init_adapter) / "adapter"
+        if not adapter_path.exists():
+            raise FileNotFoundError(f"--init-adapter {init_adapter} has no adapter at {adapter_path}")
+        print(f"Continuing from adapter {adapter_path}...")
+        model = PeftModel.from_pretrained(model, str(adapter_path), is_trainable=True)
+    else:
+        peft_config = LoraConfig(
+            r=train_config.LORA_R,
+            lora_alpha=train_config.LORA_ALPHA,
+            lora_dropout=train_config.LORA_DROPOUT,
+            target_modules=train_config.LORA_TARGET_MODULES,
+            task_type="CAUSAL_LM",
+        )
 
     sft_config = SFTConfig(
         output_dir=str(out_dir / "trainer"),
-        num_train_epochs=train_config.SFT_EPOCHS,
+        num_train_epochs=epochs,
         per_device_train_batch_size=train_config.SFT_BATCH_SIZE,
         gradient_accumulation_steps=train_config.SFT_GRAD_ACCUM_STEPS,
         gradient_checkpointing=True,
@@ -63,7 +87,7 @@ def train(model_key, out_name=None):
         args=sft_config,
         train_dataset=dataset,
         processing_class=tokenizer,
-        peft_config=peft_config,
+        peft_config=None if init_adapter else peft_config,
     )
     trainer.train()
 
@@ -73,7 +97,13 @@ def train(model_key, out_name=None):
 
     (out_dir / "train_log.json").write_text(json.dumps(trainer.state.log_history, indent=2))
 
-    meta = {"base_model": base_model_id, "tier": "tier1-lora-sft", "adapter": True}
+    meta = {
+        "base_model": base_model_id,
+        "tier": "tier1-curriculum" if stage else "tier1-lora-sft",
+        "adapter": True,
+        "stage": stage,
+        "init_adapter": init_adapter,
+    }
     (out_dir / "meta.json").write_text(json.dumps(meta, indent=2))
     print(f"Saved LoRA adapter -> {adapter_dir}")
     return out_name
@@ -83,5 +113,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", required=True, choices=list(train_config.BASE_MODELS))
     parser.add_argument("--out-name", default=None)
+    parser.add_argument("--init-adapter", default=None, help="checkpoint name of a prior LoRA adapter to continue from (curriculum stages)")
+    parser.add_argument("--stage", default=None, choices=[s["name"] for s in train_config.TRAIN_CURRICULUM_STAGES],
+                         help="curriculum stage to train on; omit for the canonical 9x9 tier1 pass")
     args = parser.parse_args()
-    train(args.model, args.out_name)
+    train(args.model, args.out_name, args.init_adapter, args.stage)

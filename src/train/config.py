@@ -58,6 +58,26 @@ TRAIN_DIFFICULTY_MIX = {
 SNAPSHOTS_PER_PUZZLE = 12  # random partial-fill states sampled per puzzle
 DATA_SEED = 0
 
+# --- Curriculum (tier1 pre-stages) --------------------------------------------
+# Sequential SFT stages on smaller boards before the canonical 9x9 tier1 pass
+# below, so the model can learn full constraint-propagation logic on state
+# spaces small enough to hold in its working set before transferring to 9x9.
+# Each stage's LoRA adapter continues from the previous stage's (see
+# sft_train.py --init-adapter); the final (canonical) 9x9 stage is NOT listed
+# here — it uses TRAIN_DIFFICULTY_MIX/SFT_EPOCHS above unchanged.
+TRAIN_CURRICULUM_STAGES = [
+    {
+        "name": "curriculum-4x4", "box_width": 2, "box_height": 2,
+        "mix": {"easy": (0.4, 20), "medium": (0.55, 30), "hard": (0.7, 30)},
+        "epochs": 2,
+    },
+    {
+        "name": "curriculum-6x6", "box_width": 3, "box_height": 2,
+        "mix": {"easy": (0.4, 20), "medium": (0.55, 30), "hard": (0.7, 30)},
+        "epochs": 2,
+    },
+]
+
 # --- LoRA ----------------------------------------------------------------------
 LORA_R = 16
 LORA_ALPHA = 32

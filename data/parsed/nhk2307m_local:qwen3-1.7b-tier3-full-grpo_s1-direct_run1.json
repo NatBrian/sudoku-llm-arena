@@ -12,18 +12,18 @@
   "box_height": 3,
   "solved": false,
   "correct_against_solution": false,
-  "total_turns": 6,
-  "valid_moves": 1,
+  "total_turns": 7,
+  "valid_moves": 2,
   "total_errors": 5,
-  "total_prompt_tokens": 2459,
-  "total_completion_tokens": 482,
-  "duration_ms": 8069,
+  "total_prompt_tokens": 2874,
+  "total_completion_tokens": 606,
+  "duration_ms": 10086,
   "final_grid": [
     [
       2,
       0,
       7,
-      0,
+      3,
       0,
       4,
       0,
@@ -122,7 +122,7 @@
   "steps": [
     {
       "turn": 1,
-      "reasoning": "Row 1 has 2, 4, 6 in the row, so missing numbers are 1, 3, 5, 7, 8, 9. Column 3 is empty, and box 1 (rows 1-3, columns 1-3) has 2, 1, 8, 9, 5, 3, 4. Missing numbers in box 1 are 6, 7, 8, 9.",
+      "reasoning": "Row 1 has 2, 4, 6 in the row, so missing numbers are 1, 3, 5, 7, 8, 9. Column 3 is empty, and box 1 (rows 1-3, columns 1-3) has 2, 1, 8, 9, 5, 3, 4. Missing numbers in box 1 are 6, 7, 8, 9. But 6 is already in row 1, so possible values are 7, 8, 9.",
       "parsed_move": {
         "row": 0,
         "col": 2,
@@ -337,19 +337,16 @@
     },
     {
       "turn": 2,
-      "reasoning": "Row 1 has 2, 7, 4, 6 in the row. Missing numbers are 1, 3, 5, 8, 9. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
+      "reasoning": "Row 1 has 2, 7, 4, 6 in the row. Missing numbers are 1, 3, 5, 8, 9. Column 4 has 9, column 5 has 9, column 6 has 4. Box 1 has 2, 7, 4, 6, 1, 8, 5. Missing numbers are 3, 9.",
       "parsed_move": {
         "row": 0,
-        "col": 1,
-        "value": 2
+        "col": 3,
+        "value": 3
       },
       "backtrack": null,
-      "valid": false,
-      "validation_errors": [
-        "Row 1 already has 2 at C1",
-        "Box (1-3, 1-3) already has 2 at R1C1"
-      ],
-      "value": 2,
+      "valid": true,
+      "validation_errors": [],
+      "value": 3,
       "grid_before": [
         [
           2,
@@ -456,7 +453,7 @@
           2,
           0,
           7,
-          0,
+          3,
           0,
           4,
           0,
@@ -555,25 +552,25 @@
     },
     {
       "turn": 3,
-      "reasoning": "Row 1 has 2, 7, 4, 6 in the row. Missing numbers are 1, 3, 5, 8, 9. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
+      "reasoning": "Row 1 has 2, 7, 3, 4, 6 in the first five cells. Missing numbers are 1, 5, 8. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
       "parsed_move": {
         "row": 0,
-        "col": 1,
-        "value": 2
+        "col": 3,
+        "value": 5
       },
       "backtrack": null,
       "valid": false,
       "validation_errors": [
-        "Row 1 already has 2 at C1",
-        "Box (1-3, 1-3) already has 2 at R1C1"
+        "Cell R1C4 already has value 3",
+        "Box (1-3, 4-6) already has 5 at R3C6"
       ],
-      "value": 2,
+      "value": 5,
       "grid_before": [
         [
           2,
           0,
           7,
-          0,
+          3,
           0,
           4,
           0,
@@ -674,7 +671,7 @@
           2,
           0,
           7,
-          0,
+          3,
           0,
           4,
           0,
@@ -773,25 +770,25 @@
     },
     {
       "turn": 4,
-      "reasoning": "Row 1 has 2, 7, 4, 6 in the row. Missing numbers are 1, 3, 5, 8, 9. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
+      "reasoning": "Row 1 has 2, 7, 3, 4, 6 in the first five cells. Missing numbers are 1, 5, 8. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
       "parsed_move": {
         "row": 0,
-        "col": 1,
-        "value": 2
+        "col": 3,
+        "value": 5
       },
       "backtrack": null,
       "valid": false,
       "validation_errors": [
-        "Row 1 already has 2 at C1",
-        "Box (1-3, 1-3) already has 2 at R1C1"
+        "Cell R1C4 already has value 3",
+        "Box (1-3, 4-6) already has 5 at R3C6"
       ],
-      "value": 2,
+      "value": 5,
       "grid_before": [
         [
           2,
           0,
           7,
-          0,
+          3,
           0,
           4,
           0,
@@ -892,7 +889,7 @@
           2,
           0,
           7,
-          0,
+          3,
           0,
           4,
           0,
@@ -991,25 +988,25 @@
     },
     {
       "turn": 5,
-      "reasoning": "Row 1 has 2, 7, 4, 6 in the row. Missing numbers are 1, 3, 5, 8, 9. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
+      "reasoning": "Row 1 has 2, 7, 3, 4, 6 in the first five cells. Missing numbers are 1, 5, 8. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
       "parsed_move": {
         "row": 0,
-        "col": 1,
-        "value": 2
+        "col": 3,
+        "value": 5
       },
       "backtrack": null,
       "valid": false,
       "validation_errors": [
-        "Row 1 already has 2 at C1",
-        "Box (1-3, 1-3) already has 2 at R1C1"
+        "Cell R1C4 already has value 3",
+        "Box (1-3, 4-6) already has 5 at R3C6"
       ],
-      "value": 2,
+      "value": 5,
       "grid_before": [
         [
           2,
           0,
           7,
-          0,
+          3,
           0,
           4,
           0,
@@ -1110,7 +1107,7 @@
           2,
           0,
           7,
-          0,
+          3,
           0,
           4,
           0,
@@ -1209,25 +1206,25 @@
     },
     {
       "turn": 6,
-      "reasoning": "Row 1 has 2, 7, 4, 6 in the row. Missing numbers are 1, 3, 5, 8, 9. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
+      "reasoning": "Row 1 has 2, 7, 3, 4, 6 in the first five cells. Missing numbers are 1, 5, 8. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
       "parsed_move": {
         "row": 0,
-        "col": 1,
-        "value": 2
+        "col": 3,
+        "value": 5
       },
       "backtrack": null,
       "valid": false,
       "validation_errors": [
-        "Row 1 already has 2 at C1",
-        "Box (1-3, 1-3) already has 2 at R1C1"
+        "Cell R1C4 already has value 3",
+        "Box (1-3, 4-6) already has 5 at R3C6"
       ],
-      "value": 2,
+      "value": 5,
       "grid_before": [
         [
           2,
           0,
           7,
-          0,
+          3,
           0,
           4,
           0,
@@ -1328,7 +1325,225 @@
           2,
           0,
           7,
+          3,
           0,
+          4,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          1,
+          0,
+          9,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          8,
+          0,
+          0,
+          5,
+          0,
+          2,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          6,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          9,
+          0,
+          0,
+          8,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          3,
+          0,
+          0,
+          2
+        ],
+        [
+          0,
+          3,
+          0,
+          1,
+          0,
+          0,
+          4,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          0,
+          6,
+          0
+        ],
+        [
+          6,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          9
+        ]
+      ]
+    },
+    {
+      "turn": 7,
+      "reasoning": "Row 1 has 2, 7, 3, 4, 6 in the first five cells. Missing numbers are 1, 5, 8. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
+      "parsed_move": {
+        "row": 0,
+        "col": 3,
+        "value": 5
+      },
+      "backtrack": null,
+      "valid": false,
+      "validation_errors": [
+        "Cell R1C4 already has value 3",
+        "Box (1-3, 4-6) already has 5 at R3C6"
+      ],
+      "value": 5,
+      "grid_before": [
+        [
+          2,
+          0,
+          7,
+          3,
+          0,
+          4,
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          1,
+          0,
+          9,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          8,
+          0,
+          0,
+          5,
+          0,
+          2,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          6,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          9,
+          0,
+          0,
+          8,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          3,
+          0,
+          0,
+          2
+        ],
+        [
+          0,
+          3,
+          0,
+          1,
+          0,
+          0,
+          4,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          0,
+          6,
+          0
+        ],
+        [
+          6,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          9
+        ]
+      ],
+      "grid_after": [
+        [
+          2,
+          0,
+          7,
+          3,
           0,
           4,
           0,
@@ -1428,68 +1643,68 @@
   ],
   "error_steps": [
     {
-      "turn": 2,
-      "reasoning": "Row 1 has 2, 7, 4, 6 in the row. Missing numbers are 1, 3, 5, 8, 9. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
-      "parsed_move": {
-        "row": 0,
-        "col": 1,
-        "value": 2
-      },
-      "validation_errors": [
-        "Row 1 already has 2 at C1",
-        "Box (1-3, 1-3) already has 2 at R1C1"
-      ]
-    },
-    {
       "turn": 3,
-      "reasoning": "Row 1 has 2, 7, 4, 6 in the row. Missing numbers are 1, 3, 5, 8, 9. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
+      "reasoning": "Row 1 has 2, 7, 3, 4, 6 in the first five cells. Missing numbers are 1, 5, 8. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
       "parsed_move": {
         "row": 0,
-        "col": 1,
-        "value": 2
+        "col": 3,
+        "value": 5
       },
       "validation_errors": [
-        "Row 1 already has 2 at C1",
-        "Box (1-3, 1-3) already has 2 at R1C1"
+        "Cell R1C4 already has value 3",
+        "Box (1-3, 4-6) already has 5 at R3C6"
       ]
     },
     {
       "turn": 4,
-      "reasoning": "Row 1 has 2, 7, 4, 6 in the row. Missing numbers are 1, 3, 5, 8, 9. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
+      "reasoning": "Row 1 has 2, 7, 3, 4, 6 in the first five cells. Missing numbers are 1, 5, 8. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
       "parsed_move": {
         "row": 0,
-        "col": 1,
-        "value": 2
+        "col": 3,
+        "value": 5
       },
       "validation_errors": [
-        "Row 1 already has 2 at C1",
-        "Box (1-3, 1-3) already has 2 at R1C1"
+        "Cell R1C4 already has value 3",
+        "Box (1-3, 4-6) already has 5 at R3C6"
       ]
     },
     {
       "turn": 5,
-      "reasoning": "Row 1 has 2, 7, 4, 6 in the row. Missing numbers are 1, 3, 5, 8, 9. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
+      "reasoning": "Row 1 has 2, 7, 3, 4, 6 in the first five cells. Missing numbers are 1, 5, 8. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
       "parsed_move": {
         "row": 0,
-        "col": 1,
-        "value": 2
+        "col": 3,
+        "value": 5
       },
       "validation_errors": [
-        "Row 1 already has 2 at C1",
-        "Box (1-3, 1-3) already has 2 at R1C1"
+        "Cell R1C4 already has value 3",
+        "Box (1-3, 4-6) already has 5 at R3C6"
       ]
     },
     {
       "turn": 6,
-      "reasoning": "Row 1 has 2, 7, 4, 6 in the row. Missing numbers are 1, 3, 5, 8, 9. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
+      "reasoning": "Row 1 has 2, 7, 3, 4, 6 in the first five cells. Missing numbers are 1, 5, 8. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
       "parsed_move": {
         "row": 0,
-        "col": 1,
-        "value": 2
+        "col": 3,
+        "value": 5
       },
       "validation_errors": [
-        "Row 1 already has 2 at C1",
-        "Box (1-3, 1-3) already has 2 at R1C1"
+        "Cell R1C4 already has value 3",
+        "Box (1-3, 4-6) already has 5 at R3C6"
+      ]
+    },
+    {
+      "turn": 7,
+      "reasoning": "Row 1 has 2, 7, 3, 4, 6 in the first five cells. Missing numbers are 1, 5, 8. Check box 1 (rows 1-3, columns 1-3) for missing numbers.",
+      "parsed_move": {
+        "row": 0,
+        "col": 3,
+        "value": 5
+      },
+      "validation_errors": [
+        "Cell R1C4 already has value 3",
+        "Box (1-3, 4-6) already has 5 at R3C6"
       ]
     }
   ]
