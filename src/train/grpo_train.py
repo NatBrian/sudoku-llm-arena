@@ -21,16 +21,22 @@ from .data import build_grpo_examples
 from .reward import reward_func
 
 
-def train(model_key, tier, init_adapter=None, out_name=None, num_generations=None, max_completion_length=None):
+def train(model_key, tier, init_adapter=None, out_name=None, num_generations=None,
+          max_completion_length=None, init_checkpoint=None):
     base_model_id = train_config.BASE_MODELS[model_key]
     out_name = out_name or f"{model_key}-{tier}"
     out_dir = train_config.checkpoint_dir(out_name)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    print(f"Loading base model {base_model_id}...")
+    # tier3 only: warm-start full-parameter GRPO from an SFT-merged checkpoint
+    # (see merge_adapter.py) instead of raw base weights, so completions are
+    # already terse/well-formatted from step 0 — see the tier3 branch below
+    # for why a format-untrained base model defeats GRPO_MAX_COMPLETION_LENGTH.
+    load_from = init_checkpoint or base_model_id
+    print(f"Loading model weights from {load_from}...")
     tokenizer = AutoTokenizer.from_pretrained(base_model_id)
     model = AutoModelForCausalLM.from_pretrained(
-        base_model_id, torch_dtype=torch.bfloat16, device_map={"": 0}
+        load_from, torch_dtype=torch.bfloat16, device_map={"": 0}
     )
 
     # CLI overrides (run_experiment.py uses these to try a headroom-dependent
@@ -134,7 +140,7 @@ def train(model_key, tier, init_adapter=None, out_name=None, num_generations=Non
         full_dir = out_dir / "full"
         trainer.save_model(str(full_dir))
         tokenizer.save_pretrained(str(full_dir))
-        meta = {"base_model": str(full_dir), "tier": tier, "adapter": False}
+        meta = {"base_model": str(full_dir), "tier": tier, "adapter": False, "init_checkpoint": init_checkpoint}
 
     (out_dir / "meta.json").write_text(json.dumps(meta, indent=2))
     print(f"Saved {tier} checkpoint -> {out_dir}")
@@ -149,5 +155,7 @@ if __name__ == "__main__":
     parser.add_argument("--out-name", default=None)
     parser.add_argument("--num-generations", type=int, default=None, help="override GRPO_NUM_GENERATIONS (bypasses tier3's automatic squeeze)")
     parser.add_argument("--max-completion-length", type=int, default=None, help="override GRPO_MAX_COMPLETION_LENGTH (bypasses tier3's automatic squeeze)")
+    parser.add_argument("--init-checkpoint", default=None, help="tier3 only: path to a merged full-weights checkpoint (see merge_adapter.py) to warm-start from instead of raw base weights")
     args = parser.parse_args()
-    train(args.model, args.tier, args.init_adapter, args.out_name, args.num_generations, args.max_completion_length)
+    train(args.model, args.tier, args.init_adapter, args.out_name, args.num_generations,
+          args.max_completion_length, args.init_checkpoint)

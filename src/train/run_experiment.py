@@ -125,17 +125,57 @@ def run_experiment(model_key):
         _run_stage(model_key, "tier1-eval",
                    [py, "-m", "src.train.eval_cli", "--checkpoint", f"{model_key}-tier1-lora-sft"], status)
 
+    # Self-rollout recovery: mines the tier1 checkpoint's OWN live rollouts
+    # (not just oracle-revealed snapshots) for technique-justified moves, to
+    # close the exposure-bias gap between training data and what the model
+    # actually sees at eval time (see self_rollout.py). tier2/tier3 continue
+    # from this adapter when it succeeds; fall back to plain tier1 otherwise.
+    recovery_jsonl = EXPERIMENTS_DIR / model_key / "tier1_recovery_examples.jsonl"
+    recovery_ok = False
+    if tier1_ok:
+        collect_ok = _run_stage(
+            model_key, "tier1-recovery-collect",
+            [py, "-m", "src.train.self_rollout", "--checkpoint", f"{model_key}-tier1-lora-sft",
+             "--out", str(recovery_jsonl)], status,
+        )
+        if collect_ok:
+            recovery_ok = _run_stage(
+                model_key, "tier1-recovery-train",
+                [py, "-m", "src.train.sft_train", "--model", model_key,
+                 "--init-adapter", f"{model_key}-tier1-lora-sft",
+                 "--examples-jsonl", str(recovery_jsonl),
+                 "--out-name", f"{model_key}-tier1-recovery", "--epochs", "2"], status,
+            )
+    tier1_for_downstream = f"{model_key}-tier1-recovery" if recovery_ok else f"{model_key}-tier1-lora-sft"
+
     tier2_ok = False
     if tier1_ok:
         tier2_ok = _run_stage(
             model_key, "tier2-train",
-            [py, "-m", "src.train.grpo_train", "--model", model_key, "--tier", "tier2-lora-grpo"], status,
+            [py, "-m", "src.train.grpo_train", "--model", model_key, "--tier", "tier2-lora-grpo",
+             "--init-adapter", tier1_for_downstream], status,
         )
     if tier2_ok:
         _run_stage(model_key, "tier2-eval",
                    [py, "-m", "src.train.eval_cli", "--checkpoint", f"{model_key}-tier2-lora-grpo"], status)
 
+    # Warm-start tier3 from the best available SFT adapter (merged into full
+    # weights) instead of the raw base checkpoint — see merge_adapter.py for
+    # why this matters given tier3's squeezed GRPO_MAX_COMPLETION_LENGTH.
+    tier3_init_checkpoint = None
+    if tier1_ok:
+        merge_out_name = f"{model_key}-tier3-warmstart"
+        merge_ok = _run_stage(
+            model_key, "tier3-merge-warmstart",
+            [py, "-m", "src.train.merge_adapter", "--checkpoint", tier1_for_downstream,
+             "--out-name", merge_out_name], status,
+        )
+        if merge_ok:
+            tier3_init_checkpoint = str(train_config.checkpoint_dir(merge_out_name) / "full")
+
     tier3_argv = [py, "-m", "src.train.grpo_train", "--model", model_key, "--tier", "tier3-full-grpo"]
+    if tier3_init_checkpoint:
+        tier3_argv += ["--init-checkpoint", tier3_init_checkpoint]
     free_mib = _gpu0_free_mib()
     tried_relaxed = free_mib > TIER3_RELAX_FREE_MIB_THRESHOLD
     if tried_relaxed:

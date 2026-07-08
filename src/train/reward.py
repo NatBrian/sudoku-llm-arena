@@ -16,6 +16,12 @@ PROGRESS_BONUS_CAP = 0.5
 INVALID_MOVE_REWARD = -1.0
 STUCK_REWARD = -1.0
 UNPARSEABLE_REWARD = -1.0
+# Backtracking a genuine mistake is as valuable as a correct forward move —
+# it's the only tool the eval harness (loop.py) gives the model to escape a
+# self-created dead end, and it was previously falling through to
+# UNPARSEABLE_REWARD, training the model to never use it.
+BACKTRACK_CORRECT_REWARD = 1.0
+BACKTRACK_WRONG_REWARD = -0.3
 
 
 def _completion_text(completion):
@@ -25,18 +31,34 @@ def _completion_text(completion):
     return completion[-1]["content"]
 
 
-def reward_func(prompts, completions, grid_before, box_width, box_height, size, solution, **kwargs):
+def reward_func(prompts, completions, grid_before, box_width, box_height, size, solution, clues, **kwargs):
     rewards = []
     for i, completion in enumerate(completions):
         text = _completion_text(completion)
         grid = json.loads(grid_before[i])
         bw, bh, sz = box_width[i], box_height[i], size[i]
         sol = json.loads(solution[i])
+        clue_grid = json.loads(clues[i])
 
         parsed = parse_response(text, sz)
 
         if parsed["stuck"]:
             rewards.append(STUCK_REWARD)
+            continue
+
+        if parsed["backtrack"]:
+            # Mirrors loop.py's own accept/refuse logic: clue cells and
+            # already-empty cells refuse the backtrack; otherwise it clears
+            # the cell — reward that clear based on whether it undid an
+            # actual mistake (vs. solution) or a cell that was already right.
+            bt = parsed["backtrack"]
+            r, c = bt["row"], bt["col"]
+            if clue_grid[r][c] != 0 or grid[r][c] == 0:
+                rewards.append(INVALID_MOVE_REWARD)
+            elif grid[r][c] != sol[r][c]:
+                rewards.append(BACKTRACK_CORRECT_REWARD)
+            else:
+                rewards.append(BACKTRACK_WRONG_REWARD)
             continue
 
         move = parsed["move"]

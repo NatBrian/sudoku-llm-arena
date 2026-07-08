@@ -15,17 +15,25 @@ from ..swarm import run_swarm, print_summary
 from . import config as train_config
 
 
-def _load_all_parsed_runs(model_string):
+def _load_all_parsed_runs(model_string, levels=None, parsed_dir=None):
     """run_swarm() only returns freshly-run jobs — puzzles already recorded in
     a prior run (via run_exists dedup) are silently skipped and excluded from
     its return value. Re-derive the full result set for this model from disk
     instead, so a summary is correct whether this is a fresh run, a resumed
-    partial run, or a fully-cached re-run."""
+    partial run, or a fully-cached re-run.
+
+    `levels` filters to specific Nikoli difficulty levels (e.g. ["hard"]) —
+    every parsed run JSON already carries its puzzle's "level" (see
+    swarm.py's run_single), so a level-filtered summary can be recomputed
+    from a prior full-100 run's cache with no new generation needed, as long
+    as that full run already covered the target level (a superset)."""
     slug = model_slug(model_string)
     rows = []
-    for path in base_config.PARSED_DIR.glob(f"*_{slug}_*.json"):
+    for path in (parsed_dir or base_config.PARSED_DIR).glob(f"*_{slug}_*.json"):
         with open(path) as f:
-            rows.append(json.load(f))
+            row = json.load(f)
+        if levels is None or row.get("level") in levels:
+            rows.append(row)
     return rows
 
 
@@ -42,10 +50,16 @@ def register_tier0_checkpoint(model_key):
     return out_name
 
 
-def evaluate_checkpoint(checkpoint_name):
-    """Runs the full real Nikoli-100 set (multi-step, TRAIN_STRATEGY_ID only,
-    1 run each since decoding is greedy/deterministic) against one checkpoint.
-    Mutates then restores src.config's globals (the harness's own pattern)."""
+def evaluate_checkpoint(checkpoint_name, levels=None):
+    """Runs the real Nikoli set (multi-step, TRAIN_STRATEGY_ID only, 1 run
+    each since decoding is greedy/deterministic) against one checkpoint.
+    Mutates then restores src.config's globals (the harness's own pattern).
+
+    `levels` restricts to specific Nikoli difficulty levels (e.g. ["hard"]
+    for the 51 hard puzzles instead of the full 100) — if this checkpoint
+    was already evaluated on the full set, every puzzle in `levels` is
+    already cached (same weights, greedy decoding) so this is a free
+    re-aggregation with no new generation, not a fresh eval pass."""
     saved = {
         k: getattr(base_config, k)
         for k in ("PUZZLE_SOURCE", "NIKOLI_LEVELS", "NIKOLI_LIMIT", "PROTOCOLS",
@@ -53,7 +67,7 @@ def evaluate_checkpoint(checkpoint_name):
     }
     try:
         base_config.PUZZLE_SOURCE = "nikoli"
-        base_config.NIKOLI_LEVELS = None
+        base_config.NIKOLI_LEVELS = levels
         base_config.NIKOLI_LIMIT = None
         base_config.PROTOCOLS = ["multi-step"]
         base_config.STRATEGIES = [train_config.TRAIN_STRATEGY_ID]
@@ -62,7 +76,8 @@ def evaluate_checkpoint(checkpoint_name):
         base_config.MODELS = [f"local:{checkpoint_name}"]
 
         model_string = f"local:{checkpoint_name}"
-        print(f"\n{'#'*70}\n# EVAL: {checkpoint_name} vs. full real Nikoli-100\n{'#'*70}")
+        scope = f"Nikoli-{'+'.join(levels)}" if levels else "full Nikoli-100"
+        print(f"\n{'#'*70}\n# EVAL: {checkpoint_name} vs. {scope}\n{'#'*70}")
         t0 = time.time()
         results = run_swarm()
         elapsed = time.time() - t0
@@ -71,12 +86,13 @@ def evaluate_checkpoint(checkpoint_name):
         # Use the full recorded set for this model (see _load_all_parsed_runs),
         # not just run_swarm()'s return value, which excludes puzzles already
         # cached from a prior/interrupted run.
-        rows = _load_all_parsed_runs(model_string)
+        rows = _load_all_parsed_runs(model_string, levels=levels)
         total = len(rows)
         solved = sum(1 for r in rows if r["solved"])
         correct = sum(1 for r in rows if r["correct_against_solution"])
         summary = {
             "checkpoint": checkpoint_name,
+            "levels": levels,
             "num_puzzles": total,
             "solved": solved,
             "solve_rate": solved / total if total else None,
@@ -94,6 +110,7 @@ def evaluate_checkpoint(checkpoint_name):
 
     out_dir = train_config.checkpoint_dir(checkpoint_name)
     out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / "eval_summary.json").write_text(json.dumps(summary, indent=2))
-    print(f"Eval summary -> {out_dir / 'eval_summary.json'}")
+    out_name = f"eval_summary_{'-'.join(levels)}.json" if levels else "eval_summary.json"
+    (out_dir / out_name).write_text(json.dumps(summary, indent=2))
+    print(f"Eval summary -> {out_dir / out_name}")
     return summary

@@ -248,6 +248,7 @@ class GameLoop:
                 "timestamp_end": datetime.now().isoformat(),
                 "duration_ms": int((datetime.now() - start_time).total_seconds() * 1000),
                 "temperature": config.TEMPERATURE,
+                "retry_temperature": config.RETRY_TEMPERATURE,
                 "max_tokens": config.MAX_TOKENS,
             },
             "puzzle": {
@@ -275,6 +276,14 @@ class GameLoop:
             "errors": [t for t in self.turns if not t["valid"]],
         }
 
+    def _turn_temperature(self):
+        # A rejected move never mutates self.grid, so the next turn's prompt
+        # is byte-identical — at TEMPERATURE=0.0 (greedy) that deterministically
+        # reproduces the exact same invalid move every time, guaranteeing a
+        # MAX_CONSECUTIVE_ERRORS death spiral with no chance to escape.
+        # Sampling on retries gives a real shot at trying something different.
+        return config.TEMPERATURE if self.consecutive_errors == 0 else config.RETRY_TEMPERATURE
+
     def _call_api(self, prompt, pfx=""):
         # Plain string check on purpose (no import from .train here) — that
         # module pulls in torch/transformers at import time, which would
@@ -283,6 +292,7 @@ class GameLoop:
         if self.model.startswith("local:"):
             return self._call_local(prompt, pfx)
 
+        temperature = self._turn_temperature()
         last_error = None
         for attempt in range(1, config.MAX_API_RETRIES + 1):
             try:
@@ -291,7 +301,7 @@ class GameLoop:
                 resp = litellm.completion(
                     model=self.model,
                     messages=[{"role": "user", "content": prompt}],
-                    temperature=config.TEMPERATURE,
+                    temperature=temperature,
                     max_tokens=config.MAX_TOKENS,
                 )
                 elapsed = time.time() - t0
@@ -327,7 +337,7 @@ class GameLoop:
         try:
             print(f"    {pfx} local inference ({self.model})...", flush=True)
             t0 = time.time()
-            resp = local_completion(self.model, prompt, temperature=config.TEMPERATURE, max_tokens=config.MAX_TOKENS)
+            resp = local_completion(self.model, prompt, temperature=self._turn_temperature(), max_tokens=config.MAX_TOKENS)
             elapsed = time.time() - t0
             print(f"    {pfx} local inference done ({elapsed:.1f}s, {resp['total_tokens']} tokens)", flush=True)
             return resp

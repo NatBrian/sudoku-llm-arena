@@ -9,6 +9,13 @@ PARSED_DIR = DATA_DIR / "parsed"
 OUTPUT_DIR = BASE_DIR / "output"
 
 TEMPERATURE = 0.0
+# Used only for a retry after >=1 consecutive error in the same run (see
+# loop.py's GameLoop) — an invalid move never mutates the grid, so with pure
+# greedy decoding (TEMPERATURE=0.0) the next turn's prompt is byte-identical
+# and the model deterministically repeats the exact same invalid move until
+# MAX_CONSECUTIVE_ERRORS kills the run. Sampling on retries gives it a real
+# chance to try something different instead.
+RETRY_TEMPERATURE = 0.7
 MAX_TOKENS = 2000
 
 # --- Puzzle source ---------------------------------------------------------

@@ -113,6 +113,7 @@ def build_grpo_examples(strategy_id=None, seed=None):
                 "box_height": puzzle["box_height"],
                 "size": puzzle["size"],
                 "solution": json.dumps(puzzle["solution"]),
+                "clues": json.dumps(puzzle["clues"]),
             })
     return examples
 
